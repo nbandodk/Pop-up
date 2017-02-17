@@ -1,11 +1,6 @@
 <?php 
-$con = mysqli_connect("localhost", "root", "",  "pop-up"); // connection variable
-if(mysqli_connect_errno())
-{
-echo "failed to connect" . mysqli_connect_errno();
-}
+require "config/config.php";
 
-$query= mysqli_query($con, "INSERT INTO test values ('1', 'Nikil'), (2, 'Bunty')");
  ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +8,9 @@ $query= mysqli_query($con, "INSERT INTO test values ('1', 'Nikil'), (2, 'Bunty')
 	<title> Pop-up</title>
 </head>
 <body>
-Hello Nikil
+<div style = " background:#ccc; color:#000; border: solid black 1px; font-size: 28px; text-align: center;">Hello Nikil</div>
+
+
+<img src="assets/images/profile_pics/defaults/virat.jpg" width = "800px" height = "600px"  />
 </body>
 </html>
