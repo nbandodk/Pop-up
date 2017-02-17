@@ -10,27 +10,17 @@ require 'includes/form_handlers/login_handler.php';
 <html>
 <head>
 	<title>Pop-up Login!</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
+	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<!-- css including boostrap -->
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/register_style.css">
+	<!-- JavaScript -->
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/register.js"></script>
 
 </head>
 <body>
-
-    
-	<?php 
-
-	if(isset($_POST['register_button'])) {
-		echo '<script>
-		$(document).ready(function() {
-			$("#first").hide();
-			$("#second").show();
-		});
-		</script>';
-	}
-
-	?> 
-
 
 	<div class="wrapper">
 		<div class="login_box">
