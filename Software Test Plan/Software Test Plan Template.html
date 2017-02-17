@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Software Test Plan Template</title>
+  <meta content="Default User" name="author">
+</head>
+<body>
+<h1 style="text-align: center;">Pop-up<br>
+</h1>
+<h1 style="text-align: center;">Software Test Plan<br>
+</h1>
+<h2 style="text-align: center;">CSCI-P465/565 (Software Engineering I)</h2>
+<h2 style="text-align: center;"><span
+ style="text-decoration: underline;">Project Team</span></h2>
+<h3 style="text-align: center;">Ninad Bandodkar</h3>
+<h3 style="text-align: center;">Nikilesh Chilkuru</h3>
+<h3 style="text-align: center;">Wenxuan Han</h3>
+<h3 style="text-align: center;">Yujie Wu</h3>
+<hr style="width: 100%; height: 2px;"><br>
+<h2>1. Overview</h2>
+This section provides an overview of the testing approach used to
+verify the software product.<br>
+<h3 style="margin-left: 40px;">1.1 Test Objectives</h3>
+<div style="margin-left: 40px;">This test plan describes the testing approach and overall framework
+that will drive the testing of Pop-up's initial setup(databases and connectivity to database) and also the first core feature.<br>
+The primary objective will be to make sure there
+are no errors and faulty functionality in the following implemented core feature: <b>Login/Registration</b>.<br>
+Through these carefully curated test cases we intend to remove and rectify any discrepancies that might have crept into
+the feature of this sprint.<br>
+<h3>1.2 Test Environment</h3>
+ Pop-up's Login/Registration
+page will be hosted locally as well as at SoIC web servers.<br>
+The database for the same will also be hosted locally and on db.soic.indiana.edu.<br>
+This test phase will be carried out on standard laptops available in the market right now from OEMs such as Dell, Lenovo, Asus, Apple, etc.
+We believe that the test environment will be similar to the oprational environment for the tests stated in this document. <br>No additional support
+or software packages will be required for these tests. All computers must have an active internet connection at the time of testing.<br><br>
+A Windows or Mac environment with Internet explorer 8, 9 and 10+, Firefox 27.0+, as well as Google Chrome 32.0+ should be available to each tester.<br><br>
+The testing environment will also need the following for local hosting of the website: XAMPP.<br>
+<h3>1.3 Test Personnel</h3>
+The personnel involved in this testing phase will initially only include our team members.<br>
+Once we have finished all the exhaustive tests from our side, we will again do testing along with the customers.<br>
+As team members we will first role play as the end user and carry out the tests.<br>
+During the testing with the customer, the customer will be the end user and will try out all the possible actions in the first core feature, i.e. Login/Registration.<br>
+The roles of our team members will be as follows: Develop test conditions, test cases, expected results, and execution scripts. Perform execution and validation.
+Re-test after software modifications have been made. Prepare testing metrics and provide regular status.
+<h3>1.4 Acceptance Criteria</h3>
+The Acceptance Criteria for this testing phase will be as follows:<br>
+<ul>
+    <li>The connection between the website and database is successful without any errors, both on test as well as operational environment(test server as well as actual hosted server)
+    <li>User is able to register successfully and all his details are stored in the database.
+    <li>User is able to login with the correct credentials and upon successful login, is redirected to index page.
+</ul>
+We will tolerate a maximum of 3 errros before the testing would be abandoned to rectify the errors.    
+<br>
+<h3>1.5 Noted Omissions</h3>
+The testing of the following software specification can be omitted:
+<ul>
+    <li>Well defined error messages given in an external pop-up box
+</ul>
+This can be ignored since styling will be carried out later with Bootstrap and the echoed error messages are enough to tell the user if any errors are raised.
+<br>
+<br>
+</div>
+<h2>2. Test Cases </h2>
+The test cases are the partitioning of the verification of the software
+into manageable sections.&nbsp; Often these sections correspond to the
+set of active use case scenarios, but can be organized as the test
+developer sees fit.&nbsp; Test cases should be in place to cover all of
+the software verification methods.&nbsp; Even non-execution based
+testing methods (i.e., inspection/analysis) may be detailed here.&nbsp;
+The intent is for the test case procedures to provide a repeatable
+verification of the software specification.<br>
+<br>
+For each test case describe the following:<br>
+<br>
+<span style="font-weight: bold;">Number:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Provide a unique number for the Test Case<br>
+<span style="font-weight: bold;">Name:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Provide a unique, descriptive name for the Test Case.<br>
+<span style="font-weight: bold;">Description:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Provide a summary description (1-3 sentences) of the Test Case, and
+what is intended to be verified by the test case.<br>
+<span style="font-weight: bold;">Initial Conditions:</span> Describe
+any unique conditions in the test environment that must be in place to
+run the test.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Also, note whether another Test Case is intended to be run prior to
+this Test Case.<br>
+<span style="font-weight: bold;">Input Data:&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Describe any specific data inputs that are to be used in the Test Case <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(e.g., a mock data file, a test user ID, erroroneous inputs to
+stimulate error conditions, etc).<br>
+<span style="font-weight: bold;">Specifications:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+List the Specificaiton statements (by number) that are intended to be
+verified by this Test Case.<br>
+<span style="font-weight: bold;">Procedure:&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Provide a link to the Test Case Procedure for this Test Case.<br>
+<br>
+You may represent this information as a table, or simply list it.<br>
+<span style="font-weight: bold;">NOTE:</span> If you are using the
+rigorous process, the Specifications described above are already
+captured in the RVM and may be omitted from this document<br>
+<br>
+<br>
+
+
+
+<table border=1px solid>
+  <tr>
+    <th>Number</th>
+    <td>1</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>Check Connectivity to Database using the connection variable.</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>The php script should successfully connect to the mysql database using the connection variable
+        <br>and produce zero errors when the script is loaded in the browser.
+        <br>This should work for both the local development/test environment using xampp as well as the IU web-hosted environment using SoIC servers.</td>
+  </tr>
+  <tr>
+    <th>Initial Conditions</th>
+    <td>The connection variable must hold the correct credentials for the mysql connector, i.e.,<br> the correct database name,the host name, the user name, and password.</td>
+  </tr>
+  <tr>
+    <th>Input Data</th>
+    <td>None</td>
+  </tr>
+  <tr>
+    <th>Procedure</th>
+    <td><a href="test_cases/test1.html">Link</a></td>
+  </tr>
+</table>
+
+<br>
+<br>
+
+<table border=1px solid>
+  <tr>
+    <th>Number</th>
+    <td>2</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>Check Customer Registration with valid form data</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>A new user should be able to successfully register for an account with the website when the person enters valid form data.<br>This should work for both the local development/test environment using xampp as well as the IU web-hosted environment using SoIC servers.</td>
+  </tr>
+  <tr>
+    <th>Initial Conditions</th>
+    <td>Test number 1 was successful and the fields such as First Name, Last Name, Email and Password are in valid format.</td>
+  </tr>
+  <tr>
+    <th>Input Data</th>
+    <td>First Name: Test1    &nbsp;&nbsp;||&nbsp;&nbsp;    Last Name: Test1L    &nbsp;&nbsp;||&nbsp;&nbsp;    Email: test1@gmail.com    &nbsp;&nbsp;||&nbsp;&nbsp;    Password: test1</td>
+  </tr>
+  <tr>
+    <th>Procedure</th>
+    <td><a href="test_cases/test2.html">Link</a></td>
+  </tr>
+</table>
+
+<br>
+<br>
+
+<table border=1px solid>
+  <tr>
+    <th>Number</th>
+    <td>3</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>Check Customer Registration with invalid form data</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>A new user should not be able to register for an account with the website when the person enters invalid form data.<br>This should work for both the local development/test environment using xampp as well as the IU web-hosted environment using SoIC servers.</td>
+  </tr>
+  <tr>
+    <th>Initial Conditions</th>
+    <td>Test number 1 was successful and the fields such as First Name, Last Name, Email and Password are given invalid format/data.</td>
+  </tr>
+  <tr>
+    <th>Input Data</th>
+    <td>First Name: T    &nbsp;&nbsp;||&nbsp;&nbsp;    Last Name: L    &nbsp;&nbsp;||&nbsp;&nbsp;    Email: test1@gmail    &nbsp;&nbsp;||&nbsp;&nbsp;    Password: test</td>
+  </tr>
+  <tr>
+    <th>Procedure</th>
+    <td><a href="test_cases/test3.html">Link</a></td>
+  </tr>
+</table>
+
+<br>
+<br>
+
+<table border=1px solid>
+  <tr>
+    <th>Number</th>
+    <td>4</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>Check Customer Login with valid form data</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>A registered user should be able to successfully login to the website when the person enters valid login credentials.<br>This should work for both the local development/test environment using xampp as well as the IU web-hosted environment using SoIC servers.</td>
+  </tr>
+  <tr>
+    <th>Initial Conditions</th>
+    <td>Test number 1 was successful and the fields Email Address and Password are entered correctly.</td>
+  </tr>
+  <tr>
+    <th>Input Data</th>
+    <td>Email: test1@gmail.com    &nbsp;&nbsp;||&nbsp;&nbsp;    Password: test1</td>
+  </tr>
+  <tr>
+    <th>Procedure</th>
+    <td><a href="test_cases/test4.html">Link</a></td>
+  </tr>
+</table>
+
+<br>
+<br>
+
+<table border=1px solid>
+  <tr>
+    <th>Number</th>
+    <td>5</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>Check Customer Login with invalid form data</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>A registered user should not be able to login to the website when the person enters invalid login credentials.<br>This should work for both the local development/test environment using xampp as well as the IU web-hosted environment using SoIC servers.</td>
+  </tr>
+  <tr>
+    <th>Initial Conditions</th>
+    <td>Test number 1 was successful and the fields Email Address or Password are entered incorrectly.</td>
+  </tr>
+  <tr>
+    <th>Input Data</th>
+    <td>Email: test1@gmail.com    &nbsp;&nbsp;||&nbsp;&nbsp;    Password: test2</td>
+  </tr>
+  <tr>
+    <th>Procedure</th>
+    <td><a href="test_cases/test5.html">Link</a></td>
+  </tr>
+</table>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+<h2>Revision History</h2>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top;">Revision</th>
+      <th style="vertical-align: top;">Date<br>
+      </th>
+      <th style="vertical-align: top;">Change Description<br>
+      </th>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<big><big><br>
+</big></big>
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: center;"><span style="font-weight: bold;">Page
+Author/Creator:</span> <a
+ href="http://homes.soic.indiana.edu/aabhutta/">Adeel Bhutta</a><span
+ style="font-weight: bold;"><br>
+Last Modified:</span> 8/23/2016</div>
+<br>
+</body>
+</html>
