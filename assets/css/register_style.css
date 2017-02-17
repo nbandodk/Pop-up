@@ -1,36 +1,46 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,900|Montez);
+@font-face {
+	font-family: 'Bellota-LightItalic';
+	src: url('../fonts/Bellota-LightItalic.otf');
+}
+
+@font-face {
+	font-family: 'Bellota-BoldItalic';
+	src: url('../fonts/Bellota-BoldItalic.otf');
+}
 
 html, body {
 	height: 100%;
 	min-height: 100%;
 }
 
+
 form {
 	text-align: center;
-	vertical-align: middle;
 }
+
 
 body {
 	margin: 0;
 	padding: 0;
+
 }
 
+a {
+	text-decoration: none;
+	color: #158ea9;
+}
+
+
 .wrapper {
-	background-image: url(../images/Desktop.jpg);
+	background-image: url("../images/backgrounds/bg2.jpg");
 	background-size: 100%;
 	width: 100%;
 	height: 100%;
 	min-width: 950px;
-
-	/* background: #092756;
-	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(35, 24, 82, 0.22) 10%, rgba(138, 114, 76, 0) 40%), -moz-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
-	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(35, 24, 82, 0.22) 10%, rgba(138, 114, 76, 0) 40%), -webkit-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%, #092756 100%);
-	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(35, 24, 82, 0.22) 10%, rgba(138, 114, 76, 0) 40%), -o-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -o-linear-gradient(-45deg, #670d10 0%, #092756 100%);
-	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(35, 24, 82, 0.22) 10%, rgba(138, 114, 76, 0) 40%), -ms-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%, #092756 100%);
-	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(35, 24, 82, 0.22) 10%, rgba(138, 114, 76, 0) 40%), linear-gradient(to bottom, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), linear-gradient(135deg, #670d10 0%, #092756 100%); */
 }
 
 .login_box {
+	font-family: 'Bellota-LightItalic', sans-serif;
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
@@ -38,63 +48,56 @@ body {
 	width: 35%;
 	background-color: #ffffff;
 	border: 1px solid #EDEDED;
-	border-radius: 10px;
-	padding: 4px;
-	opacity: 0.95;
+	border-radius: 7px;
+	padding: 5px;
+	opacity: 0.98;
 }
 
 .login_header {
+	font-family: 'Bellota-LightItalic', sans-serif;
 	width: 100%;
 	height: 90px;
-	background-color: #3498db;
-	color: #ffffff;
+	background-color: #158ea9;
+	color: #fff;
 	text-align: center;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
 }
 
 .login_header h1 {
-	font-family: Montez;
+	font-family: 'Bellota-BoldItalic', sans-serif;
 	margin-top: 0;
+	font-weight: bolder;
 	margin-bottom: 0;
-	color: #2C6C96;
-}
-
-.login_header h2 {
-	font-family: Montez;
-	color: #ffffff;
-	margin-top: 0;
+	color: #2c3e50;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
+	font-size: 270%;
 }
 
 input[type="submit"] {
-	background-color: #3498db;
-	border: 1px solid #3498db;
-	border-radius: 5px;
-	margin: 5px 0 10px 0;
-	padding: 5px 10px 5px 10px;
-	color: #ffffff;
-	text-shadow: #73B6E2 0.5px 0.5px 0px;
-	width: 70%;
+	font-family: 'Bellota-BoldItalic', sans-serif;
 	font-size: 100%;
+	background-color: #158ea9;
+	border: 1px solid #158ea9;
+	border-radius: 3px;
+	padding: 5px 10px 5px 10px;
+	margin: 5px 0px 10px 0px;
+	color: #2c3e50;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-	border: 1px solid #E5E5E5;
+input[type="text"], input[type="email"], input[type="password"] {
+	border: 1px solid #e5e5e5;
 	margin-top: 5px;
 	width: 70%;
-	height: 40px;
+	height: 35px;
 	margin-bottom: 10px;
 	padding-left: 5px;
 }
 
-.lay1 {
-	margin-left: 10%;
-	width: 40%;
-	float:left;
+input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover {
+	border-color: #158ea9;
 }
 
-.lay2 {
-	margin-right: 10%;
-	width: 40%;
-	float:left;
+#second {
+	display: none;
 }

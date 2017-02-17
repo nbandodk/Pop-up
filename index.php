@@ -1,20 +1,15 @@
-<?php
-$con = mysqli_connect("localhost", "root", "", "social");
-
-if(mysqli_connect_errno())
-{
-	echo "Failed to connect: " . mysqli_connect_errno();
-}
-
-$query = mysqli_query($con, "INSERT INTO test VALUES ('1', 'Wenxuan')");
-
+<?php 
+require 'config/config.php'; //connect to database 
 ?>
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<title>Swirlfeed</title>
+	<title>Welcome to Pop-up!</title>
 </head>
-
 <body>
-	Hello Wenxuan!!!
+	Hello <?php  echo $_SESSION['username']?>
 </body>
 </html>
