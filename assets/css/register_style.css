@@ -18,85 +18,127 @@ form {
 	text-align: center;
 }
 
-
 body {
 	margin: 0;
 	padding: 0;
-
 }
 
-a {
-	text-decoration: none;
-	color: #158ea9;
+a,
+a:focus,
+a:hover {
+  color: #fff;
+  text-decoration: none;
 }
 
-
-.wrapper {
-	background-image: url("../images/backgrounds/bg2.jpg");
+/* .wrapper {
+	background-image: url("../images/backgrounds/bg3.jpg");
 	background-size: 100%;
 	width: 100%;
 	height: 100%;
 	min-width: 950px;
-}
+} */
 
+/* login box div */
 .login_box {
 	font-family: 'Bellota-LightItalic', sans-serif;
+	background: #444;
+	background: rgba(0, 0, 0, 0.35);
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
 	top: 7%;
-	width: 35%;
-	background-color: #ffffff;
-	border: 1px solid #EDEDED;
-	border-radius: 7px;
-	padding: 5px;
-	opacity: 0.98;
+	/* width: 35%; */
+	border: 0;
+	border-radius: 4px;
+	padding: 15px;
 }
 
 .login_header {
-	font-family: 'Bellota-LightItalic', sans-serif;
 	width: 100%;
-	height: 90px;
-	background-color: #158ea9;
 	color: #fff;
+	margin-bottom: 25px;
 	text-align: center;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
 }
 
-.login_header h1 {
-	font-family: 'Bellota-BoldItalic', sans-serif;
-	margin-top: 0;
-	font-weight: bolder;
-	margin-bottom: 0;
-	color: #2c3e50;
-	text-shadow: #73B6E2 0.5px 0.5px 0px;
-	font-size: 270%;
+/* verification box div */
+.verify_box {
+	font-family: 'Bellota-LightItalic', sans-serif;
+	background: #444;
+	background: rgba(0, 0, 0, 0.35);
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	top: 7%;
+	border: 0;
+	border-radius: 4px;
+	padding: 15px;
 }
 
-input[type="submit"] {
+.verify_header {
+	width: 100%;
+	color: #fff;
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+/* input[type="submit"] {
 	font-family: 'Bellota-BoldItalic', sans-serif;
 	font-size: 100%;
-	background-color: #158ea9;
-	border: 1px solid #158ea9;
-	border-radius: 3px;
-	padding: 5px 10px 5px 10px;
+	vertical-align: middle;
+	border: 0;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+    padding: 5px 10px 5px 10px;
 	margin: 5px 0px 10px 0px;
-	color: #2c3e50;
-}
+    width: 70%;
+	height: 35px;
+	color: #fff;
+} */
 
 input[type="text"], input[type="email"], input[type="password"] {
-	border: 1px solid #e5e5e5;
-	margin-top: 5px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 100%;
 	width: 70%;
-	height: 35px;
-	margin-bottom: 10px;
-	padding-left: 5px;
+	height: 40px;
+    margin-top: 5px;
+    padding: 0 20px;
+    margin-bottom: 5px;
+    background: #fff;
+    color: #000;
+    vertical-align: middle;
+    border: 3px solid #fff;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
 input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover {
 	border-color: #158ea9;
 }
+
+button.btn {
+	font-family: 'Roboto', sans-serif;
+	font-size: 100%;
+    vertical-align: middle;
+    background: #de615e;
+    border: 0;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+    padding: 5px 10px 5px 10px;
+	margin: 5px 0px 10px 0px;
+    width: 70%;
+	height: 40px;
+	color: #fff;
+}
+
+button.btn:hover { opacity: 0.6; color: #fff; }
+button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+button.btn:focus { outline: 0; opacity: 0.6; background: #de615e; color: #fff; }
+button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de615e; color: #fff; }
 
 #second {
 	display: none;

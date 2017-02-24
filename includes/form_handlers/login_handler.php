@@ -16,6 +16,7 @@ if(isset($_POST['login_button'])) {
 		$row = mysqli_fetch_array($check_database_query);
 		$user_closed = $row['user_closed'];
 		$username = $row['username'];
+		$id = $row['id'];
 
 		if ($user_closed == 'yes') { // send the email to user
 			$hash = md5(rand(0,1000)); // Generate random 32 character hash
@@ -41,12 +42,14 @@ if(isset($_POST['login_button'])) {
 
 			$_SESSION['hash'] = $hash; // store the hash in session
 			$_SESSION['username'] = $username;
+			$_SESSION['id'] = $id;
 
 			header("Location: login_verification.php"); // link to verification page
 			exit();
 		}else{
 			$_SESSION['username'] = $username;
-			header("Location: index.php");
+			$_SESSION['id'] = $id;
+			header("Location: home.php");
 			exit();
 		}
 		
