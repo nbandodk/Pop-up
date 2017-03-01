@@ -1,13 +1,15 @@
 <?php 
+	require 'includes/service/post.php';
+
 	//Decalring vars
 	$id = "";
-	$profile_pic = "";
+	$user = array();
 	//coding here
 	if (isset($_SESSION['id'])) {
 		$id = $_SESSION['id'];
 		$check_database_query = mysqli_query($con, "SELECT * FROM users WHERE id='$id'");
-		$tuple = mysqli_fetch_array($check_database_query);
-		$profile_pic = $tuple['profile_pic'];
+		$user = mysqli_fetch_array($check_database_query);
+		$post_obj = new post($con,$id);
 	} else {
 		header("Location: register.php");
 	}

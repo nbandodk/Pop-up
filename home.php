@@ -35,7 +35,7 @@ require 'includes/form_handlers/home_handler.php';
 	</style>
 </head>
 <body>
-
+	<!--navigation bar-->
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -45,7 +45,7 @@ require 'includes/form_handlers/home_handler.php';
 	      <ul class="nav navbar-nav">
 	        <li><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
 	        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-	        <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+	        <li><a href="<?php echo $user['username'].'/'.$user['id']; ?>"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
 	      </ul>
 
 	      <ul class="nav navbar-nav navbar-right">
@@ -66,14 +66,21 @@ require 'includes/form_handlers/home_handler.php';
 	  </div>
 	</nav>
   
+  	<!--body-->
 	<div class="container text-center">    
 	  <div class="row">
 	    <div class="col-sm-3 well">
 	      <div class="well">
-	        <img src="<?php echo $profile_pic ?>" class="img-circle" height="65" width="65">
+	        <a href="<?php echo $user['username'].'/'.$user['id']; ?>">
+	        	<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65">
+	        	<br>
+	        	<?php echo $user['username'] ?>
+	        </a>
 	      </div>
+
 	      <div class="well">
-	        <p><a href="#">Interests</a></p>
+	        <p>My Posts (<?php echo $user['num_posts'] ?>)</p>
+	        <p>My friends (<?php echo $user['num_posts'] ?>)</p>
 	        <p>
 	          <span class="label label-default">News</span>
 	          <span class="label label-primary">W3Schools</span>
@@ -83,6 +90,7 @@ require 'includes/form_handlers/home_handler.php';
 	          <span class="label label-danger">Friends</span>
 	        </p>
 	      </div>
+
 	      <div class="alert alert-success fade in">
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 	        <p><strong>Ey!</strong></p>
@@ -92,74 +100,30 @@ require 'includes/form_handlers/home_handler.php';
 	      <p><a href="#">Link</a></p>
 	      <p><a href="#">Link</a></p>
 	    </div>
+
 	    <div class="col-sm-7">
 	    
 	      <div class="row">
 	        <div class="col-sm-12">
 	          <div class="panel panel-default text-left">
 	            <div class="panel-body">
-	              <p contenteditable="true">Status: Feeling Blue</p>
-	              <button type="button" class="btn btn-default btn-sm">
-	                <span class="glyphicon glyphicon-thumbs-up"></span> Like
-	              </button>     
+	            	<form action="includes/form_handlers/post_handler.php" method="POST">
+	            	   <textarea class="form-control" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" required></textarea>
+	            	  <br>
+		              <button type="submit" class="btn btn-default btn-sm">
+		                <span class="glyphicon glyphicon-thumbs-up"></span> Add Photo
+		              </button> 
+		              <button type="submit" class="btn btn-default btn-sm">
+		                <span class="glyphicon glyphicon-thumbs-up"></span> Post
+		              </button>
+	            	</form>
 	            </div>
 	          </div>
 	        </div>
 	      </div>
-	      
-	      <div class="row">
-	        <div class="col-sm-3">
-	          <div class="well">
-	           <p>John</p>
-	           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-	          </div>
-	        </div>
-	        <div class="col-sm-9">
-	          <div class="well">
-	            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="row">
-	        <div class="col-sm-3">
-	          <div class="well">
-	           <p>Bo</p>
-	           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-	          </div>
-	        </div>
-	        <div class="col-sm-9">
-	          <div class="well">
-	            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="row">
-	        <div class="col-sm-3">
-	          <div class="well">
-	           <p>Jane</p>
-	           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-	          </div>
-	        </div>
-	        <div class="col-sm-9">
-	          <div class="well">
-	            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="row">
-	        <div class="col-sm-3">
-	          <div class="well">
-	           <p>Anja</p>
-	           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-	          </div>
-	        </div>
-	        <div class="col-sm-9">
-	          <div class="well">
-	            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-	          </div>
-	        </div>
-	      </div>     
+	      <?php echo $post_obj->loadAllMyPosts($id) ?>
 	    </div>
+
 	    <div class="col-sm-2 well">
 	      <div class="thumbnail">
 	        <p>Upcoming Events:</p>
