@@ -17,6 +17,7 @@ require 'includes/form_handlers/home_handler.php';
 
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/home.js"></script>
 
 	<!-- css including boostrap -->
 	<link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -121,23 +122,12 @@ require 'includes/form_handlers/home_handler.php';
 	          </div>
 	        </div>
 	      </div>
-	      <?php echo $post_obj->loadAllMyPosts($id) ?>
+	    
+	      <div class="posts_area"></div>
+		  <img id="loadingIcon" src="assets/images/icons/loading.gif">
 	    </div>
 
-	    <div class="col-sm-2 well">
-	      <div class="thumbnail">
-	        <p>Upcoming Events:</p>
-	        <img src="paris.jpg" alt="Paris" width="400" height="300">
-	        <p><strong>Paris</strong></p>
-	        <p>Fri. 27 November 2015</p>
-	        <button class="btn btn-primary">Info</button>
-	      </div>      
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
+	    <div class="col-sm-2">
 	    </div>
 	  </div>
 	</div>
@@ -145,5 +135,56 @@ require 'includes/form_handlers/home_handler.php';
 	<footer class="container-fluid text-center">
 	  <p>Footer Text</p>
 	</footer>
+
+	<script>
+		$(document).ready(function() {
+
+			$('#loadingIcon').show();
+			<?php $_SESSION['Loading'] = 'true' ?>
+			//ajax request for loading posts 
+			$.ajax({
+				url: "includes/form_handlers/post_handler.php",
+				type: "POST",
+				data: "page=1",
+				cache: false,
+
+				success: function(returnedData) {
+					$('#loadingIcon').hide();
+					//add returned date to the post area
+					$('.posts_area').html(returnedData);
+					return false;
+				}
+			});
+
+			//do it if scroll up or down
+			$(window).scroll(function() {
+				var pageNum = $('.posts_area').find('.nextPage').val();
+				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+				//if the height of the browser window + scrolled height == total height that can be scorlled
+				if((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+					//start ajax request again
+					$('#loadingIcon').show();
+					$('.posts_area').find('.nextPage').remove(); //Removes current input
+					$('.posts_area').find('.noMorePosts').remove(); //Removes hidden input
+					//do ajax request
+					var ajaxReq = $.ajax({
+						url: "includes/form_handlers/post_handler.php",
+						type: "POST",
+						data: "page="+pageNum,
+						cache: false,
+
+						success: function(returnedData) {
+							$('#loadingIcon').hide();
+							$('.posts_area').append(returnedData);
+						}
+					});
+				}
+
+				return false;
+
+			}); //End (window).scroll(function())
+		});
+	</script>
 </body>
 </html>

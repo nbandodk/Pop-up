@@ -24,11 +24,13 @@ if(isset($_POST['login_button'])) {
 			$subject = 'Signup | Verification'; // Give the email a subject 
 			$message = '
 				Thanks for signing up!
-				Your account has been created, you can login with the following credentials after you have activated your account by using the verification code below.
+				Your account has been created, you can login 
+				with the following credentials after you have
+				activated your account by using the 
+				verification code below.
 				 
 				------------------------
-				Username: '.$name.'
-				Password: '.$password.'
+				Username: '.$username.'
 				Verification code: '.$hash.'
 				------------------------
 		

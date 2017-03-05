@@ -106,7 +106,7 @@ require 'includes/form_handlers/login_handler.php';
 							<input type="email" name="log_email" placeholder="Email Address" value="<?php if(isset($_SESSION['log_email']))echo $_SESSION['log_email']; ?>" required><br>
 							<input type="password" name="log_password" placeholder="Password"><br>
 							<!-- <input type="submit" name="login_button" value="Login"><br> -->
-							<button type="submit" class="btn" name="login_button">Sign in</button><br>
+							<button type="submit" class="btn btn btn-danger" name="login_button">Sign in</button><br>
 							<a href="#" id="signup" class="signup">Need an account? Register here.</a>
 
 							<br>
@@ -143,7 +143,7 @@ require 'includes/form_handlers/login_handler.php';
 								else if(in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
 
 							<!-- <input type="submit" name="register_button" value="Register"><br> -->
-							<button type="submit" class="btn" name="register_button">Sign up</button><br>
+							<button type="submit" class="btn btn-danger" name="register_button">Sign up</button><br>
 							<?php if(in_array("<span style='color:#14C800;'>You're all set! Go ahead and log in!</span><br>", $error_array)) echo "<span style='color:#14C800;'>You're all set! Go ahead and log in!</span><br>"; ?>
 							<a href="#" id="signin" class="signin">Already have an account? Log in here.</a>
 
