@@ -50,10 +50,17 @@ require 'includes/form_handlers/verification_handler.php';
 						
 							<p>
 								<?php if(in_array("<br>verification code was incorrect<br>", $error_array)) echo "<br>verification code was incorrect<br>"; ?>
+<<<<<<< HEAD
 								<input type="text" class="verify_input" name="ver_code" placeholder="Verfication Code" required>
 
 								<!-- <input type="submit" name="verification_button" value="Verify"> -->
 								<button type="submit" class="btn btn-danger verify_btn" style="display:inline-block" name="verification_button">Verify</button>
+=======
+							<input type="text" class="verify_input" name="ver_code" placeholder="Verfication Code" required>
+
+								<!-- <input type="submit" name="verification_button" value="Verify"> -->
+							<button type="submit" class="btn btn-danger verify_btn" style="display:inline-block" name="verification_button">Verify</button>
+>>>>>>> f468e10bd818f236857a893c72a6e0a121a8fbf9
 							</p>
 							
 						</form>
