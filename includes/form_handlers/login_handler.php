@@ -16,10 +16,7 @@ if(isset($_POST['login_button'])) {
 		$row = mysqli_fetch_array($check_database_query);
 		$user_closed = $row['user_closed'];
 		$username = $row['username'];
-<<<<<<< HEAD
 		$id = $row['id'];
-=======
->>>>>>> f468e10bd818f236857a893c72a6e0a121a8fbf9
 
 		if ($user_closed == 'yes') { // send the email to user
 			$hash = md5(rand(0,1000)); // Generate random 32 character hash
@@ -27,11 +24,13 @@ if(isset($_POST['login_button'])) {
 			$subject = 'Signup | Verification'; // Give the email a subject 
 			$message = '
 				Thanks for signing up!
-				Your account has been created, you can login with the following credentials after you have activated your account by using the verification code below.
+				Your account has been created, you can login 
+				with the following credentials after you have
+				activated your account by using the 
+				verification code below.
 				 
 				------------------------
-				Username: '.$name.'
-				Password: '.$password.'
+				Username: '.$username.'
 				Verification code: '.$hash.'
 				------------------------
 		
@@ -45,21 +44,14 @@ if(isset($_POST['login_button'])) {
 
 			$_SESSION['hash'] = $hash; // store the hash in session
 			$_SESSION['username'] = $username;
-<<<<<<< HEAD
 			$_SESSION['id'] = $id;
-=======
->>>>>>> f468e10bd818f236857a893c72a6e0a121a8fbf9
 
 			header("Location: login_verification.php"); // link to verification page
 			exit();
 		}else{
 			$_SESSION['username'] = $username;
-<<<<<<< HEAD
 			$_SESSION['id'] = $id;
 			header("Location: home.php");
-=======
-			header("Location: index.php");
->>>>>>> f468e10bd818f236857a893c72a6e0a121a8fbf9
 			exit();
 		}
 		

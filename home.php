@@ -1,8 +1,10 @@
 <?php 
 require 'config/config.php'; //connect to database 
 require 'includes/form_handlers/home_handler.php';
+require 'includes/service/user.php';
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Welcome <?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> !</title>
@@ -17,12 +19,13 @@ require 'includes/form_handlers/home_handler.php';
 
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/home.js"></script>
 
 	<!-- css including boostrap -->
 	<link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
-	
+
 	<!-- JavaScript -->
 	<script type="text/javascript" src="assets/Bootstrap/js/bootstrap.min.js"></script>
 	<style>    
@@ -79,8 +82,8 @@ require 'includes/form_handlers/home_handler.php';
 	      </div>
 
 	      <div class="well">
-	        <p>My Posts (<?php echo $user['num_posts'] ?>)</p>
-	        <p>My friends (<?php echo $user['num_posts'] ?>)</p>
+	        <p>My Posts (<?php echo $postNum ?>)</p>
+	        <p>My friends (<?php echo $friendNum ?>)</p>
 	        <p>
 	          <span class="label label-default">News</span>
 	          <span class="label label-primary">W3Schools</span>
@@ -121,23 +124,27 @@ require 'includes/form_handlers/home_handler.php';
 	          </div>
 	        </div>
 	      </div>
-	      <?php echo $post_obj->loadAllMyPosts($id) ?>
+	    
+	      <div class="posts_area"></div>
+		  <img id="loadingIcon" src="assets/images/icons/loading.gif">
 	    </div>
 
-	    <div class="col-sm-2 well">
-	      <div class="thumbnail">
-	        <p>Upcoming Events:</p>
-	        <img src="paris.jpg" alt="Paris" width="400" height="300">
-	        <p><strong>Paris</strong></p>
-	        <p>Fri. 27 November 2015</p>
-	        <button class="btn btn-primary">Info</button>
-	      </div>      
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
-	      <div class="well">
-	        <p>ADS</p>
-	      </div>
+	    <div class="col-sm-2">
+	    	<div class='well friends_list_area'>
+	    		<?php 
+	    		while ($user_friend=mysqli_fetch_array($user_friends)) {
+	    			//get the name and img of the friends
+					$friend = new user($con, $user_friend['friend_id']);
+					echo "
+					<a href='#'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'>
+						<i>".$friend->getUsername()."</i>
+					</a>
+					<br>
+					<br>
+					";
+	    		}
+	    		?>
+	    	</div>
 	    </div>
 	  </div>
 	</div>
@@ -145,5 +152,55 @@ require 'includes/form_handlers/home_handler.php';
 	<footer class="container-fluid text-center">
 	  <p>Footer Text</p>
 	</footer>
+
+	<script>
+		$(document).ready(function() {
+
+			$('#loadingIcon').show();
+			<?php $_SESSION['Loading'] = 'true' ?>
+			//ajax request for loading posts 
+			$.ajax({
+				url: "includes/form_handlers/post_handler.php",
+				type: "POST",
+				data: "page=1",
+				cache: false,
+
+				success: function(returnedData) {
+					$('#loadingIcon').hide();
+					//add returned date to the post area
+					$('.posts_area').html(returnedData);
+					return false;
+				}
+			});
+
+			//do it if scroll up or down
+			$(window).scroll(function() {
+				var pageNum = $('.posts_area').find('.nextPage').val();
+				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+				//if the height of the browser window + scrolled height == total height that can be scorlled
+				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+					//start ajax request again
+					$('#loadingIcon').show();
+					$('.posts_area').find('.nextPage').remove(); //Removes current input
+					$('.posts_area').find('.noMorePosts').remove(); //Removes hidden input
+					//do ajax request
+					var ajaxReq = $.ajax({
+						url: "includes/form_handlers/post_handler.php",
+						type: "POST",
+						data: "page="+pageNum,
+						cache: false,
+
+						success: function(returnedData) {
+							$('#loadingIcon').hide();
+							$('.posts_area').append(returnedData);
+						}
+					});
+				}
+
+				return false;
+
+			}); //End (window).scroll(function())
+		});
+	</script>
 </body>
 </html>

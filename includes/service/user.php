@@ -24,5 +24,9 @@
 		function getNum_posts(){
 			return $this->user['num_posts'];
 		}
+
+		function getProfile_pic(){
+			return $this->user['profile_pic'];
+		}
 	}
  ?>

@@ -6,13 +6,16 @@
 	class post 
 	{
 		private $con;
+		private $id;
 		private $user_obj;
 		
 		function __construct($con,$id){
 			$this->con = $con;
+			$this->id = $id;
 			$this->user_obj = new user($con, $id);
 		}
 
+		//submit my posts
 		public function submitPost($body){
 			$body = strip_tags($body);
 			$body = mysqli_real_escape_string($this->con,$body);
@@ -21,50 +24,195 @@
 			if ($check_body_empty != "") {
 				//insert the post
 				$date = date("Y-m-d H:i:s");
-				$added_by_id = $this->user_obj->getUserid();
+				$added_by_id = $this->id;
 				$added_by_name = $this->user_obj->getUsername();
+				//add a post record to table named posts 
 				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
 			}
 		}
 
-		public function loadAllMyPosts($id){
-			$data = mysqli_query($this->con,"select * from posts where added_by_id='$id'");
-			$outputStr = "";
-			while ($row = mysqli_fetch_array($data)) {
-				$outputStr = $outputStr."
-					<div class='row'>
-				        <div class='col-sm-3'>
-				          <div class='well'>
-				           <p>".$this->user_obj->getUsername()."</p>
-				           <img src='bird.jpg' class='img-circle' height='55' width='55'>
-				          </div>
-				        </div>
-				        <div class='col-sm-9'>
-				          <div class='well'>
+		//delete my posts
+		public function deleteMyPost($request){
+			$postId = $request['postId'];
+			mysqli_query($this->con,"update posts set deleted = 'yes' where id = '$postId'");
+		}
+
+		//load only my posts
+		public function loadAllMyPosts($request, $pageSize){
+			//get the current page number
+			$pageNum = $request['page']; 
+			$start = ($pageNum-1)*$pageSize;
+
+			$data = mysqli_query($this->con,"select * from posts where added_by_id='$this->id' and deleted = 'no' order by date DESC limit $start, $pageSize");
+			if (mysqli_num_rows($data) >= 1) {
+				$outputStr = "";
+				//output the data from result set
+				while ($row = mysqli_fetch_array($data)) {
+					$outputStr .= "
+				        <div class='well' value='".$row['id']."'>
+				        	<a href='#' class='close'
+				        	 	data-dismiss='alert'
+				        	 	aria-label='close'><i class='fa fa-window-close'aria-hidden='true'></i></a>
+				            <img src='".$this->user_obj->getProfile_pic()."' class='img-circle' height='55' width='55'>
+				            <br>
+		        	        ".$this->user_obj->getUsername()."
 				          	<p>".$this->getTime($row['date'])."</p>
 				          	<br>
 				            <p>".$row['text']."</p>
 				            <br>
 				            <p>Likes (".$row['likes'].")</p>
-				          </div>
 				        </div>
-				      </div>
+					";
+				}
+				$outputStr .= "
+					<input type='hidden' class='nextPage' value='".($pageNum + 1)."'>
+					<input type='hidden' class='noMorePosts' value='false'>
+					";
+				return $outputStr;
+			}else{
+				//no more posts
+				$outputStr = "";
+				$outputStr .= "
+					<input type='hidden' class='noMorePosts' value='true'>
+					<hr>
+					<p>No More to Show</p>
 				";
+				return $outputStr;
 			}
-			return $outputStr;
-		}
-
-		public function loadFriendPosts($id){
-			//get the friends' id of the user 
-			$friend_list_query = mysqli_query($this->con,"select friend_id from user_friend where user_id='$id'");
 			
-			while ($friend_array = mysqli_fetch_array($friend_list_query)) {
-				$data = array();
-				$data[$friend_array['friend_id']] = $this->loadPosts($friend_array['friend_id']);
-			}
-			return $data;
 		}
 
+		//load one of my friends' posts
+		public function loadOneFriendPosts($request, $pageSize,$friend_id){
+			//get the current page number
+			$pageNum = $request['page']; 
+			$start = ($pageNum-1)*$pageSize;
+
+
+			$data = mysqli_query($this->con,"select * from posts where added_by_id='$friend_id' and deleted = 'no' order by date DESC limit $start, $pageSize");
+			if (mysqli_num_rows($data) >= 1) {
+				$outputStr = "";
+				$friend = new user($this->con, $friend_id);
+				//output the data from result set
+				while ($row = mysqli_fetch_array($data)) {
+					$outputStr .= "
+				        <div class='well' value='".$row['id']."'>
+				            <img src='".$friend->getProfile_pic()."' class='img-circle' height='55' width='55'>
+				            <br>
+		        	        ".$friend->getUsername()."
+				          	<p>".$this->getTime($row['date'])."</p>
+				          	<br>
+				            <p>".$row['text']."</p>
+				            <br>
+				            <p>Likes (".$row['likes'].")</p>
+				        </div>
+					";
+				}
+				$outputStr .= "
+					<input type='hidden' class='nextPage' value='".($pageNum + 1)."'>
+					<input type='hidden' class='noMorePosts' value='false'>
+					";
+				return $outputStr;
+			}else{
+				//no more posts
+				$outputStr = "";
+				$outputStr .= "
+					<input type='hidden' class='noMorePosts' value='true'>
+					<hr>
+					<p>No More to Show</p>
+				";
+				return $outputStr;
+			}
+		}
+
+		//load all my friends' posts
+		public function loadAllFriendsPosts($request, $pageSize){
+			//get this current page number
+			$pageNum = $request['page']; 
+			$start = ($pageNum-1)*$pageSize;
+
+			//get the friends' id of the user 
+			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id'");
+			//if exists any friend
+			if (mysqli_num_rows($friendsData) >= 1) {
+				//transfer ids to an array
+				$friends = array();
+				while ($row = mysqli_fetch_array($friendsData)){
+					array_push($friends, $row['friend_id']);
+				}
+				unset($row);
+				//add user himself to that array
+				array_push($friends,$this->id);
+
+				//dynamicly construct the query language
+				$query = "SELECT * FROM posts WHERE (";
+				$query.= "added_by_id='$friends[0]'";
+				for($i=1; $i<count($friends); $i++){
+					$query.=" or added_by_id='$friends[$i]'";
+				}
+				$query .= ") AND deleted = 'no' order by date DESC limit $start, $pageSize"; 
+				
+				$data = mysqli_query($this->con,$query);
+
+				/*
+				------------------------------------------------
+				$data includes all posts from user and his friends
+				*/
+				if (mysqli_num_rows($data) >= 1) {
+					$outputStr = "";
+					//output the data from result set
+					while ($row = mysqli_fetch_array($data)) {
+						$person = new user($this->con, $row['added_by_id']);
+						$outputStr .= "
+					        <div class='well' value='".$row['id']."'>
+					        ";
+
+					        if ($this->id == $row['added_by_id']) {
+					        	$outputStr .= "
+					        	<a href='#' class='close'
+					        	 	data-dismiss='alert'
+					        	 	aria-label='close'>
+					        	 	<i class='fa fa-window-close'aria-hidden='true'></i>
+					        	</a>";
+					        }
+					        $outputStr .= "
+					            <img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
+					            <br>
+			        	        ".$person->getUsername()."
+					          	<p>".$this->getTime($row['date'])."</p>
+					          	<br>
+					            <p>".$row['text']."</p>
+					            <br>
+					            <p>Likes (".$row['likes'].")</p>
+					        </div>
+						";
+						unset($person);  
+					}
+					$outputStr .= "
+						<input type='hidden' class='nextPage' value='".($pageNum + 1)."'>
+						<input type='hidden' class='noMorePosts' value='false'>
+						";
+					return $outputStr;
+				}else{
+					//no more posts
+					$outputStr = "";
+					$outputStr .= "
+						<input type='hidden' class='noMorePosts' value='true'>
+						<hr>
+						<p>No More to Show</p>
+					";
+					return $outputStr;
+				}
+
+				//-----------------------------------------------
+			
+			}else{
+				return $this->loadAllMyPosts($request, $pageSize);
+			}
+
+		}
+
+		//get the relative time
 		public function getTime($postDateTime){
 			$currentDateTime = date("Y-m-d H:i:s");
 			$startTime = new DateTime($postDateTime);

@@ -42,27 +42,18 @@ require 'includes/form_handlers/verification_handler.php';
 
 				<div class="verify_box">
 					<div class="verify_header">
-						<h3>Input your verification code.</h3>
+						<h3>Input your verification code!</h3>
 					</div>
 
 					<div id="verification">
 						<form action="login_verification.php" method="POST">
-						
 							<p>
-								<?php if(in_array("<br>verification code was incorrect<br>", $error_array)) echo "<br>verification code was incorrect<br>"; ?>
-<<<<<<< HEAD
-								<input type="text" class="verify_input" name="ver_code" placeholder="Verfication Code" required>
-
-								<!-- <input type="submit" name="verification_button" value="Verify"> -->
-								<button type="submit" class="btn btn-danger verify_btn" style="display:inline-block" name="verification_button">Verify</button>
-=======
-							<input type="text" class="verify_input" name="ver_code" placeholder="Verfication Code" required>
-
-								<!-- <input type="submit" name="verification_button" value="Verify"> -->
-							<button type="submit" class="btn btn-danger verify_btn" style="display:inline-block" name="verification_button">Verify</button>
->>>>>>> f468e10bd818f236857a893c72a6e0a121a8fbf9
-							</p>
-							
+ 								<?php if(in_array("<br>verification code was incorrect<br>", $error_array)) echo "<br>verification code was incorrect<br>"; ?>
+ 								<input type="text" class="verify_input" name="ver_code" placeholder="Verfication Code" required>
+ 
+ 								<!-- <input type="submit" name="verification_button" value="Verify"> -->
+ 								<button type="submit" class="btn btn-danger verify_btn" style="display:inline-block" name="verification_button">Verify</button>
+ 							</p>
 						</form>
 					</div>
 
