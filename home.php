@@ -70,6 +70,9 @@ require 'includes/service/user.php';
 	</nav>
   
   	<!--body-->
+  	<input type="hidden" value="<?php echo $user['username'] ?>">
+	<input type="hidden" value="<?php echo $user['id'] ?>">
+	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
 	<div class="container text-center">    
 	  <div class="row">
 	    <div class="col-sm-3 well">
@@ -200,6 +203,8 @@ require 'includes/service/user.php';
 				return false;
 
 			}); //End (window).scroll(function())
+
+			
 		});
 	</script>
 </body>

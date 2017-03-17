@@ -1,5 +1,7 @@
 <?php 
 	require 'user.php';
+	require 'like.php';
+	require 'comment.php';
 	/**
 	* 
 	*/
@@ -60,7 +62,27 @@
 				          	<br>
 				            <p>".$row['text']."</p>
 				            <br>
-				            <p>Likes (".$row['likes'].")</p>
+				            <div>
+					            <button class='btn btn-default btn-sm'>
+					                <i class='fa fa-thumbs-up' aria-hidden='true'></i>
+					                Likes (".$row['likes'].")
+					            </button>
+		        	";
+				    //--------------add likes-----------------
+				    $like_obj = new like($this->con);
+				    $likeResultSet= $like_obj->selectLikes($row['id']);
+				    while ($like = mysqli_fetch_array($likeResultSet))
+				    {
+				    	$outputStr .="
+				    		<a href='#'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+				            	<input type='hidden' value='".$like['username']."'>
+				            </a>
+				        ";
+				    }
+				    //---------------------------------------
+				    $outputStr .="
+				    		</div>
 				        </div>
 					";
 				}
@@ -183,7 +205,41 @@
 					          	<br>
 					            <p>".$row['text']."</p>
 					            <br>
-					            <p>Likes (".$row['likes'].")</p>
+					            <div class='like'> 
+						            <button class='btn btn-default btn-sm'>
+					                	<i class='fa fa-thumbs-up' aria-hidden='true'></i>
+					                	Likes (".$row['likes'].")
+					            	</button>
+				            	
+				            ";
+				    //--------------add likes-----------------
+				    $like_obj = new like($this->con);
+				    $likeResultSet= $like_obj->selectLikes($row['id']);
+				    while ($like = mysqli_fetch_array($likeResultSet))
+				    {
+				    	$outputStr .="
+				    		<a href='#'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+				            	<input type='hidden' value='".$like['username']."'>
+				            </a>
+				        ";
+				    }
+				    //---------------------------------------
+				    	$outputStr .="
+				    			</div>
+				    			<div class='comment'>
+				    			<form>
+				    				<input type='text' class='verify_input' placeholder='comment here...' required>
+ 
+ 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
+ 								</form>";
+ 					//--------------add comments--------------
+ 					$comment_obj = new comment($this->con);
+ 					$outputStr .= $comment_obj->selectComments($row['id']);
+
+ 					//----------------------------------------
+				    	$outputStr .="
+				    			</div>
 					        </div>
 						";
 						unset($person);  
