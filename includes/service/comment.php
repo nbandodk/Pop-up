@@ -27,10 +27,11 @@
 			$output = "";
 			while ($comment = mysqli_fetch_array($commentData)){
 		    	$output .="
-	    			<div class='eachComment'>
+	    			<div class='eachComment' value='".$comment['id']."'>
 	    				<a href='#'><img src='".$comment['profile_pic']."' class='img-circle' height='25' width='25'>".$comment['comment_by_name']." :
 						</a>
 						".$comment['comment']."
+						<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
 						<p>
 						".$this->getTime($comment['dateTime'])."
 						</p>
@@ -38,6 +39,10 @@
 	    		";
 		    }
 			return $output;
+		}
+
+		public function deleteComments($id){
+			mysqli_query($this->con,"DELETE FROM comments WHERE id='$id'");
 		}
 
 		//get the relative time
@@ -66,7 +71,7 @@
 				}
 			}else if ($interval->h >= 1) {
 				if ($interval->h > 1) {
-					return $interval->d." hours ago";
+					return $interval->h." hours ago";
 				}else{
 					return "1 hour ago";
 				}

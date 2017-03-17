@@ -294,7 +294,7 @@
 				}
 			}else if ($interval->h >= 1) {
 				if ($interval->h > 1) {
-					return $interval->d." hours ago";
+					return $interval->h." hours ago";
 				}else{
 					return "1 hour ago";
 				}

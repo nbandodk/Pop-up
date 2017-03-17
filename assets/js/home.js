@@ -86,6 +86,25 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+
+
+	$('div.posts_area').on('click','.eachComment>span',function(){
+		var $this = $(this);
+		var commentId = $this.parent().attr('value');
+		if(confirm("Are you sure to delete")){
+			$.ajax({
+				url: "includes/form_handlers/delete_comment_handler.php",
+				type: "POST",
+				data: "commentId="+commentId+"&delete_comment=true",
+				cache: false,
+
+				success: function(returnedData) {
+					$this.parent().remove();
+				}
+			});
+		}
+		return false;
+	});
 });
 
 
