@@ -32,7 +32,7 @@
 
 <body>
 
-    <nav class="navbar navbar-f">
+    <nav class="navbar navbar-f navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
@@ -47,14 +47,20 @@
                     <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
                     <li><a href="#"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
                 </ul>
-                <form action="#" class="navbar-form navbar-right" role="search">
+                <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" role="search">
                     <div class="form-group input-group">
                         <input type="search" id="searchInput" class="form-control" placeholder="Search..">
+
                         <span class="input-group-btn">
                           <button class="btn" type="submie">
                             <span class="icon-search"></span>
                           </button>
                         </span>
+                    </div>
+                    
+                    <!--To show the search result-->
+                    <div class="well search_result_ajax" style="display: none;">
+
                     </div>
                 </form>
 
@@ -82,6 +88,19 @@
 
 <!-- Custom Javascript -->
 <script type="text/javascript" src="assets/js/home.js"></script>
+<script type="text/javascript">
+    // Navbar box shadow on scroll 
+    $(function(){
+        var navbar = $('.navbar');
+        $(window).scroll(function(){
+            if($(window).scrollTop() <= 40){
+                navbar.css('box-shadow', 'none');
+            } else {
+              navbar.css('box-shadow', '0px 10px 20px rgba(0, 0, 0, 0.4)'); 
+            }
+        });  
+    });  
+</script>
 
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.min.js"></script>

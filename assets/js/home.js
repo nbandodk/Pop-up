@@ -58,11 +58,7 @@ $(document).ready(function() {
 	//for adding toggle to comment button next to the like button 
 	$('div.posts_area').on('click','.commentdis>button',function(){
 		var $targetElement = $(this).parent().parent().parent().next();
-		var targetElement = $targetElement.get(0);
-		if(targetElement.style.display == "block") 
-			targetElement.style.display = "none";
-		else 
-			targetElement.style.display = "block";
+		$targetElement.toggle('slow');
 	});
 
 	//for adding each comment in .comment area
@@ -117,6 +113,31 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+
+	//for search ajax
+	$("nav #searchInput").keyup(function(){
+		var searchedUsername = this.value;
+		searchedUsername = $.trim(searchedUsername);
+		if (searchedUsername == '') {
+			$("nav").find('.search_result_ajax').hide('slow','swing');
+		}else{
+			$("nav").find('.search_result_ajax').show('slow','swing');
+			
+			$.ajax({
+				url: "includes/form_handlers/search_handler.php",
+				type: "POST",
+				data: "searchRegisteredUserAjax=true"+
+					  "&searchedUsername="+searchedUsername,
+				cache: false,
+
+				success: function(returnedData) {
+					$("nav").find('.search_result_ajax').empty();
+					$("nav").find('.search_result_ajax').append(returnedData);
+				}
+			});
+		}
+	});
+
 });
 
 

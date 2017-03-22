@@ -326,6 +326,7 @@
 					//no more posts
 					$outputStr = "";
 					$outputStr .= "
+						<br>
 						<input type='hidden' class='noMorePosts' value='true'>
 						<hr>
 						<p>No More to Show</p>

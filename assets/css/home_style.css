@@ -8,6 +8,10 @@
 	src: url('../fonts/Bellota-BoldItalic.otf');
 }
 
+body {
+	padding-top: 70px;
+}
+
 .profile_box {
 	background-color: #f8f8f8;
 	border: 1px solid #ddd;
@@ -57,27 +61,48 @@
 }
 
 .post_box_header {
-	height: 10px;
+	height: 22px;
+	padding: 1px;
 }
 
 .post_info {
-	padding:10px 0;
+	padding: 10px 0;
 }
 
 .post_area_p.post_p {
     font-size: 14px;
-    padding: 5px 0;
+    /* padding: 5px 0; */
 }
 
 .post_option_box {
-	background-color: #f8f8f8;
 	padding-left: 0;
 	padding-top: 20px;
 	padding-bottom: 5px;
+	min-height: 65px;
 }
 
 .comment {
 	border-top: 2px solid #ddd;
 	margin-top: 5px;
 	padding: 10px;
+}
+
+.friends_list_area {
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 15px;
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.friends_list_group {
+	margin-bottom: 0;
+	border-top: 1px solid #ddd;
+}
+
+.panel.panel-default.friends_list_panel{
+	border-radius: 0;
+
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }

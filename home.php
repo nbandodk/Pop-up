@@ -77,20 +77,34 @@ require 'header.php';
 	    </div>
 
 	    <div class="col-sm-2">
-	    	<div class='well friends_list_area'>
-	    		<?php 
-	    		while ($user_friend=mysqli_fetch_array($user_friends)) {
-	    			//get the name and img of the friends
-					$friend = new user($con, $user_friend['friend_id']);
-					echo "
-					<a href='#'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'>
-						<i>".$friend->getUsername()."</i>
-					</a>
-					<br>
-					<br>
-					";
-	    		}
-	    		?>
+	    	<div class='box friends_list_area'>
+	    		<p>My friend list</p>
+	    		<div class="panel-group friends_list_group">
+	    			<div class="panel panel-default friends_list_panel text-left">
+
+			    		<?php
+			    		while ($user_friend=mysqli_fetch_array($user_friends)) {
+			    			//get the name and img of the friends
+							$friend = new user($con, $user_friend['friend_id']);
+							echo "
+		    					<div class='panel-heading' style='padding: 15px;'>
+		      						<h4 class='panel-title'>
+		        						<a data-toggle='collapse' href='#collapse".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><i> ".$friend->getUsername()."</i></a>
+		      						</h4>
+		    					</div>
+			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
+			      					<ul class='list-group'>
+			        					<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> View profile</a></li>
+		                            	<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> Message</a></li>
+			      					</ul>
+			    				</div>
+			    				
+			    				<hr style='margin:0; border-top:1px solid #ddd'>
+							";
+			    		}
+			    		?>
+	    			</div>
+	    		</div>
 	    	</div>
 	    </div>
 	  </div>
