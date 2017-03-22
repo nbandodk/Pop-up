@@ -16,11 +16,13 @@
 			$this->id = $id;
 			$this->user_obj = new user($con, $id);
 		}
+
 		//submit my posts
 		public function submitPost($body){
 			$body = strip_tags($body);
 			$body = mysqli_real_escape_string($this->con,$body);
 			$check_body_empty = preg_replace('/\s+/', '', $body);
+
 			if ($check_body_empty != "") {
 				//insert the post
 				$date = date("Y-m-d H:i:s");
@@ -30,16 +32,19 @@
 				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
 			}
 		}
+
 		//delete my posts
 		public function deleteMyPost($request){
 			$postId = $request['postId'];
 			mysqli_query($this->con,"update posts set deleted = 'yes' where id = '$postId'");
 		}
+
 		//load only my posts
 		public function loadAllMyPosts($request, $pageSize){
 			//get the current page number
 			$pageNum = $request['page']; 
 			$start = ($pageNum-1)*$pageSize;
+
 			$data = mysqli_query($this->con,"select * from posts where added_by_id='$this->id' and deleted = 'no' order by date DESC limit $start, $pageSize");
 			if (mysqli_num_rows($data) >= 1) {
 				$outputStr = "";
@@ -76,8 +81,21 @@
 				        ";
 				    }
 				    //---------------------------------------
+				    	$outputStr .="
+				    			</div>
+				    			<div class='comment'>
+				    			<form>
+				    				<input type='text' class='verify_input' placeholder='comment here...' required>
+ 
+ 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
+ 								</form>";
+ 					//--------------add comments--------------
+ 					$comment_obj = new comment($this->con,$this->id);
+ 					$outputStr .= $comment_obj->selectComments($row['id']);
+
+ 					//----------------------------------------
 				    $outputStr .="
-				    		</div>
+			    			</div>
 				        </div>
 					";
 				}
@@ -98,11 +116,14 @@
 			}
 			
 		}
+
 		//load one of my friends' posts
 		public function loadOneFriendPosts($request, $pageSize,$friend_id){
 			//get the current page number
 			$pageNum = $request['page']; 
 			$start = ($pageNum-1)*$pageSize;
+
+
 			$data = mysqli_query($this->con,"select * from posts where added_by_id='$friend_id' and deleted = 'no' order by date DESC limit $start, $pageSize");
 			if (mysqli_num_rows($data) >= 1) {
 				$outputStr = "";
@@ -111,14 +132,50 @@
 				while ($row = mysqli_fetch_array($data)) {
 					$outputStr .= "
 				        <div class='well' value='".$row['id']."'>
-				            <img src='".$friend->getProfile_pic()."' class='img-circle' height='55' width='55'>
+				        	<a href='#' class='close'
+				        	 	data-dismiss='alert'
+				        	 	aria-label='close'><i class='fa fa-window-close'aria-hidden='true'></i></a>
+				            <img src='".$this->user_obj->getProfile_pic()."' class='img-circle' height='55' width='55'>
 				            <br>
-		        	        ".$friend->getUsername()."
+		        	        ".$this->user_obj->getUsername()."
 				          	<p>".$this->getTime($row['date'])."</p>
 				          	<br>
 				            <p>".$row['text']."</p>
 				            <br>
-				            <p>Likes (".$row['likes'].")</p>
+				            <div>
+					            <button class='btn btn-default btn-sm'>
+					                <i class='fa fa-thumbs-up' aria-hidden='true'></i>
+					                Likes (".$row['likes'].")
+					            </button>
+		        	";
+				    //--------------add likes-----------------
+				    $like_obj = new like($this->con);
+				    $likeResultSet= $like_obj->selectLikes($row['id']);
+				    while ($like = mysqli_fetch_array($likeResultSet))
+				    {
+				    	$outputStr .="
+				    		<a href='#'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+				            	<input type='hidden' value='".$like['username']."'>
+				            </a>
+				        ";
+				    }
+				    //---------------------------------------
+				    	$outputStr .="
+				    			</div>
+				    			<div class='comment'>
+				    			<form>
+				    				<input type='text' class='verify_input' placeholder='comment here...' required>
+ 
+ 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
+ 								</form>";
+ 					//--------------add comments--------------
+ 					$comment_obj = new comment($this->con,$this->id);
+ 					$outputStr .= $comment_obj->selectComments($row['id']);
+
+ 					//----------------------------------------
+				    $outputStr .="
+			    			</div>
 				        </div>
 					";
 				}
@@ -141,14 +198,13 @@
 
 		//load all my friends' posts
 		public function loadAllFriendsPosts($request, $pageSize){
-			// get this current page number
+			//get this current page number
 			$pageNum = $request['page']; 
-			$start = ($pageNum - 1) * $pageSize;
+			$start = ($pageNum-1)*$pageSize;
 
 			//get the friends' id of the user 
-			$friendsData = mysqli_query($this->con, "SELECT friend_id FROM user_friend WHERE user_id = '$this->id'");
-
-			// if exists any friend
+			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id'");
+			//if exists any friend
 			if (mysqli_num_rows($friendsData) >= 1) {
 				//transfer ids to an array
 				$friends = array();
@@ -156,14 +212,13 @@
 					array_push($friends, $row['friend_id']);
 				}
 				unset($row);
-
-				// add user himself to that array
+				//add user himself to that array
 				array_push($friends,$this->id);
 
-				// dynamicly construct the query language
+				//dynamicly construct the query language
 				$query = "SELECT * FROM posts WHERE (";
 				$query.= "added_by_id='$friends[0]'";
-				for($i = 1; $i<count($friends); $i++) {
+				for($i=1; $i<count($friends); $i++){
 					$query.=" or added_by_id='$friends[$i]'";
 				}
 				$query .= ") AND deleted = 'no' order by date DESC limit $start, $pageSize"; 
@@ -176,66 +231,49 @@
 				*/
 				if (mysqli_num_rows($data) >= 1) {
 					$outputStr = "";
-					//output the data from result set
+					//output the data from result set (load post)
 					while ($row = mysqli_fetch_array($data)) {
 						$person = new user($this->con, $row['added_by_id']);
-						$id = $row['id'];
-
-						?>
-
-						<script>
-							function toggle<?php echo $id; ?>() {
-								var element = document.getElementById("toggleComment<?php echo $id; ?>");
-
-								if(element.style.display == "block") 
-									element.style.display = "none";
-								else 
-									element.style.display = "block";
-							}
-						</script>
-
-						<?php
-
 						$outputStr .= "
 					        <div class='col-sm-12 well post_box' value='".$row['id']."'>
-					        	<div class='col-sm-12 post_box_header' value='".$row['id']."'>
+					        	<div class='col-sm-12 post_box_header'>
 					        ";
+					        //add cross
 					        if ($this->id == $row['added_by_id']) {
 					        	$outputStr .= "
 					        	<a href='#' class='close'
 					        	 	data-dismiss='alert'
 					        	 	aria-label='close'>
-					        	 	<i aria-hidden='true'>×</i>
+					        	 	<i>×</i>
 					        	</a>";
 					        }
+					        $outputStr .= "</div>";
+					        
 					        $outputStr .= "
+					        	<div class='col-sm-3'>
+					        		<a class='post_info'>
+					            		<img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
+					            		<br><br>
+			        	        		".$person->getUsername()."
+				          			</a>
 						        </div>
-						            <div class='col-sm-3'>
-						        		<p class='post_info'>
-						            		<img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
-						            		<br><br>
-				        	        		".$person->getUsername()."
-					          			</p>
-							        </div>
-						          	
-						          	<div class='col-sm-9 text-left'>
-						          		<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
-					            		<p>".$row['text']."</p>
 
-					            		<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-											<div class='commentdis' style='float:left'>
-												<button class='btn btn-default btn-sm' onClick='javascript:toggle$id()'>
-													<span class='glyphicon glyphicon-comment' aria-hidden='true'></span> Comments
-								            	</button>
-											</div>
+						        <div class='col-sm-9 text-left'>
+						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
+					            	<p>".$row['text']."</p>
+					     			
+					     			<div class='col-sm-12 post_option_box text-left' value='".$row['id']."'>
+						     			<div class='commentdis' style='float:left'>
+											<button class='btn btn-default btn-sm'>
+											<span class='icon-comment' aria-hidden='true'></span></button>
+										</div>
 
-								            <div class='like' style='float:left; margin-left: 20px;'> 
-									            <button class='btn btn-default btn-sm'>
-								                	<i class='fa fa-thumbs-up' aria-hidden='true'></i>
-								                	Likes (".$row['likes'].")
-								            	</button>
-					            ";
-
+							            <div class='like' style='float:left; margin-left: 20px;'>
+								            <button class='btn btn-default btn-sm'>
+							                	<i class='icon-thumbs-up' aria-hidden='true'></i>(".$row['likes'].")
+							            	</button>
+				            	
+				            ";
 				    //--------------add likes-----------------
 				    $like_obj = new like($this->con);
 				    $likeResultSet= $like_obj->selectLikes($row['id']);
@@ -248,31 +286,29 @@
 				            </a>
 				        ";
 				    }
-
 				    //---------------------------------------
 				    	$outputStr .="
+				    					</div>
 				    				</div>
-			    				</div>
-			    			</div>
+				    			</div>
 
-			    			<div class='col-sm-12 comment' id='toggleComment$id' style='display:none;'>
-			    				<form class='form-horizontal'>
-			    					<div class='form-group'>
-			    						<div class='col-sm-10'>
-                                            <input type='text' class='form-control verify_input' placeholder='comment here...' required>
-                                        </div>
-			    					
-			    						<button type='submit' class='btn btn-default'>Reply</button>
-									</div>
-									
-								</form>
-
-								<div class='col-sm-12 text-left'>";
-
+				    			<div class='col-sm-12 comment' style='display:none;'>
+					    			<form class='form-horizontal'>
+					    				<div class='form-group'>
+				    						<div class='col-sm-10'>
+	                                            <input type='text' class='form-control' placeholder='comment here...' required>
+	                                        </div>
+				    					
+				    						<button type='submit' class='btn btn-default'>Reply</button>
+										</div>
+	 								</form>
+	 								
+ 									<div class='col-sm-12 text-left'>
+ 								";
  					//--------------add comments--------------
- 					$comment_obj = new comment($this->con);
+ 					$comment_obj = new comment($this->con,$this->id);
  					$outputStr .= $comment_obj->selectComments($row['id']);
- 					
+
  					//----------------------------------------
 				    	$outputStr .="
 				    				</div>
@@ -290,18 +326,22 @@
 					//no more posts
 					$outputStr = "";
 					$outputStr .= "
+						<br>
 						<input type='hidden' class='noMorePosts' value='true'>
 						<hr>
 						<p>No More to Show</p>
 					";
 					return $outputStr;
 				}
+
 				//-----------------------------------------------
 			
 			}else{
 				return $this->loadAllMyPosts($request, $pageSize);
 			}
+
 		}
+
 		//get the relative time
 		public function getTime($postDateTime){
 			$currentDateTime = date("Y-m-d H:i:s");
@@ -347,4 +387,5 @@
 			}
 		}
 	}
+
 ?>

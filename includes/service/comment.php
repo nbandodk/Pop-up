@@ -6,9 +6,11 @@
 	class comment 
 	{
 		private $con;
-		function __construct($con)
+		private $currentUserId;
+		function __construct($con, $currentUserId)
 		{
 			$this->con = $con;
+			$this->currentUserId = $currentUserId;
 		}
 
 		public function insertComments($request){
@@ -25,14 +27,20 @@
 		public function selectComments($post_id){
 			$commentData = mysqli_query($this->con,"SELECT * FROM comments WHERE post_id='$post_id' AND removed = 'no' order by dateTime ASC");
 			$output = "";
-
 			while ($comment = mysqli_fetch_array($commentData)){
 		    	$output .="
 	    			<div class='eachComment' value='".$comment['id']."'>
 	    				<a href='#'><img src='".$comment['profile_pic']."' class='img-circle' height='25' width='25'>".$comment['comment_by_name']." :
 						</a>
-						".$comment['comment']."
-						<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
+						".$comment['comment'];
+						//----------------------------------
+						if ($this->currentUserId == $comment['comment_by_id']) {
+							$output .="
+							<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
+							";
+						}
+						//----------------------------------
+						$output .="
 						<p>
 						".$this->getTime($comment['dateTime'])."
 						</p>

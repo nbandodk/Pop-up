@@ -18,8 +18,7 @@
 		    echo $output;
 	    }else{
 	    	$output = "
-	    		<i class='fa fa-thumbs-up' aria-hidden='true'></i>
-				Likes (".$like_obj->selectPosts($_REQUEST['postId']).")
+	    		<i class='icon-thumbs-up' aria-hidden='true'></i>(".$like_obj->selectPosts($_REQUEST['postId']).")
 			";
 	    	echo $output;
 	    }

@@ -1,7 +1,7 @@
 <?php 
 require 'config/config.php';
-
-	$a = $_REQUEST['comment'];
-	echo $a;
+require 'includes/service/comment.php';
+	
+	new comment($con, 1);
 
  ?>

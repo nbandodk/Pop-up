@@ -19,7 +19,7 @@
 			//check if the user likes before
 			$doesLikeBefore = mysqli_query($this->con,"SELECT * FROM likes WHERE post_id='$post_id' AND user_id='$user_id'"); 
 			if (mysqli_num_rows($doesLikeBefore) < 1) {
-				//add a like record to table named likes
+				//add a like record to table named likes 
 				mysqli_query($this->con,"insert into likes values('','$username','$profile_pic','$user_id','$post_id')"); 
 				mysqli_query($this->con,"UPDATE posts SET likes=likes+1 WHERE id='$post_id'");
 			}
