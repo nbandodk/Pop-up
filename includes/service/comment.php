@@ -6,9 +6,11 @@
 	class comment 
 	{
 		private $con;
-		function __construct($con)
+		private $currentUserId;
+		function __construct($con, $currentUserId)
 		{
 			$this->con = $con;
+			$this->currentUserId = $currentUserId;
 		}
 
 		public function insertComments($request){
@@ -30,8 +32,15 @@
 	    			<div class='eachComment' value='".$comment['id']."'>
 	    				<a href='#'><img src='".$comment['profile_pic']."' class='img-circle' height='25' width='25'>".$comment['comment_by_name']." :
 						</a>
-						".$comment['comment']."
-						<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
+						".$comment['comment'];
+						//----------------------------------
+						if ($this->currentUserId == $comment['comment_by_id']) {
+							$output .="
+							<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
+							";
+						}
+						//----------------------------------
+						$output .="
 						<p>
 						".$this->getTime($comment['dateTime'])."
 						</p>

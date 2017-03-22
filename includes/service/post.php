@@ -81,8 +81,21 @@
 				        ";
 				    }
 				    //---------------------------------------
+				    	$outputStr .="
+				    			</div>
+				    			<div class='comment'>
+				    			<form>
+				    				<input type='text' class='verify_input' placeholder='comment here...' required>
+ 
+ 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
+ 								</form>";
+ 					//--------------add comments--------------
+ 					$comment_obj = new comment($this->con,$this->id);
+ 					$outputStr .= $comment_obj->selectComments($row['id']);
+
+ 					//----------------------------------------
 				    $outputStr .="
-				    		</div>
+			    			</div>
 				        </div>
 					";
 				}
@@ -119,14 +132,50 @@
 				while ($row = mysqli_fetch_array($data)) {
 					$outputStr .= "
 				        <div class='well' value='".$row['id']."'>
-				            <img src='".$friend->getProfile_pic()."' class='img-circle' height='55' width='55'>
+				        	<a href='#' class='close'
+				        	 	data-dismiss='alert'
+				        	 	aria-label='close'><i class='fa fa-window-close'aria-hidden='true'></i></a>
+				            <img src='".$this->user_obj->getProfile_pic()."' class='img-circle' height='55' width='55'>
 				            <br>
-		        	        ".$friend->getUsername()."
+		        	        ".$this->user_obj->getUsername()."
 				          	<p>".$this->getTime($row['date'])."</p>
 				          	<br>
 				            <p>".$row['text']."</p>
 				            <br>
-				            <p>Likes (".$row['likes'].")</p>
+				            <div>
+					            <button class='btn btn-default btn-sm'>
+					                <i class='fa fa-thumbs-up' aria-hidden='true'></i>
+					                Likes (".$row['likes'].")
+					            </button>
+		        	";
+				    //--------------add likes-----------------
+				    $like_obj = new like($this->con);
+				    $likeResultSet= $like_obj->selectLikes($row['id']);
+				    while ($like = mysqli_fetch_array($likeResultSet))
+				    {
+				    	$outputStr .="
+				    		<a href='#'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+				            	<input type='hidden' value='".$like['username']."'>
+				            </a>
+				        ";
+				    }
+				    //---------------------------------------
+				    	$outputStr .="
+				    			</div>
+				    			<div class='comment'>
+				    			<form>
+				    				<input type='text' class='verify_input' placeholder='comment here...' required>
+ 
+ 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
+ 								</form>";
+ 					//--------------add comments--------------
+ 					$comment_obj = new comment($this->con,$this->id);
+ 					$outputStr .= $comment_obj->selectComments($row['id']);
+
+ 					//----------------------------------------
+				    $outputStr .="
+			    			</div>
 				        </div>
 					";
 				}
@@ -182,33 +231,47 @@
 				*/
 				if (mysqli_num_rows($data) >= 1) {
 					$outputStr = "";
-					//output the data from result set
+					//output the data from result set (load post)
 					while ($row = mysqli_fetch_array($data)) {
 						$person = new user($this->con, $row['added_by_id']);
 						$outputStr .= "
-					        <div class='well' value='".$row['id']."'>
+					        <div class='col-sm-12 well post_box' value='".$row['id']."'>
+					        	<div class='col-sm-12 post_box_header'>
 					        ";
-
+					        //add cross
 					        if ($this->id == $row['added_by_id']) {
 					        	$outputStr .= "
 					        	<a href='#' class='close'
 					        	 	data-dismiss='alert'
 					        	 	aria-label='close'>
-					        	 	<i class='fa fa-window-close'aria-hidden='true'></i>
+					        	 	<i>×</i>
 					        	</a>";
 					        }
+					        $outputStr .= "</div>";
+					        
 					        $outputStr .= "
-					            <img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
-					            <br>
-			        	        ".$person->getUsername()."
-					          	<p>".$this->getTime($row['date'])."</p>
-					          	<br>
-					            <p>".$row['text']."</p>
-					            <br>
-					            <div class='like'> 
+					        	<div class='col-sm-3'>
+					        		<a class='post_info'>
+					            		<img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
+					            		<br><br>
+			        	        		".$person->getUsername()."
+				          			</a>
+						        </div>
+
+						        <div class='col-sm-9 text-left'>
+						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
+					            	<p>".$row['text']."</p>
+					     			
+					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
+					     			<div class='commentdis' style='float:left'>
+									
+									<button class='btn btn-default btn-sm'>
+										<span class='icon-comment' aria-hidden='true'></span></button>
+									</div>
+					            
+					            <div class='like'  style='float:left; margin-left: 20px;'> 
 						            <button class='btn btn-default btn-sm'>
-					                	<i class='fa fa-thumbs-up' aria-hidden='true'></i>
-					                	Likes (".$row['likes'].")
+					                	<i class='icon-thumbs-up' aria-hidden='true'></i>(".$row['likes'].")
 					            	</button>
 				            	
 				            ";
@@ -226,19 +289,29 @@
 				    }
 				    //---------------------------------------
 				    	$outputStr .="
+				    			  </div>
+				    			 </div>
 				    			</div>
-				    			<div class='comment'>
-				    			<form>
-				    				<input type='text' class='verify_input' placeholder='comment here...' required>
- 
- 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
- 								</form>";
+
+				    			<div class='col-sm-12 comment' style='display:none;'>
+				    			<form class='form-horizontal'>
+				    				<div class='form-group'>
+			    						<div class='col-sm-10'>
+                                            <input type='text' class='form-control' placeholder='comment here...' required>
+                                        </div>
+			    					
+			    						<button type='submit' class='btn btn-default'>Reply</button>
+									</div>
+ 								</form>
+ 							<div class='col-sm-12 text-left'>
+ 								";
  					//--------------add comments--------------
- 					$comment_obj = new comment($this->con);
+ 					$comment_obj = new comment($this->con,$this->id);
  					$outputStr .= $comment_obj->selectComments($row['id']);
 
  					//----------------------------------------
 				    	$outputStr .="
+				    				</div>
 				    			</div>
 					        </div>
 						";
