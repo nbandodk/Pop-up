@@ -1,8 +1,7 @@
 <?php 
-require 'config/config.php'; //connect to database 
+require 'header.php';
 require 'includes/form_handlers/home_handler.php';
 require 'includes/service/user.php';
-require 'header.php';
 ?>
   
 <!--body-->
@@ -12,8 +11,8 @@ require 'header.php';
 	<div class="container text-center">    
 	  <div class="row">
 	    <div class="col-sm-3 scrolldiv">
-	      <div class="box" >
-				<a href="<?php echo $user['username'].'/'.$user['id']; ?>">
+	      <div class="box">
+				<a href="profile.php">
 		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
 		        	<p>User ID: <?php echo $user['username'] ?></p>
 		        </a>

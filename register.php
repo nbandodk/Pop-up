@@ -107,6 +107,7 @@ require 'includes/form_handlers/login_handler.php';
 							<input type="password" name="log_password" placeholder="Password"><br>
 							<!-- <input type="submit" name="login_button" value="Login"><br> -->
 							<button type="submit" class="btn btn btn-danger" name="login_button">Sign in</button><br>
+							<a href="forgot_pass.php">Forgot Password</a><br>
 							<a href="#" id="signup" class="signup">Need an account? Register here.</a>
 
 							<br>
@@ -122,9 +123,7 @@ require 'includes/form_handlers/login_handler.php';
 								
 							<input type="text" name="reg_lname" placeholder="Last Name" value="<?php if(isset($_SESSION['reg_lname']))echo $_SESSION['reg_lname']; ?>" required>
 							<br>
-							<?php if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>"; ?>
-								
-							<span class="add-on"><i class="icon-envelope"></i></span>
+							<?php if(in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>";?>
 							<input type="email" name="reg_email" placeholder="Email" value="<?php if(isset($_SESSION['reg_email']))echo $_SESSION['reg_email']; ?>" required>
 							<br>
 							<input type="email" name="reg_email2" placeholder="Confirm Email" value="<?php if(isset($_SESSION['reg_email2']))echo $_SESSION['reg_email2']; ?>" required>

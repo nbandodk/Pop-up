@@ -5,10 +5,15 @@
 		$search_result = new search($con);
 		if (isset($_REQUEST['searchRegisteredUserAjax'])) {
 			//do the search ajax
-			//echo 
+			echo $search_result->searchUserAjax($_REQUEST['searchedUsername']);
 		} else {
 			//do the regular search
-			//$_SESSION['search_result'] = $search_result
+			if (isset($_POST['searchForm'])) {
+				$_SESSION['search_result'] = $search_result->searchUserReg($_POST['searchForm']); 
+			}else{
+				$_SESSION['search_result'] = $search_result->searchUserReg($_GET['searchValue']); 
+			}
+
 			header("Location: ../../search_result.php");
 		}
 	} else {

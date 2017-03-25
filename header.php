@@ -1,3 +1,4 @@
+<?php require 'config/config.php'; //connect to database  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,15 @@
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
 
-    <style>    
+    <style>  
+        //search bar drop down
+        .search_result_ajax {
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          padding: 12px 16px;
+        }  
         /* Set black background color, white text and some padding */
         footer {
           background-color: #555;
@@ -32,7 +41,7 @@
 
 <body>
 
-    <nav class="navbar navbar-f navbar-fixed-top">
+    <nav class="navbar navbar-f navbar-fixed-top ll">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
@@ -47,9 +56,10 @@
                     <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
                     <li><a href="#"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
                 </ul>
-                <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" role="search">
+                <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" method="post" role="search">
                     <div class="form-group input-group">
-                        <input type="search" id="searchInput" class="form-control" placeholder="Search..">
+                        
+                        <input type="search" id="searchInput" class="form-control" placeholder="Search.." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchForm">
 
                         <span class="input-group-btn">
                           <button class="btn" type="submie">
@@ -60,7 +70,6 @@
                     
                     <!--To show the search result-->
                     <div class="well search_result_ajax" style="display: none;">
-
                     </div>
                 </form>
 

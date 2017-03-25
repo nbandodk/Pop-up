@@ -97,7 +97,13 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hove
 }
 
 input.verify_input {
-	width: 50%;
+	width: 60%;
+	padding: 0 10px;
+	margin: 5px 3px;
+}
+
+input.forgetpass_input {
+	width: 60%;
 	padding: 0 10px;
 	margin: 5px 3px;
 }
@@ -125,6 +131,11 @@ button.btn.btn-danger:focus { outline: 0; opacity: 0.6; background: #de615e; col
 button.btn.btn-danger:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de615e; color: #fff; }
 
 button.btn.btn-danger.verify_btn {
+	width: 20%;
+	margin: 5px 3px;
+}
+
+button.btn.btn-danger.forgetpass_btn {
 	width: 20%;
 	margin: 5px 3px;
 }
