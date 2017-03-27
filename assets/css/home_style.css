@@ -12,6 +12,10 @@ body {
 	padding-top: 70px;
 }
 
+.ll {
+	height: 50px;
+}
+
 .profile_box {
 	background-color: #f8f8f8;
 	border: 1px solid #ddd;
@@ -78,13 +82,26 @@ body {
 	padding-left: 0;
 	padding-top: 20px;
 	padding-bottom: 5px;
-	min-height: 65px;
+	min-height: 40px;
+}
+
+.commentdis, .like {
+	height: 25px;
+	padding-top: 1px;
+}
+
+.like_a {
+	color: #e74c3c;
 }
 
 .comment {
 	border-top: 2px solid #ddd;
 	margin-top: 5px;
 	padding: 10px;
+}
+
+.comment_input_panel {
+	padding-right: 0;
 }
 
 .friends_list_area {

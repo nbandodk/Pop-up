@@ -1,8 +1,7 @@
 <?php 
-require 'config/config.php'; //connect to database 
+require 'header.php';
 require 'includes/form_handlers/home_handler.php';
 require 'includes/service/user.php';
-require 'header.php';
 ?>
   
 <!--body-->
@@ -12,8 +11,8 @@ require 'header.php';
 	<div class="container text-center">    
 	  <div class="row">
 	    <div class="col-sm-3 scrolldiv">
-	      <div class="box" >
-				<a href="<?php echo $user['username'].'/'.$user['id']; ?>">
+	      <div class="box">
+				<a href="profile.php">
 		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
 		        	<p>User ID: <?php echo $user['username'] ?></p>
 		        </a>
@@ -78,7 +77,7 @@ require 'header.php';
 
 	    <div class="col-sm-2">
 	    	<div class='box friends_list_area'>
-	    	<p>My friend list</p>
+	    		<p>My friend list</p>
 	    		<div class="panel-group friends_list_group">
 	    			<div class="panel panel-default friends_list_panel text-left">
 
@@ -92,7 +91,6 @@ require 'header.php';
 		        						<a data-toggle='collapse' href='#collapse".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><i> ".$friend->getUsername()."</i></a>
 		      						</h4>
 		    					</div>
-
 			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
 			      					<ul class='list-group'>
 			        					<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> View profile</a></li>
@@ -108,7 +106,6 @@ require 'header.php';
 	    		</div>
 	    	</div>
 	    </div>
-
 	  </div>
 	</div>
 

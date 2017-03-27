@@ -11,14 +11,14 @@
 			while ($like = mysqli_fetch_array($likeResultSet)){
 		    	$output .="
 	    		<a href='#'>
-	            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+	            	<img src='".$like['profile_pic']."' class='img-circle' height='20' width='20'>
 	            	<input type='hidden' value='".$like['username']."'>
 	            </a>";
 		    }
 		    echo $output;
 	    }else{
 	    	$output = "
-	    		<i class='icon-thumbs-up' aria-hidden='true'></i>(".$like_obj->selectPosts($_REQUEST['postId']).")
+	    		<i class='icon-heart' aria-hidden='true'></i> like(".$like_obj->selectPosts($_REQUEST['postId']).")
 			";
 	    	echo $output;
 	    }

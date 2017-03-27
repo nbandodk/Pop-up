@@ -1,19 +1,7 @@
-// Navbar box shadow on scroll 
-$(function(){
-    var navbar = $('.navbar');
-    $(window).scroll(function(){
-        if($(window).scrollTop() <= 40){
-       		navbar.css('box-shadow', 'none');
-        } else {
-          navbar.css('box-shadow', '0px 10px 20px rgba(0, 0, 0, 0.4)'); 
-        }
-    });  
-});
-
-// for delete or modify posts
+//for delete or modify posts
 $(document).ready(function() {
 	//for post deletion
-	$('div.posts_area').on('click','a:has(i)',function(){
+	$('div.posts_area').on('click','.post_box_header>a:has(i)',function(){
 		var postId = $(this).parent().parent().attr('value');
 		if(confirm("Are you sure to delete")){
 			$.ajax({
@@ -31,8 +19,8 @@ $(document).ready(function() {
 	});
 	
 
-	// for adding likes
-	$('div.posts_area').on('click','.like>button:has(i)',function(){
+	//for adding likes
+	$('div.posts_area').on('click','.like>.like_a:has(i)',function(){
 		var $this = $(this);
 		var postId = $this.parent().parent().attr('value');
 		var username = $('input:hidden:eq(0)').val();
@@ -68,13 +56,9 @@ $(document).ready(function() {
 	});
 
 	//for adding toggle to comment button next to the like button 
-	$('div.posts_area').on('click','.commentdis>button',function(){
+	$('div.posts_area').on('click','.commentdis>.comment_a',function(){
 		var $targetElement = $(this).parent().parent().parent().next();
-		var targetElement = $targetElement.get(0);
-		if(targetElement.style.display == "block") 
-			targetElement.style.display = "none";
-		else 
-			targetElement.style.display = "block";
+		$targetElement.toggle('slow');
 	});
 
 	//for adding each comment in .comment area
@@ -129,4 +113,31 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+
+	//for search ajax
+	$("nav #searchInput").keyup(function(){
+		var searchedUsername = this.value;
+		searchedUsername = $.trim(searchedUsername);
+		if (searchedUsername == '') {
+			$("nav").find('.search_result_ajax').hide('slow','swing');
+		}else{
+			$("nav").find('.search_result_ajax').show('slow','swing');
+			
+			$.ajax({
+				url: "includes/form_handlers/search_handler.php",
+				type: "POST",
+				data: "searchRegisteredUserAjax=true"+
+					  "&searchedUsername="+searchedUsername,
+				cache: false,
+
+				success: function(returnedData) {
+					$("nav").find('.search_result_ajax').empty();
+					$("nav").find('.search_result_ajax').append(returnedData);
+				}
+			});
+		}
+	});
+
 });
+
+

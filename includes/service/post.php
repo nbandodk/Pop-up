@@ -252,8 +252,8 @@
 					        $outputStr .= "
 					        	<div class='col-sm-3'>
 					        		<a class='post_info'>
-					            		<img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
-					            		<br><br>
+					            		<img src='".$person->getProfile_pic()."' class='img-circle' style='margin-bottom: 10px;' height='55' width='55'>
+					            		<br>
 			        	        		".$person->getUsername()."
 				          			</a>
 						        </div>
@@ -262,17 +262,17 @@
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
 					            	<p>".$row['text']."</p>
 					     			
-					     			<div class='col-sm-12 post_option_box text-left' value='".$row['id']."'>
-						     			<div class='commentdis' style='float:left'>
-											<button class='btn btn-default btn-sm'>
-											<span class='icon-comment' aria-hidden='true'></span></button>
+					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
+					     				<div class='commentdis' style='float:left'>
+					     					<a class='comment_a'>
+					     						<span class='icon-comment' aria-hidden='true'></span> comment
+		        							</a>
 										</div>
-
+					            
 							            <div class='like' style='float:left; margin-left: 20px;'>
-								            <button class='btn btn-default btn-sm'>
-							                	<i class='icon-thumbs-up' aria-hidden='true'></i>(".$row['likes'].")
-							            	</button>
-				            	
+							            	<a class='like_a' data-toggle='tooltip' data-placement='top' title='Tooltip on top'>
+					     						<i class='icon-heart' aria-hidden='true'></i> like(".$row['likes'].")
+		        							</a>
 				            ";
 				    //--------------add likes-----------------
 				    $like_obj = new like($this->con);
@@ -281,28 +281,26 @@
 				    {
 				    	$outputStr .="
 				    		<a href='#'>
-				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='20' width='20'>
 				            	<input type='hidden' value='".$like['username']."'>
 				            </a>
 				        ";
 				    }
 				    //---------------------------------------
 				    	$outputStr .="
-				    					</div>
-				    				</div>
+				    			  		</div>
+				    			 	</div>
 				    			</div>
 
 				    			<div class='col-sm-12 comment' style='display:none;'>
 					    			<form class='form-horizontal'>
 					    				<div class='form-group'>
-				    						<div class='col-sm-10'>
+				    						<div class='col-sm-10 comment_input_panel'>
 	                                            <input type='text' class='form-control' placeholder='comment here...' required>
 	                                        </div>
-				    					
-				    						<button type='submit' class='btn btn-default'>Reply</button>
+	                                        <button type='submit' class='btn btn-primary'>Reply</button>
 										</div>
 	 								</form>
-	 								
  									<div class='col-sm-12 text-left'>
  								";
  					//--------------add comments--------------
@@ -339,7 +337,6 @@
 			}else{
 				return $this->loadAllMyPosts($request, $pageSize);
 			}
-
 		}
 
 		//get the relative time
@@ -389,3 +386,5 @@
 	}
 
 ?>
+
+<script src="assets/js/flat.js"></script>
