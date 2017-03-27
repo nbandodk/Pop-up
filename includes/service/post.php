@@ -251,7 +251,7 @@
 					        
 					        $outputStr .= "
 					        	<div class='col-sm-3'>
-					        		<a class='post_info'>
+					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
 					            		<img src='".$person->getProfile_pic()."' class='img-circle' height='55' width='55'>
 					            		<br><br>
 			        	        		".$person->getUsername()."

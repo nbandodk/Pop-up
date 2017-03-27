@@ -77,7 +77,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo $user['username'].'/'.$user['id']; ?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
+                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
                             <li class="divider"></li>
                             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
                             <li class="divider"></li>

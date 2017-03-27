@@ -12,7 +12,7 @@ require 'includes/service/user.php';
 	  <div class="row">
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box">
-				<a href="profile.php">
+				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
 		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
 		        	<p>User ID: <?php echo $user['username'] ?></p>
 		        </a>
