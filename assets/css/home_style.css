@@ -1,0 +1,132 @@
+@font-face {
+	font-family: 'Bellota-LightItalic';
+	src: url('../fonts/Bellota-LightItalic.otf');
+}
+
+@font-face {
+	font-family: 'Bellota-BoldItalic';
+	src: url('../fonts/Bellota-BoldItalic.otf');
+}
+
+body {
+	padding-top: 70px;
+}
+
+.profile_box {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+/* .box.post_box {
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	min-height: 10px;
+	border-radius: 0px;
+	padding: 15px;
+} */
+
+.post_area_p {
+    color: #acbbc6;
+    display: block;
+    font-size: 12px;
+}
+
+.post_area_p.profile_p_title {
+    padding-top: 5px;
+    text-align: center;
+}
+
+.profile_p_count {
+    color: #34495e;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -2px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.post_box {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	padding: 5px;
+	margin-bottom: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.post_box_header {
+	height: 22px;
+	padding: 1px;
+}
+
+.post_info {
+	padding: 10px 0;
+}
+
+.post_area_p.post_p {
+    font-size: 14px;
+    /* padding: 5px 0; */
+}
+
+.post_option_box {
+	padding-left: 0;
+	padding-top: 20px;
+	padding-bottom: 5px;
+	min-height: 65px;
+}
+
+.comment {
+	border-top: 2px solid #ddd;
+	margin-top: 5px;
+	padding: 10px;
+}
+
+.friends_list_area {
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 15px;
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.friends_list_group {
+	margin-bottom: 0;
+	border-top: 1px solid #ddd;
+}
+
+.panel.panel-default.friends_list_panel{
+	border-radius: 0;
+
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.posting_on_profile input[type="submit"] {
+	width:90%;
+	height: 30px;
+	border-radius:5px;
+	margin:0px 0 0 7px;
+	color:#fff;
+	background-color: #0043f0;
+}
+
+.upload_profile_pic input[type="submit"] {
+	width:90%;
+	height: 30px;
+	border-radius:5px;
+	margin:0px 0 0 7px;
+	color:#fff;
+	background-color: #2ecc71;
+}
+
+.upload_profile_pic_area {
+	border: 2px solid #ddd;
+	padding-left: 10px;
+	background-color: #f8f8f8;
+}

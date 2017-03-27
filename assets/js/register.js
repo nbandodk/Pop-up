@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 	//on click signup, hide login and show registration form
