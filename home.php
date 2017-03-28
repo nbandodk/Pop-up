@@ -8,17 +8,18 @@ require 'includes/service/user.php';
   	<input type="hidden" value="<?php echo $user['username'] ?>">
 	<input type="hidden" value="<?php echo $user['id'] ?>">
 	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
+	
 	<div class="container text-center">    
 	  <div class="row">
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box">
 				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
-		        	<p>User ID: <?php echo $user['username'] ?></p>
+		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="70" width="70" style="margin: 15px">
+		        	<p style="font-size:18px;"><?php echo $user['username'] ?></p>
 		        </a>
 
-			   	<div class="row">
-					<div class="col-sm-6 profile_box">
+			   	<div class="row" >
+					<div class="col-sm-6 profile_box" id="postNum">
 						<p class="post_area_p profile_p_title">My Posts</p>
 						<p class="post_area_p profile_p_count"><?php echo $postNum ?></p>
 				    </div>
@@ -62,7 +63,7 @@ require 'includes/service/user.php';
 	            	<form action="includes/form_handlers/post_handler.php" method="POST">
 	            	   <textarea class="form-control" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" style="resize: none" required></textarea>
         	  			<br>
-              			<button type="submit" class="btn btn-success btn-f">
+              			<button type="submit" class="btn btn-success btn-f" style="float:right;">
                 			<span class="glyphicon glyphicon-ok"></span> Send
               			</button>
 	            	</form>
@@ -117,7 +118,12 @@ require 'includes/service/user.php';
 		$(document).ready(function() {
 
 			$('#loadingIcon').show();
-			<?php $_SESSION['Loading'] = 'true' ?>
+			<?php 
+				if (isset($_SESSION['Loading_myposts'])) {
+					unset($_SESSION['Loading_myposts']);
+				}
+				$_SESSION['Loading'] = 'true';
+			?>
 			//ajax request for loading posts 
 			$.ajax({
 				url: "includes/form_handlers/post_handler.php",

@@ -19,6 +19,8 @@
     <!-- custom styles for this page -->
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
+    <!--for upload picture-->
+    <link href="assets/css/jquery.Jcrop.css" rel="stylesheet">
 
     <style>  
         //search bar drop down
@@ -33,7 +35,8 @@
         footer {
           background-color: #555;
           color: white;
-          padding: 15px;
+          padding: 15px 0;
+          height: 50px;
         }
     </style>
 
@@ -79,8 +82,6 @@
                         <ul class="dropdown-menu">
                             <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
-                            <li class="divider"></li>
                             <li><a href="includes/form_handlers/logout_handler.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
                     </li>
@@ -116,3 +117,5 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script src="assets/js/flat.js"></script>
+<script src="assets/js/jquery.Jcrop.js"></script>
+<script src="assets/js/jcrop_bits.js"></script>

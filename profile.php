@@ -2,11 +2,6 @@
 require 'header.php';
 require 'includes/form_handlers/profile_handler.php';   
 require 'includes/service/user.php';
-	/*	
-	if(isset($_POST['update_profile'])){
-	header("Location: upload.php");
-	exit;
-	}*/
 ?>
   
 <!--body-->
@@ -20,7 +15,7 @@ require 'includes/service/user.php';
 	  	<div class="row">
 	    	<div class="col-sm-3 scrolldiv">
 	      		<div class="box" >
-					<a href="<?php echo $user['username'].'/'.$user['id']; ?>">
+					<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
 		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
 		        	<p><?php echo $user['username'] ?></p>
 		        	
@@ -38,67 +33,67 @@ require 'includes/service/user.php';
 							<p class="post_area_p profile_p_count"><?php echo $friendNum ?></p>
 					    </div>
 
-
-						<!-- this part can be used when add friend feature is implemeted
-					    <div class="col-sm-12 profile_box posting_on_profile">
-					    <input type="submit" class="deep_blue" data-toggle ="modal" data-target="#post_form" value="What's on your mind?">
-					    </div>
-					    
-					    -->
-
 					    <div class="col-sm-12 profile_box upload_profile_pic">
-						    <form class="profile_post" action="" method="POST">						    
-						    <input type="submit" name="update_profile_picture" value="Update Profile Photo" /> 
-						    </form>
+						    <a href="upload.php">						    
+						    <button type="button" class="btn btn-primary btn-lg">
+							<span class="glyphicon glyphicon-picture"> Photo Upload</span> 
+							</button>
+
+						    </a>
 					    </div>
-					    <div class="col-sm-12 profile_box posting_on_profile">
-						    <form class="profile_post" action="" method="POST">						    
-						    <input type="submit" name="pass_reset" value="Reset Password"/> 
-						    </form>
+
+					    <div class="col-sm-12 profile_box posting_on_profile">	
+					    	
+              				<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pwdModal">
+							<span class="glyphicon glyphicon-refresh"> Password Reset</span> 
+							</button>
+
 					    </div>
+			   			
+			   			<!-- pwdModal -->
+			   			<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">Change your password</h4>
+						      </div>
+						      <div class="modal-body">
+						        <form class="pwdReset"method="POST">
+
+						        <input type="password" name="reset_password" placeholder="New password...">
+
+						        </form>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						        <button type="button" class="btn btn-primary" id="pwdResetSumbit">Confirm</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
 			   		</div>
 
 	  	  		</div>
 	    	</div>
 
-
-
 	    	<!-- Modal : for posting something-->
 	    	<div class="col-sm-7">
+	    		<div class="row">
+			        <div class="col-sm-12">
+			          <div class="panel panel-default text-left">
+			            <div class="panel-body">
+			            	
+			            </div>
+			          </div>
+			        </div>
+			    </div>
+
 	    		<div class="posts_area"></div>
 		  		<img id="loadingIcon" src="assets/images/icons/loading.gif">
-
-		  			<!-- this part can be used when add friend feature is implemeted 
-		    	<div class="modal fade" id="post_form" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="postModalLabel">Post something!</h4>
-				      </div>
-				      <div class="modal-body">
-				      	<p>This will appear on the user's profile page and also their newsfeed for your friends to see!</p>
-				      	<form class="profile_post" action="" method="POST">
-				      		<div class="form-group">
-				      			<textarea class="form-control" name="post_body"></textarea>
-				      			<input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>">
-				      			<input type="hidden" name="user_to" value="<?php echo $username; ?>">
-				      		</div>
-				      	</form>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary" name="post_button" id="submit_profile_post">Post</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				
-				-->
 	    	</div>
-
-
-
 
 	    	<div class="col-sm-2">
 	    		<div class='box friends_list_area'>
@@ -131,22 +126,19 @@ require 'includes/service/user.php';
 	    		</div>
 	    		</div>
 	    	</div>
-	  </div>
-	</div>
-
-
-	      
-
-	   
-	    
-	 	 </div>
+	    </div>
 	</div>
 
 	
 	<script>
 		$(document).ready(function() {
 			$('#loadingIcon').show();
-			<?php $_SESSION['Loading'] = 'true' ?>
+			<?php 
+				if (isset($_SESSION['Loading'])) {
+					unset($_SESSION['Loading']);
+				}
+				$_SESSION['Loading_myposts'] = 'true'; 
+			?>
 			//ajax request for loading posts 
 			$.ajax({
 				url: "includes/form_handlers/post_handler.php",
@@ -184,6 +176,25 @@ require 'includes/service/user.php';
 				}
 				return false;
 			}); //End (window).scroll(function())
+			
+
+			//for password reset
+			$('#pwdResetSumbit').click(function(){
+				$.ajax({
+					url: "includes/form_handlers/pass_handler.php",
+					type: "POST",
+					data: $("form.pwdReset").serialize(),
+					cache: false,
+					success: function(returnedData) {
+						$('#pwdModal').modal('hide');
+						//reload the profile page
+						alert("Password reset successfully");
+						location.reload();
+						return false;
+					}
+				});
+				
+			});
 			
 		});
 	</script>

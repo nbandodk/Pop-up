@@ -1,22 +1,16 @@
-<?php 
-	if (isset($_SESSION['username'])) {
-		if ($_SESSION['username'] == $_GET['username'] && $_SESSION['id'] == $_GET['id']) {
-		}else{
-			header("Location: ../home.php");
-		}
-	}
- ?>
-
  <?php 
 	if(isset($_SESSION['username'])) {
 		$userLoggedIn = $_SESSION['username'];
-		//$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
-		//$userLoggedIn_array = mysqli_fetch_array($user_details_query);
+		if (!(isset($_GET['username']) && isset($_GET['id']))) {
+			header("Location: home.php");
+			exit;
+		}
 	}else {
 		header("Location: register.php");
+		exit;
 	}
 
-	if(isset($_GET['username']) && isset($_GET['id']) ) {
+	if($_SESSION['username'] == $_GET['username'] and $_SESSION['id'] == $_GET['id']) {
 	$user_id = $_GET['id'];
 	$user_details_query  = mysqli_query($con, "SELECT * FROM users WHERE id='$user_id'");
 	$user = mysqli_fetch_array($user_details_query);
@@ -28,13 +22,14 @@
 	$postNum = mysqli_num_rows($check_database_query);
 	//get the friends list of the user 
 	$user_friends = mysqli_query($con, "SELECT friend_id FROM user_friend WHERE user_id='$user_id'");
+	}else{
+		header("Location: home.php");
+		exit;
 	}
+
 	if(isset($_POST['update_profile_picture'])){
 		header("Location: upload.php");
 		exit;
-	}
-	if(isset($_POST['pass_reset'])){
-		header("Location: pass.php");
-		exit;
+		
 	}
  ?>

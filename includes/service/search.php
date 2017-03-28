@@ -17,7 +17,7 @@
 			while ($row = mysqli_fetch_array($resultSet))
 			{
 				$output .="
-					<a href='#'>
+					<a href='profile.php?username=".$row['username']."&id=".$row['id']."'>
 						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'>".$row['username']."
 					</a>
 					<hr>
