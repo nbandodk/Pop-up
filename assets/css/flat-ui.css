@@ -183,7 +183,6 @@ h2 {
 	margin-top: 30px;
 }
 
-
 a:focus {
 	outline: none;
 }
@@ -391,7 +390,7 @@ label {
 }
 
 @media(max-width: 992px) {
-	.btn-divider .btn{
+	.btn-divider .btn {
 		margin-bottom: 15px;
 	}
 }

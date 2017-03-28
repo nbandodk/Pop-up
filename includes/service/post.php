@@ -252,7 +252,7 @@
 					        $outputStr .= "
 					        	<div class='col-sm-3'>
 					        		<a class='post_info'>
-					            		<img src='".$person->getProfile_pic()."' class='img-circle' style='margin-bottom: 10px;' height='55' width='55'>
+					            		<img src='".$person->getProfile_pic()."' class='img-rounded' style='margin-bottom: 10px;' height='55' width='55'>
 					            		<br>
 			        	        		".$person->getUsername()."
 				          			</a>
@@ -265,13 +265,13 @@
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
 					     				<div class='commentdis' style='float:left'>
 					     					<a class='comment_a'>
-					     						<span class='icon-comment' aria-hidden='true'></span> comment
+					     						<span class='icon-comments-alt' aria-hidden='true'></span> comment
 		        							</a>
 										</div>
 					            
 							            <div class='like' style='float:left; margin-left: 20px;'>
-							            	<a class='like_a' data-toggle='tooltip' data-placement='top' title='Tooltip on top'>
-					     						<i class='icon-heart' aria-hidden='true'></i> like(".$row['likes'].")
+							            	<a class='like_a'>
+					     						<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
 		        							</a>
 				            ";
 				    //--------------add likes-----------------
@@ -386,5 +386,3 @@
 	}
 
 ?>
-
-<script src="assets/js/flat.js"></script>

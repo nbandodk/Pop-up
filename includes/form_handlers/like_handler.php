@@ -18,7 +18,7 @@
 		    echo $output;
 	    }else{
 	    	$output = "
-	    		<i class='icon-heart' aria-hidden='true'></i> like(".$like_obj->selectPosts($_REQUEST['postId']).")
+	    		<i class='icon-heart-empty' aria-hidden='true'></i> (".$like_obj->selectPosts($_REQUEST['postId']).")
 			";
 	    	echo $output;
 	    }

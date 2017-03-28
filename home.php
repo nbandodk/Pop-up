@@ -13,8 +13,8 @@ require 'includes/service/user.php';
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box">
 				<a href="profile.php">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
-		        	<p>User ID: <?php echo $user['username'] ?></p>
+		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="70" width="70" style="margin: 15px">
+		        	<p style="font-size: 18px;"><?php echo $user['username'] ?></p>
 		        </a>
 
 			   	<div class="row">

@@ -12,6 +12,14 @@ body {
 	padding-top: 70px;
 }
 
+a:link, a:visited {
+	text-decoration: none;
+}
+
+a:focus, a:hover {
+	text-decoration: none;
+}
+
 .ll {
 	height: 50px;
 }
@@ -94,6 +102,10 @@ body {
 	color: #e74c3c;
 }
 
+.like_a:focus, .like_a:hover {
+	color: #c0392b;
+}
+
 .comment {
 	border-top: 2px solid #ddd;
 	margin-top: 5px;
@@ -102,6 +114,20 @@ body {
 
 .comment_input_panel {
 	padding-right: 0;
+}
+
+.eachComment {
+	clear: both;
+	padding: 5px 0;
+	margin-bottom: 2px;
+}
+
+.eachComment:nth-of-type(odd) {
+	background-color: rgba(236, 240, 241, 0.80);
+}
+
+.eachComment:nth-of-type(even) {
+	background-color: rgba(189, 195, 199,0.50);
 }
 
 .friends_list_area {

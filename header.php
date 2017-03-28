@@ -33,7 +33,8 @@
         footer {
           background-color: #555;
           color: white;
-          padding: 15px;
+          padding: 15px 0;
+          height: 50px;
         }
     </style>
 
@@ -75,7 +76,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hi! <?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo $user['username'].'/'.$user['id']; ?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
                             <li class="divider"></li>
