@@ -35,5 +35,7 @@
 			$row = mysqli_fetch_array($data);
 			return $row['likes'];
 		}
+
+
 	}
 ?>

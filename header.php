@@ -19,6 +19,9 @@
     <!-- custom styles for this page -->
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
+    
+    <!--for upload picture-->
+    <link href="assets/css/jquery.Jcrop.css" rel="stylesheet">
 
     <style>  
         //search bar drop down
@@ -76,11 +79,9 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hi! <?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo $user['username'].'/'.$user['id']; ?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
                             <li class="divider"></li>
                             <li><a href="includes/form_handlers/logout_handler.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
@@ -100,10 +101,10 @@
 <script type="text/javascript" src="assets/js/home.js"></script>
 <script type="text/javascript">
     // Navbar box shadow on scroll 
-    $(function() {
+    $(function(){
         var navbar = $('.navbar');
         $(window).scroll(function(){
-            if($(window).scrollTop() <= 40) {
+            if($(window).scrollTop() <= 40){
                 navbar.css('box-shadow', 'none');
             } else {
               navbar.css('box-shadow', '0px 10px 20px rgba(0, 0, 0, 0.4)'); 
@@ -117,3 +118,5 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script src="assets/js/flat.js"></script>
+<script src="assets/js/jquery.Jcrop.js"></script>
+<script src="assets/js/jcrop_bits.js"></script>

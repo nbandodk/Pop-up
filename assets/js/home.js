@@ -1,7 +1,7 @@
 //for delete or modify posts
 $(document).ready(function() {
 	//for post deletion
-	$('div.posts_area').on('click','.post_box_header>a:has(i)',function(){
+	$('div.posts_area').on('click','.post_box_header a:has(i)',function(){
 		var postId = $(this).parent().parent().attr('value');
 		if(confirm("Are you sure to delete")){
 			$.ajax({
@@ -12,6 +12,9 @@ $(document).ready(function() {
 
 				success: function(returnedData) {
 					$('div.posts_area').find('div.well[value='+postId+']').remove();
+					var $it = $('#postNum p.profile_p_count');
+					$it.empty();
+					$it.append(returnedData);
 				}
 			});
 		}
@@ -20,7 +23,7 @@ $(document).ready(function() {
 	
 
 	//for adding likes
-	$('div.posts_area').on('click','.like>.like_a:has(i)',function(){
+	$('div.posts_area').on('click','.like>a:has(i)',function(){
 		var $this = $(this);
 		var postId = $this.parent().parent().attr('value');
 		var username = $('input:hidden:eq(0)').val();
@@ -56,7 +59,7 @@ $(document).ready(function() {
 	});
 
 	//for adding toggle to comment button next to the like button 
-	$('div.posts_area').on('click','.commentdis>.comment_a',function(){
+	$('div.posts_area').on('click','.commentdis>a',function(){
 		var $targetElement = $(this).parent().parent().parent().next();
 		$targetElement.toggle('slow');
 	});
@@ -96,9 +99,9 @@ $(document).ready(function() {
 	});
 
 	//for comment deletion
-	$('div.posts_area').on('click','.eachComment>span',function(){
+	$('div.posts_area').on('click','#each_comment i',function(){
 		var $this = $(this);
-		var commentId = $this.parent().attr('value');
+		var commentId = $this.parent().parent().parent().attr('value');
 		if(confirm("Are you sure to delete")){
 			$.ajax({
 				url: "includes/form_handlers/delete_comment_handler.php",
@@ -107,7 +110,7 @@ $(document).ready(function() {
 				cache: false,
 
 				success: function(returnedData) {
-					$this.parent().remove();
+					$this.parent().parent().parent().remove();
 				}
 			});
 		}
@@ -138,6 +141,9 @@ $(document).ready(function() {
 		}
 	});
 
+	$(window).click(function(){
+		$("nav").find('.search_result_ajax').hide('slow','swing');
+	});
 });
 
 

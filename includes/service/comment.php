@@ -29,42 +29,39 @@
 			$output = "";
 			while ($comment = mysqli_fetch_array($commentData)){
 		    	$output .="
-	    			<div class='row eachComment' value='".$comment['id']."'>
+	    			<div class='row eachComment' value='".$comment['id']."' id='each_comment'>
 	    				<div class='row  showcomments_header' style='height: 15px;'>
 	    					<div class='col-sm-12' >
-	    			";
-	    			
-	    			//----------------------------------
-					if ($this->currentUserId == $comment['comment_by_id']) {
-						$output .="
-							<i class='icon-remove' aria-hidden='true' style='float: right; padding-right:5px'></i>
 						";
-					}
-
-				$output .="
+						//----------------------------------
+						if ($this->currentUserId == $comment['comment_by_id']) {
+							$output .="
+							<i class='icon-remove' aria-hidden='true' style='float: right; padding-right:5px'></i>
+							";
+						}
+						//----------------------------------
+						$output .="
 							</div>
-	    				</div>
-	    				<div class='col-sm-3' style='clear:both; height:35px;'>
-		    				<a href='#' style='float: left; padding: 2.5px 0; font-size: 14px'><img src='".$comment['profile_pic']."' class='img-rounded' height='30' width='30'> ".$comment['comment_by_name'].":
+						</div>
+
+						<div class='col-sm-3' style='clear:both; padding-left: 5px'>
+							<a href='profile.php?username=".$comment['comment_by_name']."&id=".$comment['comment_by_id']."' style='float: left; padding: 2px 0; font-size: 14px'><img src='".$comment['profile_pic']."' class='img-rounded' height='40' width='40'> ".$comment['comment_by_name'].":
 							</a>
 						</div>
+
 						<div class='col-sm-9'>
 							<div class='row'>
-								<div class='col-sm-12' style='clear: both; height: 35px;'>
-									<p class='post_area_p post_p' style='float: left; padding: 5px 0'>
+								<div class='col-sm-12' style='clear: both;'>
+									<p class='post_area_p post_p' style='float: left; padding: 1px 0'>
 										".$this->getTime($comment['dateTime'])."
 									</p>
-							";
-
-				$output .="
-								</div>
+	    						</div>
 							</div>
+
 							<div class='row'>
 								<div class='col-sm-12' style='margin-top: 5px; margin-bottom: 5px;'>
 									".$comment['comment'];
-
-				//----------------------------------
-				$output .="
+	    				$output .="
 								</div>
 							</div>
 						</div>

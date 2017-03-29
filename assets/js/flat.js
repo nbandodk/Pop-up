@@ -10,7 +10,7 @@ $("#searchInput").blur(function () {
 
 // tooltip
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip()
 })
 
 // -navbar-top-color-toggle	
@@ -38,3 +38,6 @@ $('#onClick1').click(function () {
 
 // animate
 // $('.introduce').addClass('animated fadeInUp');
+
+
+
