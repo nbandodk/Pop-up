@@ -151,6 +151,12 @@ a:focus, a:hover {
 	border-bottom: 0;
 }
 
+.friendlist_title {
+	color: #7f8c8d;
+	font-size: 14px;
+	font-weight: bold;
+}
+
 .friends_list_group {
 	margin-bottom: 0;
 	border-top: 1px solid #ddd;
@@ -160,7 +166,7 @@ a:focus, a:hover {
 	border-radius: 0;
 
 	-webkit-box-shadow: none;
-	box-shadow: none;
+			box-shadow: none;
 }
 
 .emoji-container-p {

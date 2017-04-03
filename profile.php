@@ -31,8 +31,9 @@ require 'includes/service/user.php';
 	  	<div class="row">
 	    	<div class="col-sm-5">
 	      		<div class="box">
-					<p class="text-left profile_title"><i class="icon-globe icon-large"></i> Intro: </p>
+					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> Intro: </p>
 					<hr style="height: 1px; border: none; background-color: #7f8c8d">
+					
 					<form action="" class="form-horizontal text-left pro_form">
                         <div class="form-group">
                             <label for="my_fname" class="col-sm-3 control-label" style="text-align:left">First name:</label>

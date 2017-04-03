@@ -74,12 +74,13 @@ require 'includes/service/user.php';
 	      </div>
 	    
 	      <div class="posts_area"></div>
-		  <img id="loadingIcon" src="assets/images/icons/loading.gif">
+	      <p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
+		  <!-- <img id="loadingIcon" src="assets/images/icons/loading.gif"> -->
 	    </div>
 
-	    <div class="col-sm-3 col-md-2">
+	    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
 	    	<div class='box friends_list_area'>
-	    		<p>My friend list</p>
+	    		<p class="friendlist_title"><i class="icon-group icon-large"></i> My friend list</p>
 	    		<div class="panel-group friends_list_group">
 	    			<div class="panel panel-default friends_list_panel text-left">
 
@@ -95,8 +96,8 @@ require 'includes/service/user.php';
 		    					</div>
 			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
 			      					<ul class='list-group'>
-			        					<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> View profile</a></li>
-		                            	<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> Message</a></li>
+			        					<li class='list-group-item text-left'><a href='#'><i class='icon-eye-open'></i> View profile</a></li>
+		                            	<li class='list-group-item text-left'><a href='#'><i class='icon-comment-alt'></i> Chat</a></li>
 			      					</ul>
 			    				</div>
 			    				
