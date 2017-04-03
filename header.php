@@ -16,12 +16,19 @@
     <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
 
+    <!-- Begin emoji-picker Stylesheets -->
+    <link href="assets/emoji_lib/css/nanoscroller.css" rel="stylesheet">
+    <link href="assets/emoji_lib/css/emoji.css" rel="stylesheet">
+    <!-- End emoji-picker Stylesheets -->
+
     <!-- custom styles for this page -->
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
+    <link href="assets/css/profile_style.css" rel="stylesheet">
     
     <!--for upload picture-->
     <link href="assets/css/jquery.Jcrop.css" rel="stylesheet">
+    
 
     <style>  
         //search bar drop down
@@ -120,3 +127,12 @@
 <script src="assets/js/flat.js"></script>
 <script src="assets/js/jquery.Jcrop.js"></script>
 <script src="assets/js/jcrop_bits.js"></script>
+
+<!-- Begin emoji-picker JavaScript -->
+<script src="assets/emoji_lib/js/nanoscroller.min.js"></script>
+<script src="assets/emoji_lib/js/tether.min.js"></script>
+<script src="assets/emoji_lib/js/config.js"></script>
+<script src="assets/emoji_lib/js/util.js"></script>
+<script src="assets/emoji_lib/js/jquery.emojiarea.js"></script>
+<script src="assets/emoji_lib/js/emoji-picker.js"></script>
+<!-- End emoji-picker JavaScript -->

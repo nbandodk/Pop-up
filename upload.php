@@ -156,10 +156,9 @@ if (isset($_POST['x'])){
 <div id="Overlay" style=" width:100%; height:100%; border:0px #990000 solid; position:absolute; top:0px; left:0px; z-index:2000; display:none;"></div>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-9" style="float: none; margin-left: auto; margin-right: auto;">
-			<div class="upload_profile_pic_area">
+			<div class="col-sm-8 col-sm-offset-2 upload_profile_pic_area">
 
-				<div class="col-sm-8" id="formExample">
+				<div id="formExample">
 				    <p><b> <?=$msg?> </b></p>
 
 				    <div class="form_header">
@@ -168,12 +167,12 @@ if (isset($_POST['x'])){
 
 			        <hr style="height: 1px; border: none; border-top: 2px solid #ddd;">
 				    
-				    <form action="upload.php" method="post"  enctype="multipart/form-data">
+				    <form action="upload.php" method="post" enctype="multipart/form-data">
 				    	<div class="row">
-				    		<div class="col-sm-2">
+				    		<div class="col-xs-5 col-sm-3 col-md-2">
 				   	 			<input class="btn btn-default" type="button" id="image" name="image" onclick="myImage.click();" value="Browse">
 				   	 		</div>
-				   	 		<div class="col-sm-5">
+				   	 		<div class="col-xs-7 col-sm-5 col-md-4">
 				   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
 								<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none"><br>
 							</div>
@@ -232,7 +231,6 @@ if (isset($_POST['x'])){
 	    </div><!-- CroppingContainer -->
 	<?php 
 	} ?>
-</div>
 </div>
 </div>
 </div>

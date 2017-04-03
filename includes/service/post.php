@@ -115,17 +115,20 @@
 				    			</div>
 
 				    			<div class='col-sm-12 comment' style='display:none;'>
-				    			<form class='form-horizontal'>
-				    				<div class='form-group'>
-			    						<div class='col-sm-10 comment_input_panel'>
-                                            <input type='text' class='form-control' placeholder='comment here...' required>
-                                        </div>
-			    					
-			    						<button type='submit' class='btn btn-success'>Reply</button>
-									</div>
- 								</form>
+					    			<form class='form-horizontal'>
+					    				<div class='form-group'>
+				    						<div class='col-xs-7 col-sm-8 col-md-10 text-left comment_input_panel'>
+				    							<p class='lead emoji-picker-container emoji-container-p'>
+	              									<input type='text' class='form-control comment_input' placeholder='comment here...' data-emojiable='true' data-emoji-input='unicode' required>
+	            								</p>
+	                                        </div>
+				    					
+				    						<button type='submit' class='btn btn-success'>Reply</button>
+										</div>
+	 								</form>
  							<div class='col-sm-12 text-left'>
  								";
+
  					//--------------add comments--------------
  					$comment_obj = new comment($this->con,$this->id);
  					$outputStr .= $comment_obj->selectComments($row['id']);
@@ -146,6 +149,7 @@
 				//no more posts
 				$outputStr = "";
 				$outputStr .= "
+					<br>
 					<input type='hidden' class='noMorePosts' value='true'>
 					<hr>
 					<p>No More to Show</p>
@@ -226,6 +230,7 @@
 				//no more posts
 				$outputStr = "";
 				$outputStr .= "
+					<br>
 					<input type='hidden' class='noMorePosts' value='true'>
 					<hr>
 					<p>No More to Show</p>
@@ -333,12 +338,13 @@
 				    			<div class='col-sm-12 comment' style='display:none;'>
 					    			<form class='form-horizontal'>
 					    				<div class='form-group'>
-				    						<div class='col-xs-7 col-sm-8 col-md-10 comment_input_panel'>
-	                                            <input type='text' class='form-control' placeholder='comment here...' required>
+				    						<div class='col-xs-7 col-sm-8 col-md-10 text-left comment_input_panel'>
+					    						<p class='lead emoji-picker-container emoji-container-p'>
+	              									<input type='text' class='form-control comment_input' placeholder='comment here...' data-emojiable='true' data-emoji-input='unicode' required>
+	            								</p>
 	                                        </div>
-				    						<div class='col-xs-5 col-sm-4 col-md-2'>
-				    							<button type='submit' class='btn btn-success'>Reply</button>
-				    						</div>
+				    						
+				    						<button type='submit' class='btn btn-success'>Reply</button>
 										</div>
 	 								</form>
  								<div class='col-sm-12 text-left'>
@@ -427,3 +433,29 @@
 	}
 
 ?>
+
+<script>
+	$(function() {
+	// Initializes and creates emoji set from sprite sheet
+	window.emojiPicker = new EmojiPicker({
+	  emojiable_selector: '[data-emojiable=true]',
+	  assetsPath: 'assets/emoji_lib/img/',
+	  popupButtonClasses: 'icon-smile'
+	});
+	// Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+	// You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+	// It can be called as many times as necessary; previously converted input fields will not be converted again
+	window.emojiPicker.discover();
+	});
+</script>
+
+<script>
+	// Google Analytics
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-49610253-3', 'auto');
+	ga('send', 'pageview');
+</script>

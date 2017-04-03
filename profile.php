@@ -11,18 +11,58 @@ require 'includes/service/user.php';
 	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
 	-->
 
-	<div class="container text-center">    
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="profile_cover">
+					<div class="col-sm-6 myprofile_box">
+						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
+							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
+				        </div>
+				        <div class="col-xs-12 col-sm-6 col-md-4 right_area">
+						<a class="user_name" href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">	
+				    		<p><?php echo $user['username'] ?></p>
+				        </a>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+		</div>    
 	  	<div class="row">
-	    	<div class="col-sm-3 scrolldiv">
-	      		<div class="box" >
-					<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
-		        	<p><?php echo $user['username'] ?></p>
-		        	
-		        	</a>
-
+	    	<div class="col-sm-5">
+	      		<div class="box">
+					<p class="text-left profile_title"><i class="icon-globe icon-large"></i> Intro: </p>
+					<hr style="height: 1px; border: none; background-color: #7f8c8d">
+					<form action="" class="form-horizontal text-left pro_form">
+                        <div class="form-group">
+                            <label for="my_fname" class="col-sm-3 control-label" style="text-align:left">First name:</label>
+                            <div class="col-sm-9">
+                            	<input type="text" class="form-control pro_input" id="pro_fname" value="<?php echo $user['first_name'] ?>" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="my_lname" class="col-sm-3 control-label" style="text-align:left">Last name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control pro_input" id="pro_lname" value="<?php echo $user['last_name'] ?>" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="my_email" class="col-sm-3 control-label" style="text-align:left">My email:</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control pro_input" id="pro_email" value="<?php echo $user['email'] ?>" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        	<div class="col-sm-offset-1 col-sm-3">
+                                <button class="btn btn-default pro_btn" type="submit">Cancel</button>
+                            </div>
+                            <div class="col-sm-offset-4 col-sm-3">
+                                <button class="btn btn-default pro_btn" type="submit">Edit</button>
+                            </div>
+                        </div>
+                    </form>
+                    
 			   		<div class="row">
-
 						<div class="col-sm-6 profile_box">
 							<p class="post_area_p profile_p_title">My Posts</p>
 							<p class="post_area_p profile_p_count"><?php echo $postNum ?></p>
@@ -81,21 +121,28 @@ require 'includes/service/user.php';
 
 	    	<!-- Modal : for posting something-->
 	    	<div class="col-sm-7">
-	    		<div class="row">
-			        <div class="col-sm-12">
-			          <div class="panel panel-default text-left">
-			            <div class="panel-body">
-			            	
-			            </div>
-			          </div>
-			        </div>
-			    </div>
+				<div class="row">
+				<div class="col-sm-12">
+				  <div class="panel panel-default text-left">
+				    <div class="panel-body">
+				    	<form action="includes/form_handlers/post_handler.php" method="POST">
+				    		<p class="lead emoji-picker-container">
+				    			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+				    		</p>
+				  			<button type="submit" class="btn btn-success btn-f" style="float:right;">
+				    			<span class="glyphicon glyphicon-ok"></span> Send
+				  			</button>
+				    	</form>
+				    </div>
+				  </div>
+				</div>
+				</div>
 
 	    		<div class="posts_area"></div>
 		  		<img id="loadingIcon" src="assets/images/icons/loading.gif">
 	    	</div>
 
-	    	<div class="col-sm-2">
+	    	<!-- <div class="col-sm-2">
 	    		<div class='box friends_list_area'>
 	    		<p>My friend list</p>
 	    		<div class="panel-group friends_list_group">
@@ -125,7 +172,7 @@ require 'includes/service/user.php';
 	    			</div>
 	    		</div>
 	    		</div>
-	    	</div>
+	    	</div> -->
 	    </div>
 	</div>
 

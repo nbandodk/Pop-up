@@ -55,14 +55,15 @@ require 'includes/service/user.php';
 	    </div>
 
 	    <div class="col-sm-6 col-md-7">
-	    
+
 	      <div class="row">
 	        <div class="col-sm-12">
 	          <div class="panel panel-default text-left">
 	            <div class="panel-body">
 	            	<form action="includes/form_handlers/post_handler.php" method="POST">
-	            	   <textarea class="form-control" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" style="resize: none" required></textarea>
-        	  			<br>
+	            		<p class="lead emoji-picker-container">
+	            			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+	            		</p>
               			<button type="submit" class="btn btn-success btn-f" style="float:right;">
                 			<span class="glyphicon glyphicon-ok"></span> Send
               			</button>
@@ -170,5 +171,32 @@ require 'includes/service/user.php';
 			
 		});
 	</script>
+
+	<script>
+		$(function() {
+		// Initializes and creates emoji set from sprite sheet
+		window.emojiPicker = new EmojiPicker({
+		  emojiable_selector: '[data-emojiable=true]',
+		  assetsPath: 'assets/emoji_lib/img/',
+		  popupButtonClasses: 'icon-smile'
+		});
+		// Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+		// You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+		// It can be called as many times as necessary; previously converted input fields will not be converted again
+		window.emojiPicker.discover();
+		});
+    </script>
+
+    <script>
+		// Google Analytics
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-49610253-3', 'auto');
+		ga('send', 'pageview');
+    </script>
+
 </body>
 </html>
