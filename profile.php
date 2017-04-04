@@ -5,11 +5,11 @@ require 'includes/service/user.php';
 ?>
   
 <!--body-->
-<!--
+
+	<!--very important! -->
   	<input type="hidden" value="<?php echo $user['username'] ?>">
 	<input type="hidden" value="<?php echo $user['id'] ?>">
 	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
-	-->
 
 	<div class="container text-center">
 		<div class="row">
@@ -32,7 +32,7 @@ require 'includes/service/user.php';
 	    	<div class="col-sm-5">
 	      		<div class="box">
 					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> Intro: </p>
-					<hr style="height: 1px; border: none; background-color: #7f8c8d">
+					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
 					
 					<form action="" class="form-horizontal text-left pro_form">
                         <div class="form-group">
@@ -53,12 +53,24 @@ require 'includes/service/user.php';
                                 <input type="email" class="form-control pro_input" id="pro_email" value="<?php echo $user['email'] ?>" disabled="true">
                             </div>
                         </div>
-                        <div class="form-group">
-                        	<div class="col-sm-offset-1 col-sm-3">
-                                <button class="btn btn-default pro_btn" type="submit">Cancel</button>
+                        <div id="op1" class="form-group options1" style="display: block;">
+                            <div class="col-sm-offset-9 col-sm-3 text-right">
+                            	<a id="edit_pro" class="edit_profile" onclick="edit_pro();">
+					                <i class='icon-edit icon-large' aria-hidden='true'></i> Edit
+					            </a>
                             </div>
-                            <div class="col-sm-offset-4 col-sm-3">
-                                <button class="btn btn-default pro_btn" type="submit">Edit</button>
+                        </div>
+
+                        <div id="op2" class="form-group options2" style="display: none;">
+                        	<div class="col-xs-3 col-sm-3 text-left">
+                            	<a id="cancel_pro" class="edit_profile" onclick="cancel_pro();">
+					                <i class='icon-undo icon-large' aria-hidden='true'></i> Cancel
+					            </a>
+                            </div>
+                            <div class="col-xs-3 col-xs-offset-6 col-sm-offset-6 col-sm-3 text-right">
+                            	<a id="save_pro" class="edit_profile">
+					                <i class='icon-save icon-large' aria-hidden='true'></i> Save
+					            </a>
                             </div>
                         </div>
                     </form>
@@ -94,25 +106,26 @@ require 'includes/service/user.php';
 			   			
 			   			<!-- pwdModal -->
 			   			<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">Change your password</h4>
-						      </div>
-						      <div class="modal-body">
-						        <form class="pwdReset"method="POST">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Change your password</h4>
+									</div>
+									<div class="modal-body">
+										<form class="pwdReset"method="POST">
 
-						        <input type="password" name="reset_password" placeholder="New password...">
+											<input type="password" name="reset_password" class="form-control" placeholder="New password..."><br>
+											<input type="password" name="confirm_reset_password" class="form-control" placeholder="Confirm password...">
 
-						        </form>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						        <button type="button" class="btn btn-primary" id="pwdResetSumbit">Confirm</button>
-						      </div>
-						    </div>
-						  </div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary" id="pwdResetSumbit">Confirm</button>
+									</div>
+								</div>
+							</div>
 						</div>
 
 			   		</div>
@@ -140,7 +153,7 @@ require 'includes/service/user.php';
 				</div>
 
 	    		<div class="posts_area"></div>
-		  		<img id="loadingIcon" src="assets/images/icons/loading.gif">
+		  		<p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
 	    	</div>
 
 	    	<!-- <div class="col-sm-2">
@@ -176,6 +189,42 @@ require 'includes/service/user.php';
 	    	</div> -->
 	    </div>
 	</div>
+
+	<script>
+		function edit_pro () {
+			var fname = document.getElementById("pro_fname");
+			var lname = document.getElementById("pro_lname");
+			var email = document.getElementById("pro_email");
+			var edit = document.getElementById("op1");
+			var save = document.getElementById("op2");
+
+			fname.disabled = false;
+			lname.disabled = false;
+			email.disabled = false;
+
+			$('#op1').slideUp('slow', function() {
+				$('#op2').slideDown('slow');
+			});
+		}
+	</script>
+
+	<script>
+		function cancel_pro () {
+			var fname = document.getElementById("pro_fname");
+			var lname = document.getElementById("pro_lname");
+			var email = document.getElementById("pro_email");
+			var edit = document.getElementById("op1");
+			var save = document.getElementById("op2");
+
+			fname.disabled = true;
+			lname.disabled = true;
+			email.disabled = true;
+
+			$('#op2').slideUp('slow', function() {
+				$('#op1').slideDown('slow');
+			});
+		}
+	</script>
 
 	
 	<script>

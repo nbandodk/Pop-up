@@ -64,8 +64,8 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="#"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
+                    <li class="active"><a href="home.php"><i class="icon-home icon-large"></i> Home</a></li>
+                    <li><a href="#"><i class="icon-envelope icon-large"></i> Messages</a></li>
                 </ul>
                 <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" method="post" role="search">
                     <div class="form-group input-group">
@@ -88,9 +88,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
+                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><i class="icon-user icon-large"></i> My profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="includes/form_handlers/logout_handler.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li><a href="includes/form_handlers/logout_handler.php"><i class="icon-signout icon-large"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -28,6 +28,10 @@
 	font-size: 25px;
 }
 
+.user_name:focus, .user_name:hover {
+	color: #95a5a6;
+}
+
 .profile_title {
 	color: #7f8c8d;
 	font-size: 16px;
@@ -36,8 +40,13 @@
 }
 
 .pro_form {
-	padding-left: 15px;
+	background-color: #f8f8f8;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
 	color: #2c3e50;
+	border: 1px solid #ddd;
+	border-radius: 2px;
 }
 
 .pro_input {
@@ -69,4 +78,10 @@
     appearance: none;
     -moz-appearance: none;  
     -webkit-appearance: none;
+}
+
+.options1, .options2 {
+	padding-left: 0;
+	padding-top: 15px;
+	margin-bottom: 10px;
 }

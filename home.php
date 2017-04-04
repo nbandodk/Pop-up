@@ -62,8 +62,11 @@ require 'includes/service/user.php';
 	            <div class="panel-body">
 	            	<form action="includes/form_handlers/post_handler.php" method="POST">
 	            		<p class="lead emoji-picker-container">
-	            			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+	            			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required>
+	            				<img contenteditable="false" id="myimg" />
+	            			</textarea>
 	            		</p>
+	            		<input class="file" type='file' id="imgSel" />
               			<button type="submit" class="btn btn-success btn-f" style="float:right;">
                 			<span class="glyphicon glyphicon-ok"></span> Send
               			</button>
@@ -116,9 +119,26 @@ require 'includes/service/user.php';
 	  <p>Footer Text</p>
 	</footer>
 
+	<script type="text/javascript">
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                document.getElementById('myimg').setAttribute('src',e.target.result);
+	            }
+
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+
+	    document.getElementById('imgSel').onchange = function () { //set up a common class
+	        readURL(this);
+	    };
+	</script>
+
 	<script>
 		$(document).ready(function() {
-
 			$('#loadingIcon').show();
 			<?php 
 				if (isset($_SESSION['Loading_myposts'])) {
