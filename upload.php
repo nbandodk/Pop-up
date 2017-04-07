@@ -101,7 +101,7 @@ if (isset($_POST['x'])){
 			imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],
 			$targ_w,$targ_h,$_POST['w'],$_POST['h']);
 		//save the new cropped version
-			imagejpeg($dst_r, "assets/images/profile_pics/".$finalname."n.jpeg", 90); 	
+			imagejpeg($dst_r, "assets/images/profile_pics/".$finalname."n.jpeg", 90);
 			 		
 	}else if($type == 'png' || $type == 'PNG'){
 		

@@ -14,24 +14,30 @@ require 'includes/service/user.php';
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="profile_cover">
+				<div id="theme" class="profile_cover">
 					<div class="col-sm-6 myprofile_box">
 						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
+							<div class="middle">
+								<a href="upload.php" class="icon-camera-retro upload_pic"></a>
+							</div>
 				        </div>
 				        <div class="col-xs-12 col-sm-6 col-md-4 right_area">
-						<a class="user_name" href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">	
-				    		<p><?php echo $user['username'] ?></p>
-				        </a>
+							<a class="user_name" href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">	
+					    		<p><?php echo $user['username'] ?></p>
+					        </a>
 				        </div>
 			        </div>
 			    </div>
+
+				<input type='file' id='getval' name="background-image" /><br/><br/>
+
 			</div>
-		</div>    
+		</div>
 	  	<div class="row">
 	    	<div class="col-sm-5">
 	      		<div class="box">
-					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> Intro: </p>
+					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> My profile: </p>
 					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
 					
 					<form action="" class="form-horizontal text-left pro_form">
@@ -86,15 +92,6 @@ require 'includes/service/user.php';
 							<p class="post_area_p profile_p_count"><?php echo $friendNum ?></p>
 					    </div>
 
-					    <div class="col-sm-12 profile_box upload_profile_pic">
-						    <a href="upload.php">						    
-						    <button type="button" class="btn btn-primary btn-lg">
-							<span class="glyphicon glyphicon-picture"> Photo Upload</span> 
-							</button>
-
-						    </a>
-					    </div>
-
 					    <div class="col-sm-12 profile_box posting_on_profile">	
 					    	
               				<!-- Button trigger modal -->
@@ -128,28 +125,50 @@ require 'includes/service/user.php';
 							</div>
 						</div>
 
-			   		</div>
+						<!-- themeModal -->
+			   			<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Choose one theme</h4>
+									</div>
+									<div class="modal-body">
+										<form class="updateThems"method="POST">
 
+
+
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-primary" id="pwdResetSumbit">Save</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+			   		</div>
 	  	  		</div>
 	    	</div>
 
-	    	<!-- Modal : for posting something-->
+	    	<!-- for posting something-->
 	    	<div class="col-sm-7">
 				<div class="row">
-				<div class="col-sm-12">
-				  <div class="panel panel-default text-left">
-				    <div class="panel-body">
-				    	<form action="includes/form_handlers/post_handler.php" method="POST">
-				    		<p class="lead emoji-picker-container">
-				    			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
-				    		</p>
-				  			<button type="submit" class="btn btn-success btn-f" style="float:right;">
-				    			<span class="glyphicon glyphicon-ok"></span> Send
-				  			</button>
-				    	</form>
-				    </div>
-				  </div>
-				</div>
+					<div class="col-sm-12">
+						<div class="panel panel-default text-left">
+							<div class="panel-body">
+								<form action="includes/form_handlers/post_handler.php" method="POST">
+										<p class="lead emoji-picker-container">
+											<textarea class="form-control post_input" rows="3" name="profile_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+										</p>
+										<button type="submit" class="btn btn-success btn-f" style="float:right;">
+											<i class="icon-ok icon-large"></i> Send
+										</button>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 
 	    		<div class="posts_area"></div>
@@ -189,6 +208,23 @@ require 'includes/service/user.php';
 	    	</div> -->
 	    </div>
 	</div>
+
+	<!-- change themes -->
+	<script>
+		document.getElementById('getval').addEventListener('change', readURL, true);
+			function readURL(){
+  				var file = document.getElementById("getval").files[0];
+   				var reader = new FileReader();
+   				reader.onloadend = function() {
+      				document.getElementById('theme').style.backgroundImage = "url(" + reader.result + ")";
+   				}
+   				if(file) {
+      				reader.readAsDataURL(file);
+    			}else {
+    				
+    			}
+		}
+	</script>
 
 	<script>
 		function edit_pro () {

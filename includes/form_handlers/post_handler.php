@@ -3,7 +3,7 @@
 	require '../service/post.php';
 
 	if (isset($_POST['home_post'])) {
-		//store post
+		//store post in home page
 		$user_id = $_SESSION['id'];
 		$username = $_SESSION['username'];
 		$body = $_POST['home_post'];
@@ -11,6 +11,16 @@
 		$post_obj->submitPost($body);
 
 		header("Location: ../../home.php");
+	}elseif(isset($_POST['profile_post'])){
+		//store post in profile page
+		$user_id = $_SESSION['id'];
+		$username = $_SESSION['username'];
+		$body = $_POST['profile_post'];
+		$post_obj = new post($con, $user_id);
+		$post_obj->submitPost($body);
+
+		header("Location: ../../profile.php?username=".$username."&id=".$user_id);
+		
 	}elseif (isset($_SESSION['Loading'])) {
 		$user_id = $_SESSION['id'];
 		$post_obj = new post($con, $user_id);

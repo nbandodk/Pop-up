@@ -11,9 +11,12 @@ if (isset($_SESSION['hash'])) {
 
 	if ($hash == $ver_code) {
 		$user_closed_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND user_closed='yes'");
+		$row = mysqli_fetch_array($user_closed_query);
+		$id = $row['id'];
 			if(mysqli_num_rows($user_closed_query) == 1) {
 				$reopen_account = mysqli_query($con, "UPDATE users SET user_closed='no' WHERE email='$email'");
 			}
+		$_SESSION['id'] = $id;
 		header("Location: home.php");
 		exit();
 	}else {

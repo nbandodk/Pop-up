@@ -14,7 +14,7 @@ require 'includes/service/user.php';
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box">
 				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="70" width="70" style="margin: 15px">
+		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="100" width="100" style="margin: 15px">
 		        	<p style="font-size:18px;"><?php echo $user['username'] ?></p>
 		        </a>
 
@@ -34,7 +34,7 @@ require 'includes/service/user.php';
 	      <div class="box">
 	        <p>
 	          <span class="label label-default">News</span>
-	          <span class="label label-primary">W3Schools</span>
+	          <span class="label label-primary">Basketball</span>
 	          <span class="label label-success">Labels</span>
 	          <span class="label label-info">Football</span>
 	          <span class="label label-warning">Gaming</span>
@@ -46,7 +46,7 @@ require 'includes/service/user.php';
 	      		<div class="alert alert-success fade in">
 		        	<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 		        	<p><strong>Hi there!</strong></p>
-		        	These people share the similar interesting with you, let make friend with them.
+		        	These people have one or more same friends with you, let make friend with them.
 	      		</div>
 	      		<p><a href="#">Link</a></p>
 	      		<p><a href="#">Link</a></p>
@@ -67,8 +67,8 @@ require 'includes/service/user.php';
 	            			</textarea>
 	            		</p>
 	            		<input class="file" type='file' id="imgSel" />
-              			<button type="submit" class="btn btn-success btn-f" style="float:right;">
-                			<span class="glyphicon glyphicon-ok"></span> Send
+              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
+                			<i class="icon-ok icon-large"></i> Send
               			</button>
 	            	</form>
 	            </div>
@@ -163,10 +163,14 @@ require 'includes/service/user.php';
 
 			//do it if scroll up or down
 			$(window).scroll(function() {
+				var height = $('.posts_area').height();
+				var scroll_top = $(this).scrollTop();
 				var pageNum = $('.posts_area').find('.nextPage').val();
 				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 				//if the height of the browser window + scrolled height == total height that can be scorlled
-				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+				//if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+
+				if((document.body.scrollHeight == (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight) && noMorePosts == 'false') {
 					//start ajax request again
 					$('#loadingIcon').show();
 					$('.posts_area').find('.nextPage').remove(); //Removes current input
@@ -218,6 +222,7 @@ require 'includes/service/user.php';
 		ga('create', 'UA-49610253-3', 'auto');
 		ga('send', 'pageview');
     </script>
+    
 
 </body>
 </html>
