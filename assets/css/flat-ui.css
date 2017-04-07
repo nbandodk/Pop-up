@@ -277,6 +277,8 @@ label {
 
 /* .btn-success */
 .btn-success {
+	font-size: 14px; /* new */
+
     color: #fff;
     background-color: #91d097;
 }
@@ -420,8 +422,9 @@ label {
 .form-control {
 	border:2px solid #bec6d5;
 	box-shadow: none;
-	height: 42px;
-	border-radius: 6px;
+	/* height: 42px; */
+	height: 40px;
+	border-radius: 3px;
 	-webkit-transition: border 0.15s linear, color 0.15s linear, background-color 0.15s linear;
             transition: border 0.15s linear, color 0.15s linear, background-color 0.15s linear;
 }

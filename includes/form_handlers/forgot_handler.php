@@ -14,7 +14,8 @@ $error_array = array(); //errors
 			$row = mysqli_fetch_array($check_query);
 			$id = $row['id'];
 
-			$password = md5('123456');
+			$temp_pass = rand(999,99999999);
+			$password = md5($temp_pass);
 			$update_query = mysqli_query($con, "UPDATE users SET password='$password' WHERE id='$id'");
 
 			if($update_query) {

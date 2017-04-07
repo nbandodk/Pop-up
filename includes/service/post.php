@@ -33,6 +33,16 @@
 				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
 			}
 		}
+		
+		//shared friends' posts
+		public function submitSharedPost($shareUsername,$shareContent) {
+			$date = date("Y-m-d H:i:s");
+			$added_by_id = $this->id;
+			$added_by_name = $this->user_obj->getUsername();
+			$body = "Shared from ".$shareUsername.": ".$shareContent;
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
+			
+		}
 
 		//delete my posts
 		public function deleteMyPost($request){
@@ -75,7 +85,7 @@
 					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
 					            		<img src='".$this->user_obj->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
-			        	        		".$this->user_obj->getUsername()."
+			        	        			<p>".$this->user_obj->getUsername()."</p>
 				          			</a>
 						        </div>
 
@@ -89,6 +99,12 @@
 									<a class='comment_a'>
 										<i class='icon-comments-alt' aria-hidden='true'></i> comment
 									</a>
+									</div>
+									
+									<div class='share' style='float:left; margin-left: 20px;'>
+										<a class='comment_a'>
+											<i class='icon-share-alt' aria-hidden='true'></i> share
+										</a>
 									</div>
 					            
 					            <div class='like'  style='float:left; margin-left: 20px;'> 
@@ -115,17 +131,20 @@
 				    			</div>
 
 				    			<div class='col-sm-12 comment' style='display:none;'>
-				    			<form class='form-horizontal'>
-				    				<div class='form-group'>
-			    						<div class='col-sm-10 comment_input_panel'>
-                                            <input type='text' class='form-control' placeholder='comment here...' required>
-                                        </div>
-			    					
-			    						<button type='submit' class='btn btn-success'>Reply</button>
-									</div>
- 								</form>
+					    			<form class='form-horizontal'>
+					    				<div class='form-group'>
+				    						<div class='col-xs-7 col-sm-8 col-md-10 text-left comment_input_panel'>
+				    							<p class='lead emoji-picker-container emoji-container-p'>
+	              									<input type='text' class='form-control comment_input' placeholder='comment here...' data-emojiable='true' data-emoji-input='unicode' required>
+	            								</p>
+	                                        </div>
+				    					
+				    						<button type='submit' class='btn btn-success'>Reply</button>
+										</div>
+	 								</form>
  							<div class='col-sm-12 text-left'>
  								";
+
  					//--------------add comments--------------
  					$comment_obj = new comment($this->con,$this->id);
  					$outputStr .= $comment_obj->selectComments($row['id']);
@@ -146,6 +165,7 @@
 				//no more posts
 				$outputStr = "";
 				$outputStr .= "
+					<br>
 					<input type='hidden' class='noMorePosts' value='true'>
 					<hr>
 					<p>No More to Show</p>
@@ -226,6 +246,7 @@
 				//no more posts
 				$outputStr = "";
 				$outputStr .= "
+					<br>
 					<input type='hidden' class='noMorePosts' value='true'>
 					<hr>
 					<p>No More to Show</p>
@@ -241,7 +262,7 @@
 			$start = ($pageNum-1)*$pageSize;
 
 			//get the friends' id of the user 
-			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id'");
+			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id' AND block='no' ");
 			//if exists any friend
 			if (mysqli_num_rows($friendsData) >= 1) {
 				//transfer ids to an array
@@ -292,26 +313,31 @@
 					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
 					            		<img src='".$person->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
-			        	        		".$person->getUsername()."
-				          			</a>
-						        </div>
+					            		<p>".$person->getUsername()."</p>
+					            </a>
+						      </div>
 
 						        <div class='col-sm-9 text-left'>
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
 					            	<p>".$row['text']."</p>
 					     			
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-					     			<div class='commentdis' style='float:left'>
-									
-									<a class='comment_a'>
-										<i class='icon-comments-alt' aria-hidden='true'></i> comment
-									</a>
-									</div>
-					            
-					            <div class='like'  style='float:left; margin-left: 20px;'> 
-						            <a class='like_a'>
-					                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
-					            	</a>
+						     			<div class='commentdis' style='float:left'>
+											<a class='comment_a'>
+												<i class='icon-comments-alt' aria-hidden='true'></i> comment
+											</a>
+										</div>
+					            		
+										<div class='share' style='float:left; margin-left: 20px;'>
+											<a class='comment_a'>
+												<i class='icon-share-alt' aria-hidden='true'></i> share
+											</a>
+										</div>
+
+							         <div class='like'  style='float:left; margin-left: 20px;'> 
+								         <a class='like_a'>
+							               <i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
+							            </a>
 				            	
 				            ";
 				    //--------------add likes-----------------
@@ -332,16 +358,18 @@
 				    			</div>
 
 				    			<div class='col-sm-12 comment' style='display:none;'>
-				    			<form class='form-horizontal'>
-				    				<div class='form-group'>
-			    						<div class='col-sm-10 comment_input_panel'>
-                                            <input type='text' class='form-control' placeholder='comment here...' required>
-                                        </div>
-			    					
-			    						<button type='submit' class='btn btn-success'>Reply</button>
-									</div>
- 								</form>
- 							<div class='col-sm-12 text-left'>
+					    			<form class='form-horizontal'>
+					    				<div class='form-group'>
+				    						<div class='col-xs-7 col-sm-8 col-md-10 text-left comment_input_panel'>
+					    						<p class='lead emoji-picker-container emoji-container-p'>
+	              									<input type='text' class='form-control comment_input' placeholder='comment here...' data-emojiable='true' data-emoji-input='unicode' required>
+	            							</p>
+	                              </div>
+				    						
+				    						<button type='submit' class='btn btn-success'>Reply</button>
+										</div>
+	 								</form>
+ 								<div class='col-sm-12 text-left'>
  								";
  					//--------------add comments--------------
  					$comment_obj = new comment($this->con,$this->id);
@@ -427,3 +455,29 @@
 	}
 
 ?>
+
+<script>
+	$(function() {
+	// Initializes and creates emoji set from sprite sheet
+	window.emojiPicker = new EmojiPicker({
+	  emojiable_selector: '[data-emojiable=true]',
+	  assetsPath: 'assets/emoji_lib/img/',
+	  popupButtonClasses: 'icon-smile'
+	});
+	// Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+	// You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+	// It can be called as many times as necessary; previously converted input fields will not be converted again
+	window.emojiPicker.discover();
+	});
+</script>
+
+<script>
+	// Google Analytics
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-49610253-3', 'auto');
+	ga('send', 'pageview');
+</script>

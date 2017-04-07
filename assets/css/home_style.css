@@ -9,6 +9,7 @@
 }
 
 body {
+	background-color: #e9ebee;
 	padding-top: 70px;
 }
 
@@ -38,6 +39,12 @@ a:focus, a:hover {
 	border-radius: 0px;
 	padding: 15px;
 } */
+
+.form-control.post_input {
+	height: 95px;
+	padding-top: 8px;
+	padding-left: 12px;
+}
 
 .post_area_p {
     color: #acbbc6;
@@ -116,6 +123,12 @@ a:focus, a:hover {
 	padding-right: 0;
 }
 
+.form-control.comment_input {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 12px;
+}
+
 .eachComment {
 	clear: both;
 	padding: 5px 0;
@@ -138,6 +151,12 @@ a:focus, a:hover {
 	border-bottom: 0;
 }
 
+.friendlist_title {
+	color: #7f8c8d;
+	font-size: 14px;
+	font-weight: bold;
+}
+
 .friends_list_group {
 	margin-bottom: 0;
 	border-top: 1px solid #ddd;
@@ -147,5 +166,9 @@ a:focus, a:hover {
 	border-radius: 0;
 
 	-webkit-box-shadow: none;
-	box-shadow: none;
+			box-shadow: none;
+}
+
+.emoji-container-p {
+	margin-bottom: 0px;
 }

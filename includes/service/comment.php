@@ -44,15 +44,15 @@
 							</div>
 						</div>
 
-						<div class='col-sm-3' style='clear:both; height:35px;'>
-							<a href='profile.php?username=".$comment['comment_by_name']."&id=".$comment['comment_by_id']."' style='float: left; padding: 2.5px 0; font-size: 14px'><img src='".$comment['profile_pic']."' class='img-rounded' height='40' width='40'> ".$comment['comment_by_name'].":
+						<div class='col-xs-2 col-sm-2 col-md-3' style='clear:both; padding-left: 5px'>
+							<a href='profile.php?username=".$comment['comment_by_name']."&id=".$comment['comment_by_id']."' style='float: left; padding: 2px 0; font-size: 14px'><img src='".$comment['profile_pic']."' class='img-rounded' height='40' width='40'> ".$comment['comment_by_name'].":
 							</a>
 						</div>
 
-						<div class='col-sm-9'>
+						<div class='col-xs-10 col-sm-10 col-md-9'>
 							<div class='row'>
-								<div class='col-sm-12' style='clear: both; height: 35px;'>
-									<p class='post_area_p post_p' style='float: left; padding: 5px 0'>
+								<div class='col-sm-12' style='clear: both;'>
+									<p class='post_area_p post_p' style='float: left; padding: 1px 0'>
 										".$this->getTime($comment['dateTime'])."
 									</p>
 	    						</div>

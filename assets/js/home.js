@@ -89,7 +89,7 @@ $(document).ready(function() {
 					if(returnedData.indexOf(error) >=0){
 						$this.parent().before(returnedData);
 					}else{
-						$this.prev().find('input').val("");
+						$this.prev().find('p>div').text("");
 						$this.parent().parent().next().empty();
 						$this.parent().parent().next().append(returnedData);
 					}
@@ -140,6 +140,25 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	//for share ajax
+	$('div.posts_area').on('click','.share>a',function(){
+		var shareContent = $(this).parent().parent().prev().text();
+		var shareUsername = $(this).parent().parent().parent().prev().find('.post_info>p').text();
+		$.ajax({
+				url: "includes/form_handlers/share_handler.php",
+				type: "POST",
+				data: "shareContent="+shareContent+"&shareUsername="+shareUsername,
+				cache: false,
+				success: function(returnedData) {
+						alert("Shared!");
+						location.reload();
+						return false;
+				}
+		});
+		
+	});
+
 
 	$(window).click(function(){
 		$("nav").find('.search_result_ajax').hide('slow','swing');

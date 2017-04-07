@@ -1,24 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title></title>
+</head>
+<body>
 <?php 
-require 'config/config.php';
-require 'includes/service/search.php';
-	
-	// $search_result = new search($con);
-	// echo $search_result->searchUserAjax("niu");
-	
-	$resultSet = mysqli_query($con,"SELECT * FROM users WHERE username LIKE 'n%' AND user_closed = 'no'");
-			$output = "";
-			$i=0;
-			while ($row = mysqli_fetch_array($resultSet) and $i<3){
-				// $output .="
-				// 	<a href='#'>
-				// 		<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'>".$row['username']."
-				// 	</a>
-				// 	<hr>
-				// ";
-				$i++;
-				echo $row['username'];
-			}
-			echo $output;
+    require 'config/config.php';
+    require 'includes/service/search.php';
+    //$query = "SELECT * FROM users WHERE (id in (SELECT friend_id FROM user_friend WHERE user_id='3' AND block='no') OR id='3') AND username LIKE 'n%' AND user_closed = 'no' ";
+    $search_result = new search($con,3);
+    echo $search_result->filteredSearch(1, "n", 29, "male", "a", "a", "in", "us");
 
+    //search friend
+    // $friendResultSet = mysqli_query($con, $query); 
+    // while ($row = mysqli_fetch_array($friendResultSet)){
+    //     echo $row['id']." ";
+    // }
+            
+?>
 
- ?>
+</body>
+
+</html>

@@ -152,21 +152,37 @@ if (isset($_POST['x'])){
 		header("Location: profile.php?username=".$username."&id=".$user_id);
 }// post x
 ?>
+<link rel="stylesheet" type="text/css" href="assets/css/upload_style.css">
 <div id="Overlay" style=" width:100%; height:100%; border:0px #990000 solid; position:absolute; top:0px; left:0px; z-index:2000; display:none;"></div>
-<div class="container "> <div class="row"><div class="col-sm-5"><div class="upload_profile_pic_area">
+<div class="container">
+	<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 upload_profile_pic_area">
 
+				<div id="formExample">
+				    <p><b> <?=$msg?> </b></p>
 
-	<div id="formExample">
-		
-	    <p><b> <?=$msg?> </b></p>
-	    
-	    <form action="upload.php" method="post"  enctype="multipart/form-data">
-	        &nbsp;Update Your Profile Picture!<br /><br />
-	        <input type="file" id="image" name="image" style="width:200px; height:30px; " /><br /><br />
-	        <input type="submit" value="Submit" style="width:85px; height:30px; " />
-	    </form><br /><br />
-	    
-	</div> <!-- Form-->  
+				    <div class="form_header">
+			        	<h4 style="color: #000">Update Your Profile Picture!</h4>
+			        </div>
+
+			        <hr style="height: 1px; border: none; border-top: 2px solid #ddd;">
+				    
+				    <form action="upload.php" method="post" enctype="multipart/form-data">
+				    	<div class="row">
+				    		<div class="col-xs-5 col-sm-3 col-md-2">
+				   	 			<input class="btn btn-default" type="button" id="image" name="image" onclick="myImage.click();" value="Browse">
+				   	 		</div>
+				   	 		<div class="col-xs-7 col-sm-5 col-md-4">
+				   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
+								<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none"><br>
+							</div>
+						</div>
+
+				        <!--<input type="file" class="btn btn-default" id="image" name="image">-->
+				        <input type="submit" class="btn btn-default" value="Submit" style="margin-top: 30px;">
+				    </form>
+				    
+				</div> <!-- Form-->
 
 
     <?php
@@ -175,9 +191,9 @@ if (isset($_POST['x'])){
 	    	$('#Overlay').show();
 			$('#formExample').hide();
 	    </script>
-	    <div id="CroppingContainer" style="width:800px; max-height:600px; background-color:#FFF; margin-left: -200px; position:relative; overflow:hidden; border:2px #666 solid; z-index:2001; padding-bottom:0px;">  
+	    <div id="CroppingContainer" style="background-color: #FFF; position: relative; 	margin-right: auto; margin-left: auto; overflow: hidden; border: 2px #666 solid; z-index: 2001; padding-bottom: 0px;">  
 	    
-	        <div id="CroppingArea" style="width:500px; max-height:400px; position:relative; overflow:hidden; margin:40px 0px 40px 40px; border:2px #666 solid; float:left;">	
+	        <div id="CroppingArea" style="width: 500px; max-height: 400px; position: relative; overflow: hidden; margin: 40px 0px 40px 40px; border: 2px #666 solid; float: left;">	
 	            <img src="<?=$imgSrc?>" border="0" id="jcrop_target" style="border:0px #990000 solid; position:relative; margin:0px 0px 0px 0px; padding:0px; " />
 	        </div>  
 
@@ -215,7 +231,6 @@ if (isset($_POST['x'])){
 	    </div><!-- CroppingContainer -->
 	<?php 
 	} ?>
-</div>
 </div>
 </div>
 </div>

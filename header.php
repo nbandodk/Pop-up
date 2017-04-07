@@ -16,11 +16,19 @@
     <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
 
+    <!-- Begin emoji-picker Stylesheets -->
+    <link href="assets/emoji_lib/css/nanoscroller.css" rel="stylesheet">
+    <link href="assets/emoji_lib/css/emoji.css" rel="stylesheet">
+    <!-- End emoji-picker Stylesheets -->
+
     <!-- custom styles for this page -->
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
+    <link href="assets/css/profile_style.css" rel="stylesheet">
+    
     <!--for upload picture-->
     <link href="assets/css/jquery.Jcrop.css" rel="stylesheet">
+    
 
     <style>  
         //search bar drop down
@@ -56,8 +64,15 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="#"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
+                    <li class="active"><a href="home.php"><i class="icon-home icon-large"></i> Home</a></li>
+                    
+                    <li><a href="#"><i class="icon-envelope icon-large"></i> Messages</a></li>
+                    
+                    <li role="presentation"><a href="#">Notice <span class="badge"><?php
+                    $id = $_SESSION['id'];
+                    $query = "SELECT friend_id FROM user_friend WHERE user_id='$id' AND block='yes' ";
+                    echo mysqli_num_rows(mysqli_query($con,$query));
+                      ?></span></a></li>
                 </ul>
                 <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" method="post" role="search">
                     <div class="form-group input-group">
@@ -80,9 +95,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
+                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><i class="icon-user icon-large"></i> My profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="includes/form_handlers/logout_handler.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li><a href="includes/form_handlers/logout_handler.php"><i class="icon-signout icon-large"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -119,3 +134,12 @@
 <script src="assets/js/flat.js"></script>
 <script src="assets/js/jquery.Jcrop.js"></script>
 <script src="assets/js/jcrop_bits.js"></script>
+
+<!-- Begin emoji-picker JavaScript -->
+<script src="assets/emoji_lib/js/nanoscroller.min.js"></script>
+<script src="assets/emoji_lib/js/tether.min.js"></script>
+<script src="assets/emoji_lib/js/config.js"></script>
+<script src="assets/emoji_lib/js/util.js"></script>
+<script src="assets/emoji_lib/js/jquery.emojiarea.js"></script>
+<script src="assets/emoji_lib/js/emoji-picker.js"></script>
+<!-- End emoji-picker JavaScript -->

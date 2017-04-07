@@ -44,7 +44,7 @@ if(isset($_POST['login_button'])) {
 
 			$_SESSION['hash'] = $hash; // store the hash in session
 			$_SESSION['username'] = $username;
-			$_SESSION['id'] = $id;
+		
 
 			header("Location: login_verification.php"); // link to verification page
 			exit();
