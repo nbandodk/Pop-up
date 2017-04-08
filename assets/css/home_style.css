@@ -145,7 +145,7 @@ body {
 	margin :0;
 	position: absolute;
 	border:none;
-	background-color: #91d097;
+	background-color: #2ecc71;
 	color :#fff ;
 	border-radius: 5px;
 	font-family: 'Bellota-BoldItalic', sans-serif;
@@ -161,15 +161,15 @@ body {
 }
 
 .message#blue{
-	background-color: #3498db;
+	background-color: #337ab7;
 	border-color: #2980b9;
 	float:right;
 	margin-bottom: 5px;
 }
 
 .message#green{
-	background-color: #2ecc71;
-	border-color: #27ae60;
+	background-color: #c0392b;
+	border-color: #e74c3c;
 	float:left;
 	margin-bottom: 5px;
 	margin-right: 10px;
@@ -207,3 +207,18 @@ body {
  	max-height :80px;
  }
 
+.chat_head {
+	background-color: #283048 ;
+	border-bottom: 0.2em solid #2c3e50;
+	opacity: 0.98;
+}
+.chat_head h3 {
+	color:#fff;
+	text-align: left;
+}
+.chat_head img {
+	float: left;
+	border-radius: 100px;
+	max-height: 70px;
+	margin: 0 15px;
+}

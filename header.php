@@ -76,7 +76,7 @@ require 'config/config.php';
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="#"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
+                    <li><a href="messages.php"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
                 </ul>
                 <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" role="search">
                     <div class="form-group input-group">

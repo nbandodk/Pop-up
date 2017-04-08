@@ -48,7 +48,8 @@
 
 	    		      	<?php
 	    		      	if($user_to_id != "new") {
-	    		      		echo "<h4>You and " . $user_to_obj->getUsername() . "</h4><br>" ;
+	    		      		$user_to_id_profile_pic = $user_to_obj->getProfile_pic();
+	    		      		echo "<div class='box chat_head'><img src = '$user_to_id_profile_pic'><h3>" . $user_to_obj->getUsername() . "</h3><br></div>" ;
 	    		      		echo "<div class='loaded_messages' id='scroll_messages'>";
 	    		      			echo $message_obj->getMessages($user_to_id);
 	    		      		echo "</div>";
