@@ -1,3 +1,8 @@
+<?php
+require 'config/config.php';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +23,32 @@
     <!-- custom styles for this page -->
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/jquery.Jcrop.css" type="text/css" />  <!-- for uploading picture -->
+    
+
+    <!-- script -->
+    <script type="text/javascript" src="assets/Bootstrap/js/bootstrap.js"></script>
+
+        <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="assets/js/jquery.jcrop.js"></script>
+    <script src="assets/js/jcrop_bits.js"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="assets/Bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Custom Javascript -->
+    <script type="text/javascript" src="assets/js/home.js"></script>
+
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="assets/js/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="assets/js/flat.js"></script>
+
+
+
 
     <style>    
         /* Set black background color, white text and some padding */
@@ -52,7 +83,7 @@
                         <input type="search" id="searchInput" class="form-control" placeholder="Search..">
 
                         <span class="input-group-btn">
-                          <button class="btn" type="submie">
+                          <button class="btn" type="submit">  <!-- change made -->
                             <span class="icon-search"></span>
                           </button>
                         </span>
@@ -68,7 +99,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo $user['username'].'/'.$user['id']; ?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
+                            <li><a href="profile.php?<?php echo "username=".$_SESSION['username']."&id=".$_SESSION['id']?>"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
                             <li class="divider"></li>
                             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
                             <li class="divider"></li>
@@ -80,14 +111,6 @@
         </div>
     </nav>
 
-<!-- JQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-<!-- Bootstrap core JavaScript-->
-<script type="text/javascript" src="assets/Bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Custom Javascript -->
-<script type="text/javascript" src="assets/js/home.js"></script>
 <script type="text/javascript">
     // Navbar box shadow on scroll 
     $(function(){
@@ -102,8 +125,3 @@
     });  
 </script>
 
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="assets/js/holder.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="assets/js/flat.js"></script>

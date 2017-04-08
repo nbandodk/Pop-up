@@ -1,8 +1,8 @@
 <?php 
-require 'config/config.php'; //connect to database 
+//require 'config/config.php'; //connect to database
+require 'header.php'; 
 require 'includes/form_handlers/home_handler.php';
 require 'includes/service/user.php';
-require 'header.php';
 ?>
   
 <!--body-->
@@ -13,7 +13,7 @@ require 'header.php';
 	  <div class="row">
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box" >
-				<a href="<?php echo $user['username'].'/'.$user['id']; ?>">
+				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
 		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-circle" height="65" width="65" style="margin: 10px">
 		        	<p>User ID: <?php echo $user['username'] ?></p>
 		        </a>
@@ -110,10 +110,7 @@ require 'header.php';
 	  </div>
 	</div>
 
-	<footer class="container-fluid text-center">
-	  <p>Footer Text</p>
-	</footer>
-
+	
 	<script>
 		$(document).ready(function() {
 
