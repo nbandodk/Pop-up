@@ -77,7 +77,6 @@ require 'includes/service/user.php';
 	    		      	<div class="posts_area"></div>
 		  	<img id="loadingIcon" src="assets/images/icons/loading.gif">
 
-		  			
 
 	    	</div>
 
