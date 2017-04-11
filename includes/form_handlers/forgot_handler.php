@@ -34,7 +34,7 @@ $error_array = array(); //errors
 				 
 				------------------------
 				
-				Password: "123456"
+				Password: '.$temp_pass.'
 				
 				------------------------
 		

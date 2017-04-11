@@ -25,6 +25,16 @@
 			$check_body_empty = preg_replace('/\s+/', '', $body);
 
 			if ($check_body_empty != "") {
+				$body_array = preg_split("/\s+/", $body);
+				foreach ($body_array as $key => $value) {
+					if (strpos($value, "www.youtube.com/watch?v=") !== false) {
+						$value = preg_replace("!watch\?v=!", "embed/", $value);
+						$value = "<iframe src=\'".$value."\' width=\'420\' height=\'315\'></iframe>";
+						$body_array[$key] = $value;
+					}
+				}
+				$body = implode(" ", $body_array);
+
 				//insert the post
 				$date = date("Y-m-d H:i:s");
 				$added_by_id = $this->id;
@@ -94,20 +104,21 @@
 					            	<p>".$row['text']."</p>
 					     			
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-					     			<div class='commentdis' style='float:left'>
+
+					     			<div class='share' style='float:left;'>
+										<a class='share_a' style='color: #16a085'>
+											<i class='icon-share' aria-hidden='true'></i> share
+										</a>
+ 									</div>
+
+					     			<div class='commentdis' style='float:left; margin-left: 10px'>
 									
 									<a class='comment_a'>
 										<i class='icon-comments-alt' aria-hidden='true'></i> comment
 									</a>
 									</div>
-									
-									<div class='share' style='float:left; margin-left: 20px;'>
-										<a class='comment_a'>
-											<i class='icon-share-alt' aria-hidden='true'></i> share
-										</a>
-									</div>
 					            
-					            <div class='like'  style='float:left; margin-left: 20px;'> 
+					            <div class='like'  style='float:left; margin-left: 10px;'> 
 						            <a class='like_a'>
 					                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
 					            	</a>
@@ -322,19 +333,20 @@
 					            	<p>".$row['text']."</p>
 					     			
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-						     			<div class='commentdis' style='float:left'>
+
+						     			<div class='share' style='float:left;'>
+											<a class='share_a' style='color: #16a085'>
+												<i class='icon-share' aria-hidden='true'></i> share
+											</a>
+	 									</div>
+
+						     			<div class='commentdis' style='float:left; margin-left: 10px'>
 											<a class='comment_a'>
 												<i class='icon-comments-alt' aria-hidden='true'></i> comment
 											</a>
 										</div>
-					            		
-										<div class='share' style='float:left; margin-left: 20px;'>
-											<a class='comment_a'>
-												<i class='icon-share-alt' aria-hidden='true'></i> share
-											</a>
-										</div>
-
-							         <div class='like'  style='float:left; margin-left: 20px;'> 
+					     
+							         <div class='like'  style='float:left; margin-left: 10px;'> 
 								         <a class='like_a'>
 							               <i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
 							            </a>

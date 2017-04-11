@@ -36,6 +36,9 @@
 
 		$search_result = new search($con,$_SESSION['id']);
 		$_SESSION['search_result'] = $search_result->filteredSearch($isFriend, $username, $age, $gender, $street, $city, $province, $country);
+		if ($_SESSION['search_result'] == '') {
+			$_SESSION['search_result'] = "<p>No Result</p>";
+		}
 		header("Location: ../../search_result.php");
 	}
  ?>

@@ -14,11 +14,15 @@ require 'includes/service/user.php';
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="profile_cover">
+				<div id= "theme" class="profile_cover">
 					<div class="col-sm-6 myprofile_box">
 						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
+							<div class="middle">
+								<a href="upload.php" class="icon-camera-retro upload_pic"></a>
+							</div>
 				        </div>
+
 				        <div class="col-xs-12 col-sm-6 col-md-4 right_area">
 						<a class="user_name" href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">	
 				    		<p><?php echo $user['username'] ?></p>
@@ -31,7 +35,7 @@ require 'includes/service/user.php';
 	  	<div class="row">
 	    	<div class="col-sm-5">
 	      		<div class="box">
-					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> Intro: </p>
+					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> My profile: </p>
 					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
 					
 					<form action="" class="form-horizontal text-left pro_form">
@@ -84,15 +88,6 @@ require 'includes/service/user.php';
 					    <div class="col-sm-6 profile_box">
 					    	<p class="post_area_p profile_p_title">My Friends</p>
 							<p class="post_area_p profile_p_count"><?php echo $friendNum ?></p>
-					    </div>
-
-					    <div class="col-sm-12 profile_box upload_profile_pic">
-						    <a href="upload.php">						    
-						    <button type="button" class="btn btn-primary btn-lg">
-							<span class="glyphicon glyphicon-picture"> Photo Upload</span> 
-							</button>
-
-						    </a>
 					    </div>
 
 					    <div class="col-sm-12 profile_box posting_on_profile">	

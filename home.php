@@ -14,7 +14,7 @@ require 'includes/service/user.php';
 	    <div class="col-sm-3 scrolldiv">
 	      <div class="box">
 				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="70" width="70" style="margin: 15px">
+		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="100" width="100" style="margin: 15px">
 		        	<p style="font-size:18px;"><?php echo $user['username'] ?></p>
 		        </a>
 
@@ -32,25 +32,37 @@ require 'includes/service/user.php';
 	  	  </div>
 
 	      <div class="box">
+	      	<h5 style="color: #EE9611"><strong>features</strong></h5>
 	        <p>
-	          <span class="label label-default">News</span>
-	          <span class="label label-primary">W3Schools</span>
-	          <span class="label label-success">Labels</span>
-	          <span class="label label-info">Football</span>
-	          <span class="label label-warning">Gaming</span>
-	          <span class="label label-danger">Friends</span>
+	          <span class="label label-default">Post</span>
+	          <span class="label label-primary">Like</span>
+	          <span class="label label-success">Comment</span>
+	          <span class="label label-info">Search</span>
+	          <span class="label label-warning">Chat</span>
+	          <span class="label label-danger">Video</span>
+	          <span class="label label-primary">Photo</span>
 	        </p>
 	      </div>
 
 	      <div class="box">
-	      		<div class="alert alert-success fade in">
+	      		<!--<div class="alert alert-success fade in">
 		        	<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-		        	<p><strong>Hi there!</strong></p>
-		        	These people share the similar interesting with you, let make friend with them.
-	      		</div>
-	      		<p><a href="#">Link</a></p>
-	      		<p><a href="#">Link</a></p>
-	      		<p><a href="#">Link</a></p>
+	      		</div>-->
+			    <a href="https://www.apple.com" class="thumbnail">
+			      <img src="assets/images/Advertisement/Apple-logo.png" height="60px" width="60px">
+			    </a>
+			    <a href="https://www.youtube.com" class="thumbnail">
+			      <img src="assets/images/Advertisement/YouTube-logo-full_color.png" height="60px" width="110px">
+			    </a>
+			    <a href="https://www.linkedin.com" class="thumbnail">
+			      <img src="assets/images/Advertisement/linkedin-logo.png" height="80px" width="110px">
+			    </a>
+			    <a href="https://www.google.com" class="thumbnail">
+			      <img src="assets/images/Advertisement/google-logo-vector.png" height="60px" width="110px">
+			    </a>
+			    <a href="https://www.amazon.com" class="thumbnail">
+			      <img src="assets/images/Advertisement/Amazon-Logo_Feature.jpg" height="60px" width="110px">
+			    </a>
 	      </div>
 	    </div>
 
@@ -67,9 +79,9 @@ require 'includes/service/user.php';
 	            			</textarea>
 	            		</p>
 	            		<input class="file" type='file' id="imgSel" />
-              			<button type="submit" class="btn btn-success btn-f" style="float:right;">
-                			<span class="glyphicon glyphicon-ok"></span> Send
-              			</button>
+              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
+                 			<i class="icon-ok icon-large"></i> Send
+                			</button>
 	            	</form>
 	            </div>
 	          </div>
@@ -163,10 +175,12 @@ require 'includes/service/user.php';
 
 			//do it if scroll up or down
 			$(window).scroll(function() {
+				var height = $('.posts_area').height();
+ 				var scroll_top = $(this).scrollTop();
 				var pageNum = $('.posts_area').find('.nextPage').val();
 				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 				//if the height of the browser window + scrolled height == total height that can be scorlled
-				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+				if((document.body.scrollHeight == (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight) && noMorePosts == 'false') {
 					//start ajax request again
 					$('#loadingIcon').show();
 					$('.posts_area').find('.nextPage').remove(); //Removes current input

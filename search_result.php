@@ -4,11 +4,16 @@
  <!--body-->
 
  	<div class="container text-center">
- 		<h1 style="color: blue;">Search Result</h1>
- 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#filter">
-		  Filter Search Result
-		</button>
+	 	<div class="page-header">
+			<h1 style="color: blue;">Search Result 
+				<small>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#filter">
+				  Filter Search Result
+				</button>
+				</small>
+			</h1>
+		</div>
 		<hr>
  		<?php echo $_SESSION['search_result'] ?>
  	</div>
@@ -25,7 +30,7 @@
 			<div class="modal-body">
 				<form action="includes/form_handlers/searchResult_handler.php" method="POST">
 					<label for="1">Yes</label>
-					<input type="radio" name="isFriend" class="form-control" value="1">
+					<input type="radio" name="isFriend" class="form-control" value="1" checked="true">
 					<label for="0">No</label>
 					<input type="radio" name="isFriend" class="form-control" value="0">
 					<br>

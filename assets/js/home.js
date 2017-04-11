@@ -71,7 +71,7 @@ $(document).ready(function() {
 		var username = $('input:hidden:eq(0)').val();
 		var userId = $('input:hidden:eq(1)').val();
 		var profile_pic = $('input:hidden:eq(2)').attr('value');
-		var comment = $this.prev().find('input').val();	
+		var comment = $this.prev().find('p>div').text();	
 		// if <p> exists before <form></form> delete it
 		$this.parent().prevAll('p').remove();
 		$.ajax({
@@ -143,7 +143,7 @@ $(document).ready(function() {
 	
 	//for share ajax
 	$('div.posts_area').on('click','.share>a',function(){
-		var shareContent = $(this).parent().parent().prev().text();
+		var shareContent = $(this).parent().parent().prev().html();
 		var shareUsername = $(this).parent().parent().parent().prev().find('.post_info>p').text();
 		$.ajax({
 				url: "includes/form_handlers/share_handler.php",

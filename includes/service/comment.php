@@ -36,7 +36,7 @@
 						//----------------------------------
 						if ($this->currentUserId == $comment['comment_by_id']) {
 							$output .="
-							<i class='icon-remove' aria-hidden='true' style='float: right; padding-right:5px'></i>
+							<i class='icon-remove' aria-hidden='true' style='float: right; padding-right:5px; color: #c2c2c2 '></i>
 							";
 						}
 						//----------------------------------
