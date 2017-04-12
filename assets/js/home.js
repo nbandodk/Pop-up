@@ -138,6 +138,12 @@ $(document).ready(function() {
 		}
 	});
 
+
 });
 
-
+// for new conversation
+	function getUsers(value, user) {
+	$.post("includes/form_handlers/ajax_friend_search.php", {query:value, userLoggedIn_id:user}, function(data) {
+		$(".results").html(data);
+	});
+	}

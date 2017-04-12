@@ -28,5 +28,14 @@
 		function getProfile_pic(){
 			return $this->user['profile_pic'];
 		}
+		function isFriend($is_friend_id) {
+			$user_id = $this->user['id'];
+			if(mysqli_query($this->con, "SELECT 'true' WHERE $is_friend_id IN ( SELECT friend_id FROM user_friend WHERE user_id ='$user_id') ") ) 
+				return true;
+			else 
+				return false;
+	
+		}
+
 	}
  ?>
