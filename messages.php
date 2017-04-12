@@ -14,8 +14,7 @@
 				$user_to_id = 'new';
 		}
 
-	if($user_to_id != "new")
-		$user_to_obj = new user($con, $user_to_id);
+	$user_to_obj = new user($con, $user_to_id);
 
 	if(isset($_POST['post_message'])) {
 
@@ -45,7 +44,6 @@
 	    		      			<?php echo $message_obj->getChats();?>
 	    		      			</div>
 	    		      			<br>
-	    		      			<a href="messages.php?u=new">Start Conversation</a>
 	    		    </div>
 		        </div>
 
@@ -60,36 +58,19 @@
 	    		      	<div class="box posts_area">
 
 	    		      	<?php
-	    		      	if($user_to_id != "new") {
 	    		      		$user_to_id_profile_pic = $user_to_obj->getProfile_pic();
 	    		      		echo "<div class='box chat_head'><img src = '$user_to_id_profile_pic'><h3>" . $user_to_obj->getUsername() . "</h3><br></div>" ;
 	    		      		echo "<div class='loaded_messages' id='scroll_messages'>";
 	    		      			echo $message_obj->getMessages($user_to_id);
 	    		      		echo "</div>";
-	    		      	}
-	    		      	else {
-	    		      		echo "<h4>New Message</h4>";
-	    		      	}
-
+	    		      		    		      	
 	    		      	?>
 
 	    		      		<div class="message_post">
 								<form action="" method="POST">
-									<?php
-									if($user_to_id == "new") {
-										echo "Start a new conversation <br><br>".$id ."";
-										?> 
-										To: <input type='text' onkeyup='getUsers(this.value, "<?php echo $id; ?>")' name='q' placeholder='Name' autocomplete='off' id='seach_text_input'>
-
-										<?php
-										echo "<div class='results'></div>";
-									}
-									else {
-										echo "<textarea name='message_body' id='message_textarea' placeholder='Write your message ...'></textarea>";
-										echo "<input type='submit' name='post_message' class='info' id='message_submit' value='Send'>";
-									}
-
-									?>
+									<textarea name='message_body' id='message_textarea' placeholder='Write your message ...'></textarea>
+									<input type='submit' name='post_message' class='info' id='message_submit' value='Send'>
+									
 								</form>
 
 							</div>
@@ -108,7 +89,7 @@
 
 		  	<div class="col-sm-3">
 		  		<div class='box friends_list_area'>
-	    		<p>My friend list</p>
+	    		<h4 style="text-align: center; padding-bottom: 15px;">Start a Conversation</h>
 	    		<div class="panel-group friends_list_group">
 	    			<div class="panel panel-default friends_list_panel text-left">
 
@@ -116,18 +97,15 @@
 			    		while ($user_friend=mysqli_fetch_array($user_friends)) {
 			    			//get the name and img of the friends
 							$friend = new user($con, $user_friend['friend_id']);
+							$friend_id = $friend->getUserid();
 							echo "
+								 
 		    					<div class='panel-heading' style='padding: 15px;'>
 		      						<h4 class='panel-title'>
-		        						<a data-toggle='collapse' href='#collapse".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><i> ".$friend->getUsername()."</i></a>
+		        						<a  href='messages.php?u=$friend_id'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><i> ".$friend->getUsername()."</i></a>
 		      						</h4>
 		    					</div>
-			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
-			      					<ul class='list-group'>
-			        					<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> View profile</a></li>
-		                            	<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> Message</a></li>
-			      					</ul>
-			    				</div>
+
 			    				
 			    				<hr style='margin:0; border-top:1px solid #ddd'>
 							";
