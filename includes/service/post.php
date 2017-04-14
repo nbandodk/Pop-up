@@ -43,6 +43,28 @@
 				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
 			}
 		}
+
+		//submit my imageposts
+		public function submitImagePost($filepath){
+			//insert the post
+			$body = "<img src=\'".$filepath."\' width=\'70%\'>";
+			$date = date("Y-m-d H:i:s");
+			$added_by_id = $this->id;
+			$added_by_name = $this->user_obj->getUsername();
+			
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+		}
+
+		//submit my videoposts
+		public function submitVideoPost($filepath){
+			//insert the post
+			$body = "<embed src=\'".$filepath."\' autoplay=\'false\' width=\'420\' height=\'315\'></embed>";
+			$date = date("Y-m-d H:i:s");
+			$added_by_id = $this->id;
+			$added_by_name = $this->user_obj->getUsername();
+			
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+		}
 		
 		//shared friends' posts
 		public function submitSharedPost($shareUsername,$shareContent) {
@@ -50,8 +72,7 @@
 			$added_by_id = $this->id;
 			$added_by_name = $this->user_obj->getUsername();
 			$body = "Shared from ".$shareUsername.": ".$shareContent;
-			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
-			
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 	
 		}
 
 		//delete my posts
@@ -101,8 +122,8 @@
 
 						        <div class='col-sm-9 text-left'>
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
-					            	<p>".$row['text']."</p>
-					     			
+									<p>".$row['text']."</p>
+									
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
 
 					     			<div class='share' style='float:left;'>
@@ -325,13 +346,13 @@
 					            		<img src='".$person->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
 					            		<p>".$person->getUsername()."</p>
-					            </a>
-						      </div>
+					            	</a>
+						      	</div>
 
 						        <div class='col-sm-9 text-left'>
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
-					            	<p>".$row['text']."</p>
-					     			
+									<p>".$row['text']."</p>
+									 			
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
 
 						     			<div class='share' style='float:left;'>

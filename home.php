@@ -8,145 +8,205 @@ require 'includes/service/user.php';
   	<input type="hidden" value="<?php echo $user['username'] ?>">
 	<input type="hidden" value="<?php echo $user['id'] ?>">
 	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
+
+	<button id="scrolltop_btn" class="btn btn-danger btn-f" onclick="topFunction()" title="Go to top">Top</button>
 	
 	<div class="container text-center">    
-	  <div class="row">
-	    <div class="col-sm-3 scrolldiv">
-	      <div class="box">
-				<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
-		    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="100" width="100" style="margin: 15px">
-		        	<p style="font-size:18px;"><?php echo $user['username'] ?></p>
-		        </a>
+	  	<div class="row">
+	    	<div class="col-sm-3 scrolldiv">
+	      		<div class="box">
+					<a href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">
+			    		<img src="<?php echo $user['profile_pic'] ?>" class="img-rounded" height="100" width="100" style="margin: 15px">
+			        	<p style="font-size:18px;"><?php echo $user['username'] ?></p>
+			        </a>
 
-			   	<div class="row" >
-					<div class="col-xs-6 col-sm-6 col-md-6 profile_box" id="postNum">
-						<p class="post_area_p profile_p_title">My Posts</p>
-						<p class="post_area_p profile_p_count"><?php echo $postNum ?></p>
-				    </div>
+				   	<div class="row" >
+						<div class="col-xs-6 col-sm-6 col-md-6 profile_box" id="postNum">
+							<p class="post_area_p profile_p_title">My Posts</p>
+							<p class="post_area_p profile_p_count"><?php echo $postNum ?></p>
+					    </div>
 
-				    <div class="col-xs-6 col-sm-6 col-md-6 profile_box">
-				    	<p class="post_area_p profile_p_title">My Friends</p>
-						<p class="post_area_p profile_p_count"><?php echo $friendNum ?></p>
-				    </div>
-			   	</div>
-	  	  </div>
+					    <div class="col-xs-6 col-sm-6 col-md-6 profile_box">
+					    	<p class="post_area_p profile_p_title">My Friends</p>
+							<p class="post_area_p profile_p_count"><?php echo $friendNum ?></p>
+					    </div>
+				   	</div>
+	  	  		</div>
 
-	      <div class="box">
-	      	<h5 style="color: #EE9611"><strong>features</strong></h5>
-	        <p>
-	          <span class="label label-default">Post</span>
-	          <span class="label label-primary">Like</span>
-	          <span class="label label-success">Comment</span>
-	          <span class="label label-info">Search</span>
-	          <span class="label label-warning">Chat</span>
-	          <span class="label label-danger">Video</span>
-	          <span class="label label-primary">Photo</span>
-	        </p>
-	      </div>
+		      	<div class="box" style="padding: 15px;">
+		      		<p style="color: #EE9611; font-size: 16px; margin-top: 0"><strong>Features</strong></p>
+		        	<p>
+		          		<span class="label label-default">Post</span>
+		          		<span class="label label-primary">Like</span>
+		          		<span class="label label-success">Comment</span>
+		          		<span class="label label-info">Search</span>
+		          		<span class="label label-warning">Chat</span>
+		          		<span class="label label-danger">Video</span>
+		          		<span class="label label-primary">Photo</span>
+		        	</p>
+		      	</div>
 
-	      <div class="box">
-	      		<!--<div class="alert alert-success fade in">
-		        	<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-	      		</div>-->
-			    <a href="https://www.apple.com" class="thumbnail">
-			      <img src="assets/images/Advertisement/Apple-logo.png" height="60px" width="60px">
-			    </a>
-			    <a href="https://www.youtube.com" class="thumbnail">
-			      <img src="assets/images/Advertisement/YouTube-logo-full_color.png" height="60px" width="110px">
-			    </a>
-			    <a href="https://www.linkedin.com" class="thumbnail">
-			      <img src="assets/images/Advertisement/linkedin-logo.png" height="80px" width="110px">
-			    </a>
-			    <a href="https://www.google.com" class="thumbnail">
-			      <img src="assets/images/Advertisement/google-logo-vector.png" height="60px" width="110px">
-			    </a>
-			    <a href="https://www.amazon.com" class="thumbnail">
-			      <img src="assets/images/Advertisement/Amazon-Logo_Feature.jpg" height="60px" width="110px">
-			    </a>
-	      </div>
-	    </div>
+		      	<div class="box">
 
-	    <div class="col-sm-6 col-md-7">
-
-	      <div class="row">
-	        <div class="col-sm-12">
-	          <div class="panel panel-default text-left">
-	            <div class="panel-body">
-	            	<form action="includes/form_handlers/post_handler.php" method="POST">
-	            		<p class="lead emoji-picker-container">
-	            			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required>
-	            				<img contenteditable="false" id="myimg" />
-	            			</textarea>
-	            		</p>
-	            		<input class="file" type='file' id="imgSel" />
-              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
-                 			<i class="icon-ok icon-large"></i> Send
-                			</button>
-	            	</form>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-	    
-	      <div class="posts_area"></div>
-	      <p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
-		  <!-- <img id="loadingIcon" src="assets/images/icons/loading.gif"> -->
-	    </div>
-
-	    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
-	    	<div class='box friends_list_area'>
-	    		<p class="friendlist_title"><i class="icon-group icon-large"></i> My friend list</p>
-	    		<div class="panel-group friends_list_group">
-	    			<div class="panel panel-default friends_list_panel text-left">
-
-			    		<?php
-			    		while ($user_friend=mysqli_fetch_array($user_friends)) {
-			    			//get the name and img of the friends
-							$friend = new user($con, $user_friend['friend_id']);
-							echo "
-		    					<div class='panel-heading' style='padding: 15px;'>
-		      						<h4 class='panel-title'>
-		        						<a data-toggle='collapse' href='#collapse".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><i> ".$friend->getUsername()."</i></a>
-		      						</h4>
-		    					</div>
-			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
-			      					<ul class='list-group'>
-			        					<li class='list-group-item text-left'><a href='#'><i class='icon-eye-open'></i> View profile</a></li>
-		                            	<li class='list-group-item text-left'><a href='#'><i class='icon-comment-alt'></i> Chat</a></li>
-			      					</ul>
-			    				</div>
-			    				
-			    				<hr style='margin:0; border-top:1px solid #ddd'>
-							";
-			    		}
-			    		?>
-	    			</div>
-	    		</div>
+				    <a href="https://www.apple.com" class="thumbnail">
+				      	<img src="assets/images/Advertisement/Apple-logo.png">
+				    </a>
+				    <a href="https://www.youtube.com" class="thumbnail">
+				      	<img src="assets/images/Advertisement/YouTube-logo-full_color.png" height="60px" width="110px">
+				    </a>
+				    <a href="https://www.linkedin.com" class="thumbnail">
+				      	<img src="assets/images/Advertisement/linkedin-logo.png" height="80px" width="110px">
+				    </a>
+				    <a href="https://www.google.com" class="thumbnail">
+				      	<img src="assets/images/Advertisement/google-logo-vector.png" height="60px" width="110px">
+				    </a>
+				    <a href="https://www.amazon.com" class="thumbnail">
+				      	<img src="assets/images/Advertisement/Amazon-Logo_Feature.jpg" height="60px" width="110px">
+				    </a>
+		      	</div>
 	    	</div>
-	    </div>
-	  </div>
+
+		    <div class="col-sm-6 col-md-7">
+		      	<div class="row">
+		        	<div class="col-sm-12">
+		        		<ul class="nav nav-pills">
+						    <li class="active"><a data-toggle="pill" href="#home">Posts</a></li>
+						    <li><a data-toggle="pill" href="#photo_menu">Photos</a></li>
+						    <li><a data-toggle="pill" href="#video_menu">Videos</a></li>
+						</ul>
+
+						<div class="tab-content">
+							<div id="home" class="tab-pane fade in active">
+				          		<div class="panel panel-default text-left" style="margin-top: 10px;">
+				            		<div class="panel-body">
+						            	<form action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
+						            		<p class="lead emoji-picker-container">
+						            			<textarea class="form-control post_input" rows="3" name="home_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+						            		</p>
+
+					              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
+					                 			<i class="icon-ok icon-large"></i> Send
+					                		</button>
+						            	</form>
+				            		</div>
+				          		</div>
+		        			</div>
+
+		        			<div id="photo_menu" class="tab-pane fade">
+				          		<div class="panel panel-default text-left" style="margin-top: 10px;">
+				            		<div class="panel-body">
+						            	<form action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
+											<div class="row">
+												<div class="col-xs-3 col-sm-3 col-md-2">
+									   	 			<input class="btn btn-primary" type="button" id="image" name="find_image" onclick="myImage.click();" value="Browse" style="font-size: 14px; width: 85px">
+									   	 		</div>
+									   	 		<div class="col-sm-5 col-md-5">
+									   	 			<input type="text" class='form-control imgname' id="imgname" style="" disabled="true">
+													<input type="file" id="myImage" name="img" onchange="imgname.value=this.value" style="display: none" required>
+													<br>
+												</div>
+											</div>
+
+											<input type="submit" name="post_img" class="btn btn-success" value="Submit" style="font-size: 14px; width: 85px">
+						            	</form>
+				            		</div>
+				          		</div>
+		        			</div>
+
+		        			<div id="video_menu" class="tab-pane fade">
+				          		<div class="panel panel-default text-left" style="margin-top: 10px;">
+				            		<div class="panel-body">
+						            	<form id="form1" action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
+						            		<input class="form-control" name="home_post" placeholder="Video url..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" style="resize: none" required></textarea>
+						            		<br>
+
+					                		<a id="loc_vid" class="local_video" onclick="switch_localVideo();" style="float: left; padding-left: 5px; padding-top: 13px;">
+					                			<i class='icon-folder-close-alt icon-large' aria-hidden='true'></i> Local
+					            			</a>
+
+					              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
+					                 			<i class="icon-ok icon-large"></i> Send
+					                		</button>
+						            	</form>
+						            	<form id="form2" action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data"; style="display: none;">
+											<div class="row">
+												<div class="col-xs-3 col-sm-3 col-md-2">
+									   	 			<input class="btn btn-primary" type="button" id="file" name="find_file" onclick="myVideo.click();" value="Browse" style="font-size: 14px; width: 85px">
+									   	 		</div>
+									   	 		<div class="col-sm-5 col-md-5">
+									   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
+													<input type="file" id="myVideo" name="file" onchange="filename.value=this.value" style="display: none" required>
+													<br>
+												</div>
+											</div>
+
+											<input type="submit" name="post_video" class="btn btn-success" value="Submit" style="font-size: 14px; width: 85px">
+
+											<a id="web_vid" class="web_video" onclick="switch_webVideo();" style="float: right; padding-top: 10px; padding-right: 5px;">
+					                			<i class='icon-external-link icon-large' aria-hidden='true'></i> URL
+					            			</a>
+						            	</form>
+				            		</div>
+				          		</div>
+		        			</div>
+
+	      				</div>
+	      			</div>
+	      		</div>
+	    
+		      	<div class="posts_area"></div>
+		      	<p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
+			  	<!-- <img id="loadingIcon" src="assets/images/icons/loading.gif"> -->
+		    </div>
+
+		    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
+		    	<div class='box friends_list_area'>
+		    		<p class="friendlist_title"><i class="icon-group icon-large"></i> &nbspMy friend list</p>
+		    		<div class="panel-group friends_list_group">
+		    			<div class="panel panel-default friends_list_panel text-left">
+				    		<?php
+					    		while ($user_friend=mysqli_fetch_array($user_friends)) {
+					    			//get the name and img of the friends
+									$friend = new user($con, $user_friend['friend_id']);
+									echo "
+				    					<div class='panel-heading' style='padding-left: 15px; padding-top: 12px; padding-bottom: 12px;'>
+				      						<h4 class='panel-title'>
+				        						<a data-toggle='collapse' href='#collapse".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'> &nbsp".$friend->getUsername()."</a>
+				      						</h4>
+				    					</div>
+					    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
+					      					<ul class='list-group'>
+					        					<li class='list-group-item text-left'><a href='#'><i class='icon-eye-open icon-large'></i> &nbspVisit</a></li>
+				                            	<li class='list-group-item text-left'><a href='messages.php?u=".$friend->getUserid()."'><i class='icon-comment-alt icon-large'></i> &nbspChat</a></li>
+					      					</ul>
+					    				</div>
+					    				
+					    				<hr style='margin:0; border-top:1px solid #ddd'>
+									";
+					    		}
+				    		?>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	  	</div>
 	</div>
 
 	<footer class="container-fluid text-center">
-	  <p>Footer Text</p>
+	  	<p>Footer Text</p>
 	</footer>
 
-	<script type="text/javascript">
-	    function readURL(input) {
-	        if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-
-	            reader.onload = function (e) {
-	                document.getElementById('myimg').setAttribute('src',e.target.result);
-	            }
-
-	            reader.readAsDataURL(input.files[0]);
-	        }
-	    }
-
-	    document.getElementById('imgSel').onchange = function () { //set up a common class
-	        readURL(this);
-	    };
+	<script>
+		function switch_localVideo () {
+			$('#form1').slideUp('slow', function() {
+				$('#form2').slideDown('slow');
+			});
+		}
+		function switch_webVideo () {
+			$('#form2').slideUp('slow', function() {
+				$('#form1').slideDown('slow');
+			});
+		}
 	</script>
 
 	<script>
@@ -202,8 +262,6 @@ require 'includes/service/user.php';
 				return false;
 
 			}); //End (window).scroll(function())
-
-			
 		});
 	</script>
 
@@ -233,6 +291,24 @@ require 'includes/service/user.php';
 		ga('send', 'pageview');
     </script>
     
+    <script>
+		// When the user scrolls down 20px from the top of the document, show the button
+		window.onscroll = function() {scrollFunction()};
+
+		function scrollFunction() {
+		    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		        document.getElementById("scrolltop_btn").style.display = "block";
+		    } else {
+		        document.getElementById("scrolltop_btn").style.display = "none";
+		    }
+		}
+
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+		    document.body.scrollTop = 0;
+		    document.documentElement.scrollTop = 0;
+		}
+	</script>
 
 </body>
 </html>

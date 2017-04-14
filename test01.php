@@ -1,24 +1,29 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE HTML>
 <head>
-  <title></title>
+<title>数据</title>
+<meta characterset="utf-8" />
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js" ></script>
 </head>
 <body>
-<?php 
-    require 'config/config.php';
-    require 'includes/service/search.php';
-    //$query = "SELECT * FROM users WHERE (id in (SELECT friend_id FROM user_friend WHERE user_id='3' AND block='no') OR id='3') AND username LIKE 'n%' AND user_closed = 'no' ";
-    // $search_result = new search($con,3);
-    // echo $search_result->filteredSearch(1, "n", 29, "male", "a", "a", "in", "us");
-
-    //search friend
-    // $friendResultSet = mysqli_query($con, $query); 
-    // while ($row = mysqli_fetch_array($friendResultSet)){
-    //     echo $row['id']." ";
-    // }
-    echo strpos("mmwww.youtube.com/watch?v=ss", "www.youtube.com/watch?v=")    
-?>
-
+<header>
+    <nav>
+        <ul>
+            <li><a href="javascript:void(0)" id="a1" onclick="chcolor(1)">首页</a></li>
+            <li><a href="javascript:void(0)" id="a2" onclick="chcolor(2)">添加</a></li>
+            <li><a href="javascript:void(0)" id="a3" onclick="chcolor(3)">管理</a></li>
+            <li><a href="javascript:void(0)" id="a4" onclick="chcolor(4)">操作</a></li>
+            </ul>
+    <nav>
+</header>
 </body>
-
+<script type="text/javascript">
+    function chcolor(ids)
+    {
+        for(var i=1;i<5;i++)
+        {
+            $("#a"+i).css({"color":"#000","font-size":"14px","background-color":"#fff"});
+        }
+        $("#a"+ids).css({"color":"red","font-size":"20px","background-color":"#333"});
+    }
+</script>
 </html>

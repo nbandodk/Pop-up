@@ -25,10 +25,11 @@
     <link href="assets/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/home_style.css" rel="stylesheet">
     <link href="assets/css/profile_style.css" rel="stylesheet">
+    <link href="assets/css/search_style.css" rel="stylesheet">
+    <link href="assets/css/messages_style.css" rel="stylesheet">
     
     <!--for upload picture-->
     <link href="assets/css/jquery.Jcrop.css" rel="stylesheet">
-    
 
     <style>  
         //search bar drop down
@@ -38,7 +39,8 @@
           min-width: 160px;
           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
           padding: 12px 16px;
-        }  
+        }
+        
         /* Set black background color, white text and some padding */
         footer {
           background-color: #555;
@@ -65,10 +67,14 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="home.php"><i class="icon-home icon-large"></i> Home</a></li>
+
+                    <li><a href="messages.php" id="count_unseen_messages"><i class=" icon-envelope icon-large"></i>
+                    <?php
+                    echo "Messages <span id='new_message' class='badge'></span>"; 
+                    ?>
+                    </a></li>
                     
-                    <li><a href="#"><i class="icon-envelope icon-large"></i> Messages</a></li>
-                    
-                    <li role="presentation"><a href="#">Notice <span class="badge"><?php
+                    <li role="presentation"><a href="#"><i class=" icon-bell-alt icon-large"></i> Notice <span class="badge"><?php
                     $id = $_SESSION['id'];
                     $query = "SELECT friend_id FROM user_friend WHERE user_id='$id' AND block='yes' ";
                     echo mysqli_num_rows(mysqli_query($con,$query));
@@ -80,7 +86,7 @@
                         <input type="search" id="searchInput" class="form-control" placeholder="Search.." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="searchForm">
 
                         <span class="input-group-btn">
-                          <button class="btn" type="submie">
+                          <button class="btn" type="submit">
                             <span class="icon-search"></span>
                           </button>
                         </span>

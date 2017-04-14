@@ -20,7 +20,7 @@
 			{
 				$output .="
 					<a href='profile.php?username=".$row['username']."&id=".$row['id']."'>
-						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'>".$row['username']."
+						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'> ".$row['username']."
 					</a>
 					<hr>
 				";
@@ -50,32 +50,30 @@
 				}
 				$output .="
 				<div class='col-sm-4'>
- 					<div class='box'>
+ 					<div class='result_box'>
 						<a href='#'>
-							<img src='".$row['profile_pic']."' class='img-rounded' height='75' width='75'>
-							<p>".$row['username']."</p>
+							<img src='".$row['profile_pic']."' class='img-circle' height='65' width='65'>
+							<p style='margin-top: 10px'>".$row['username']."</p>
 						</a>
 						<input type='hidden' value='".$row['id']."'/>";
 				//friend
 				if (in_array($row['id'], $friend_list)) {
 					$output .="
-						<button type='button' class='btn btn-danger btn-f Delete'>
-                			<span class='glyphicon glyphicon-remove-sign'></span> Delete
-              			</button>
+						<a class='Delete' style='float: left'>
+                			<i class='icon-remove'></i> Delete
+              			</a>
 					";
 				}elseif ($row['id'] == $this->myId) {
 					$output .="
-						<a href='home.php'>
-						<button type='button' class='btn btn-warning btn-f'>
-                			<span class='glyphicon glyphicon-home'></span> Home
-              			</button>
+						<a href='home.php' style='float: left'>
+                			<i class='icon-home'></i> Home
               			</a>
 					";
 				}else{
 					$output .="
-						<button type='button' class='btn btn-success btn-f Add'>
-                			<span class='glyphicon glyphicon-ok-sign'></span> Add
-              			</button>
+						<a class='Add' style='float: left'>
+                			<i class='icon-ok'></i> Add
+              			</a>
 					";
 				}
 				$output .="	

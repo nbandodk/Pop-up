@@ -13,6 +13,11 @@
 		
 		//get the friends list of the user 
 		$user_friends = mysqli_query($con, "SELECT friend_id FROM user_friend WHERE user_id='$id' AND block='no' ");
+
+
+				
+		$user_friends_details_query = mysqli_query($con, "SELECT * FROM users WHERE id IN (SELECT friend_id FROM user_friend WHERE user_id='$id' ) ");
+		$user_friends_details = mysqli_fetch_array($user_friends_details_query);
 	} else {
 		header("Location: register.php");
 	}
