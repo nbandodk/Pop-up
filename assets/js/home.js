@@ -141,3 +141,20 @@ $(document).ready(function() {
 
 });
 
+ function update() {
+        $.ajax({
+            url: 'includes/form_handlers/check_num_unseen_messages.php',
+            type: 'GET',
+            success: function(data) {
+                
+                    var add_this = " ( " + data + ")" ;
+                    $("#new_message").html(add_this);
+                    /*var container = document.getElementById("yourDiv");
+                    var content = container.innerHTML;
+                    container.innerHTML= content;*/
+                
+            }
+        });
+    }
+
+    setInterval('update()', 1000); // refresh div after 5 secs

@@ -76,7 +76,11 @@ require 'config/config.php';
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="home.php"><span class=" glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="messages.php"><span class=" glyphicon glyphicon-envelope"></span> Messages</a></li>
+                    <li><a href="messages.php" id="count_unseen_messages"><span class=" glyphicon glyphicon-envelope"></span>
+                    <?php
+                    echo "Messages<span id='new_message'></span>"; 
+                    ?>
+                    </a></li>
                 </ul>
                 <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" role="search">
                     <div class="form-group input-group">
@@ -89,6 +93,7 @@ require 'config/config.php';
                         </span>
                     </div>
                     
+
                     <!--To show the search result-->
                     <div class="well search_result_ajax" style="display: none;">
 
@@ -123,5 +128,28 @@ require 'config/config.php';
             }
         });  
     });  
+
+
+    // var statusIntervalId = window.setInterval(update, 1000);
+/**
+    function update() {
+        $.ajax({
+            url: 'check_status.php',
+            type: 'GET',
+            success: function(data) {
+                
+                    var add_this = "( " + data + ")" ;
+                    $("#new_message").html(add_this);
+                    /*var container = document.getElementById("yourDiv");
+                    var content = container.innerHTML;
+                    container.innerHTML= content;*/
+                
+            }
+        }
+    }
+
+    //setInterval('update()', 1000); // refresh div after 5 secs
+   
+
 </script>
 

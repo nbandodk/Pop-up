@@ -145,54 +145,77 @@ body {
 	margin :0;
 	position: absolute;
 	border:none;
-	background-color: #2ecc71;
+	background-color: #5e5d8b;
 	color :#fff ;
 	border-radius: 5px;
 	font-family: 'Bellota-BoldItalic', sans-serif;
-	text-shadow: #7386E2 0.5px 0.5px 0px;
+	text-shadow: #7386E2 0.5px 0.5px 0px
+	opacity:0.98;
 }
 
 .message {
 	border: 1px solid #bec6d5;
-	/*border-radius: 5px; */
+	border-radius: 2px;
 	padding: 5px 10px;
 	display: inline-block;
 	color: #fff;
 }
 
 .message#blue{
-	background-color: #337ab7;
-	border-color: #2980b9;
+	background-color: #2ecc71;
+	border-color: #2ecc71;
 	float:right;
 	margin-bottom: 5px;
 	position: relative;
+	margin-right: 20px;
 }
 
 .message#green{
-	background-color: #F4511E;
-	border-color: #BF360C;
+	background-color: dodgerblue;
+	border-color: dodgerblue;
 	float:left;
-	margin-bottom: 5px;
+	margin-bottom: 4px;
 	margin-right: 10px;
 	position: relative;
+	margin-left: 15px;
+}
+
+.message#blue:after {
+	position: absolute;
+    width: 8px;
+    height: 8px;
+    border-top: 0px solid #2ecc71;
+    border-right: 2px solid #2ecc71;
+    border-bottom: 2px solid #2ecc71;
+    border-left: 0px solid #2ecc71;
+    top: 0%;
+    left: 100%;
+    margin-left: 0px;
+    content: '';
+    transform: rotate(45deg);
+    margin-top: 1.5px;
+    margin-left: -4.5px;
+    /*margin-right: 56px; */
+    background-color: #2ecc71;
 }
 
 .message#green:before {
 	position: absolute;
-	width:15px;
-	height:15px;
-	border-top: 0px solid #fff;
-	border-right: 2px solid #fff;
-	border-bottom: 2px solid #fff;
-	border-left: 0px solid #fff;
-	top:0%;
-	left:0%;
-	margin-left: 0px;
-	content:'';
-	transform: rotate(45deg);
-	margin-top: -7.5px;
-	background-color: #F4511E;
-
+    width: 8px;
+    height: 8px;
+    border-top: 0px solid dodgerblue;
+    border-right: 2px solid dodgerblue;
+    border-bottom: 2px solid dodgerblue;
+    border-left: 0px solid dodgerblue;
+    top: 0%;
+    left: 0%;
+    margin-left: 0px;
+    content: '';
+    transform: rotate(45deg);
+    margin-top: 1.5px;
+    margin-left: -4.5px;
+    /*margin-right: 56px; */
+    background-color: dodgerblue;
 }
 
 .loaded_messages{
@@ -229,7 +252,12 @@ body {
  }
 
 .chat_head {
-	background-color: #283048 ;
+	/* other colors to look for
+	teal;
+	firebrick
+	lightseagreenl
+	*/
+	background-color: #5e5d8b ;
 	border-bottom: 0.2em solid #2c3e50;
 	opacity: 0.98;
 }
