@@ -86,6 +86,7 @@ require 'includes/service/user.php';
 			    		while ($user_friend=mysqli_fetch_array($user_friends)) {
 			    			//get the name and img of the friends
 							$friend = new user($con, $user_friend['friend_id']);
+							$friend_id = $friend->getUserid();
 							echo "
 		    					<div class='panel-heading' style='padding: 15px;'>
 		      						<h4 class='panel-title'>
@@ -95,7 +96,7 @@ require 'includes/service/user.php';
 			    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
 			      					<ul class='list-group'>
 			        					<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> View profile</a></li>
-		                            	<li class='list-group-item text-left'><a href='#'><span class='glyphicon glyphicon-cog'></span> Message</a></li>
+		                            	<li class='list-group-item text-left'><a  href='messages.php?u=$friend_id'><span class='glyphicon glyphicon-cog'></span> Message</a></li>
 			      					</ul>
 			    				</div>
 			    				

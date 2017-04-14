@@ -91,7 +91,7 @@
 
 		  	<div class="col-sm-3">
 		  		<div class='box friends_list_area'>
-	    		<h4 style="text-align: center; padding-bottom: 15px;">Start a Conversation</h>
+	    		<h4 style="text-align: center; padding-bottom: 15px;">Start a Conversation</h4>
 	    		<div class="panel-group friends_list_group">
 	    			<div class="panel panel-default friends_list_panel text-left">
 

@@ -146,13 +146,14 @@ $(document).ready(function() {
             url: 'includes/form_handlers/check_num_unseen_messages.php',
             type: 'GET',
             success: function(data) {
-                
+                	
+                	if(data!= 0) {
                     var add_this = " ( " + data + ")" ;
                     $("#new_message").html(add_this);
                     /*var container = document.getElementById("yourDiv");
                     var content = container.innerHTML;
                     container.innerHTML= content;*/
-                
+                	}
             }
         });
     }
