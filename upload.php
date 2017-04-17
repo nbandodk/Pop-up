@@ -101,7 +101,7 @@ if (isset($_POST['x'])){
 			imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],
 			$targ_w,$targ_h,$_POST['w'],$_POST['h']);
 		//save the new cropped version
-			imagejpeg($dst_r, "assets/images/profile_pics/".$finalname."n.jpeg", 90);
+			imagejpeg($dst_r, "assets/images/profile_pics/".$finalname."n.jpeg", 90); 	
 			 		
 	}else if($type == 'png' || $type == 'PNG'){
 		
@@ -156,34 +156,34 @@ if (isset($_POST['x'])){
 <div id="Overlay" style=" width:100%; height:100%; border:0px #990000 solid; position:absolute; top:0px; left:0px; z-index:2000; display:none;"></div>
 <div class="container">
 	<div class="row">
-			<div class="col-sm-8 col-sm-offset-2 upload_profile_pic_area">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 upload_profile_pic_area">
 
-				<div id="formExample">
-				    <p><b> <?=$msg?> </b></p>
+			<div id="formExample">
+			    <p><b> <?=$msg?> </b></p>
 
-				    <div class="form_header">
-			        	<h4 style="color: #000">Update Your Profile Picture!</h4>
-			        </div>
+			    <div class="form_header">
+		        	<h4 style="color: #000">Update Your Profile Picture!</h4>
+		        </div>
 
-			        <hr style="height: 1px; border: none; border-top: 2px solid #ddd;">
-				    
-				    <form action="upload.php" method="post" enctype="multipart/form-data">
-				    	<div class="row">
-				    		<div class="col-xs-5 col-sm-3 col-md-2">
-				   	 			<input class="btn btn-default" type="button" id="image" name="image" onclick="myImage.click();" value="Browse">
-				   	 		</div>
-				   	 		<div class="col-xs-7 col-sm-5 col-md-4">
-				   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
-								<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none"><br>
-							</div>
+		        <hr style="height: 1px; border: none; border-top: 2px solid #ddd;">
+			    
+			    <form action="upload.php" method="post" enctype="multipart/form-data">
+			    	<div class="row">
+			    		<div class="col-xs-5 col-sm-2">
+			   	 			<input class="btn btn-primary" type="button" id="image" name="image" onclick="myImage.click();" value="Browse" style="font-size: 14px; width: 85px;">
+			   	 		</div>
+			   	 		<div class="col-xs-7 col-sm-8 col-sm-offset-2">
+			   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
+							<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none"><br>
 						</div>
+					</div>
 
-				        <!--<input type="file" class="btn btn-default" id="image" name="image">-->
-				        <input type="submit" class="btn btn-default" value="Submit" style="margin-top: 30px;">
-				    </form>
-				    
-				</div> <!-- Form-->
-
+			        <!--<input type="file" class="btn btn-default" id="image" name="image">-->
+			        <input type="submit" class="btn btn-success" value="Submit" style="margin-top: 30px; font-size: 14px; width: 85px;">
+			    </form>
+			    
+			</div> <!-- Form-->
+		</div>
 
     <?php
     if($imgSrc){ //if an image has been uploaded display cropping area?>
@@ -191,60 +191,54 @@ if (isset($_POST['x'])){
 	    	$('#Overlay').show();
 			$('#formExample').hide();
 	    </script>
-	    <div id="CroppingContainer" style="background-color: #FFF; position: relative; 	margin-right: auto; margin-left: auto; overflow: hidden; border: 2px #666 solid; z-index: 2001; padding-bottom: 0px;">  
-	    
-	        <div id="CroppingArea" style="width: 500px; max-height: 400px; position: relative; overflow: hidden; margin: 40px 0px 40px 40px; border: 2px #666 solid; float: left;">	
-	            <img src="<?=$imgSrc?>" border="0" id="jcrop_target" style="border:0px #990000 solid; position:relative; margin:0px 0px 0px 0px; padding:0px; " />
-	        </div>  
+	    <div class="col-sm-10 col-sm-offset-1">
+		    <div id="CroppingContainer" style="background-color: #FFF; position: relative; margin-right: auto; margin-left: auto; overflow: hidden; border: 2px #666 solid; z-index: 2001; padding-bottom: 0px;">  
+		    
+		        <div id="CroppingArea" style="width: 500px; max-height: 400px; position: relative; overflow: hidden; margin: 40px 0px 40px 40px; border: 2px #666 solid; float: left;">	
+		            <img src="<?=$imgSrc?>" border="0" id="jcrop_target" style="border:0px #990000 solid; position:relative; margin:0px 0px 0px 0px; padding:0px; " />
+		        </div>  
 
-	        <div id="InfoArea" style="width:180px; height:150px; position:relative; overflow:hidden; margin:40px 0px 0px 40px; border:0px #666 solid; float:left;">	
-	           <p style="margin:0px; padding:0px; color:#444; font-size:18px;">          
-	                <b>Crop Profile Image</b><br /><br />
-	                <span style="font-size:14px;">
-	                    Crop / resize your uploaded profile image. <br />
-	                    Once you are happy with your profile image then please click Upload.
+		        <div id="InfoArea" style="width:180px; height:150px; position:relative; overflow:hidden; margin:40px 0px 0px 40px; border:0px #666 solid; float:left;">	
+		           	<p style="margin:0px; padding:0px; color:#444; font-size:18px;">          
+		                <b>Crop Profile Image</b><br /><br />
+		                <span style="font-size:14px;">
+		                    Crop / resize your uploaded profile image. <br>
+		                    Once you are happy with your profile image then please click Upload.
+		                </span>
+		           	</p>
+		        </div>  
 
-	                </span>
-	           </p>
-	        </div>  
+		        <br>
 
-	        <br />
+		        <div id="CropImageForm" style="width:100px; height:30px; float:left; margin:10px 0px 0px 40px;" >  
+		            <form action="upload.php" method="post" onsubmit="return checkCoords();">
+		                <input type="hidden" id="x" name="x" />
+		                <input type="hidden" id="y" name="y" />
+		                <input type="hidden" id="w" name="w" />
+		                <input type="hidden" id="h" name="h" />
+		                <input type="hidden" value="jpeg" name="type" /> <?php // $type ?> 
+		                <input type="hidden" value="<?=$src?>" name="src" />
+		                <input type="submit" value="Upload" style="width:100px; height:30px;" />
+		            </form>
+		        </div>
 
-	        <div id="CropImageForm" style="width:100px; height:30px; float:left; margin:10px 0px 0px 40px;" >  
-	            <form action="upload.php" method="post" onsubmit="return checkCoords();">
-	                <input type="hidden" id="x" name="x" />
-	                <input type="hidden" id="y" name="y" />
-	                <input type="hidden" id="w" name="w" />
-	                <input type="hidden" id="h" name="h" />
-	                <input type="hidden" value="jpeg" name="type" /> <?php // $type ?> 
-	                <input type="hidden" value="<?=$src?>" name="src" />
-	                <input type="submit" value="Upload" style="width:100px; height:30px;"   />
-	            </form>
-	        </div>
-
-	        <div id="CropImageForm2" style="width:100px; height:30px; float:left; margin:10px 0px 0px 40px;" >  
-	            <form action="upload.php" method="post" onsubmit="return cancelCrop();">
-	                <input type="submit" value="Drop Changes" style="width:100px; height:30px;"   />
-	            </form>
-	        </div>            
-	            
-	    </div><!-- CroppingContainer -->
-	<?php 
-	} ?>
+		        <div id="CropImageForm2" style="width:100px; height:30px; float:left; margin:10px 0px 0px 40px;" >  
+		            <form action="upload.php" method="post" onsubmit="return cancelCrop();">
+		                <input type="submit" value="Drop Changes" style="width:100px; height:30px;" />
+		            </form>
+		        </div>
+		            
+		    </div><!-- CroppingContainer -->
+	    </div>
+		<?php 
+		} ?>
+	</div>
 </div>
-</div>
-</div>
- 
- 
- 
- 
- 
- <?php if($result_path) {
-	 ?>
-     
-     <img src="<?=$result_path?>" style="position:relative; margin:10px auto; width:150px; height:150px;" />
-	 
- <?php } ?>
- 
- 
-    <br /><br />
+
+
+<?php if($result_path) {
+ ?>
+ 	<img src="<?=$result_path?>" style="position:relative; margin:10px auto; width:150px; height:150px;" />
+<?php } ?>
+
+<br><br>

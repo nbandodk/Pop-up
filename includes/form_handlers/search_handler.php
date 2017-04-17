@@ -2,7 +2,7 @@
 	require '../../config/config.php';
 	require '../service/search.php';
 	if (isset($_SESSION['id'])) {
-		$search_result = new search($con);
+		$search_result = new search($con,$_SESSION['id']);
 		if (isset($_REQUEST['searchRegisteredUserAjax'])) {
 			//do the search ajax
 			echo $search_result->searchUserAjax($_REQUEST['searchedUsername']);

@@ -25,6 +25,16 @@
 			$check_body_empty = preg_replace('/\s+/', '', $body);
 
 			if ($check_body_empty != "") {
+				$body_array = preg_split("/\s+/", $body);
+				foreach ($body_array as $key => $value) {
+					if (strpos($value, "www.youtube.com/watch?v=") !== false) {
+						$value = preg_replace("!watch\?v=!", "embed/", $value);
+						$value = "<iframe src=\'".$value."\' width=\'420\' height=\'315\'></iframe>";
+						$body_array[$key] = $value;
+					}
+				}
+				$body = implode(" ", $body_array);
+
 				//insert the post
 				$date = date("Y-m-d H:i:s");
 				$added_by_id = $this->id;
@@ -33,15 +43,36 @@
 				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
 			}
 		}
+
+		//submit my imageposts
+		public function submitImagePost($filepath){
+			//insert the post
+			$body = "<img src=\'".$filepath."\' width=\'70%\'>";
+			$date = date("Y-m-d H:i:s");
+			$added_by_id = $this->id;
+			$added_by_name = $this->user_obj->getUsername();
+			
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+		}
+
+		//submit my videoposts
+		public function submitVideoPost($filepath){
+			//insert the post
+			$body = "<embed src=\'".$filepath."\' autoplay=\'false\' width=\'420\' height=\'315\'></embed>";
+			$date = date("Y-m-d H:i:s");
+			$added_by_id = $this->id;
+			$added_by_name = $this->user_obj->getUsername();
+			
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+		}
 		
 		//shared friends' posts
 		public function submitSharedPost($shareUsername,$shareContent) {
 			$date = date("Y-m-d H:i:s");
 			$added_by_id = $this->id;
 			$added_by_name = $this->user_obj->getUsername();
-			$body = "Shared from ".$shareUsername.": ".$shareContent;
-			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
-			
+			$body = "<strong>Shared from ".$shareUsername.": </strong>".$shareContent;
+			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 	
 		}
 
 		//delete my posts
@@ -91,25 +122,27 @@
 
 						        <div class='col-sm-9 text-left'>
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
-					            	<p>".$row['text']."</p>
-					     			
-					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-					     				<div class='share' style='float:left;'>
-											<a class='share_a'>
-												<i class='icon-share' aria-hidden='true'></i> share
-											</a>
-										</div>
-
-					     				<div class='commentdis' style='float:left; margin-left: 10px;'>
-											<a class='comment_a'>
-												<i class='icon-comments-alt' aria-hidden='true'></i> comment
-											</a>
-										</div>
+									<p>".$row['text']."</p>
 									
-							            <div class='like'  style='float:left; margin-left: 10px;'> 
-								            <a class='like_a'>
-							                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
-							            	</a>
+					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
+
+					     			<div class='share' style='float:left;'>
+										<a class='share_a' style='color: #16a085'>
+											<i class='icon-share' aria-hidden='true'></i> share
+										</a>
+ 									</div>
+
+					     			<div class='commentdis' style='float:left; margin-left: 10px'>
+									
+									<a class='comment_a'>
+										<i class='icon-comments-alt' aria-hidden='true'></i> comment
+									</a>
+									</div>
+					            
+					            <div class='like'  style='float:left; margin-left: 10px;'> 
+						            <a class='like_a'>
+					                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
+					            	</a>
 				            	
 				            ";
 				    //--------------add likes-----------------
@@ -261,7 +294,7 @@
 			$start = ($pageNum-1)*$pageSize;
 
 			//get the friends' id of the user 
-			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id'");
+			$friendsData = mysqli_query($this->con,"SELECT friend_id FROM user_friend WHERE user_id='$this->id' AND block='no' ");
 			//if exists any friend
 			if (mysqli_num_rows($friendsData) >= 1) {
 				//transfer ids to an array
@@ -313,28 +346,27 @@
 					            		<img src='".$person->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
 					            		<p>".$person->getUsername()."</p>
-					            </a>
-						      </div>
+					            	</a>
+						      	</div>
 
 						        <div class='col-sm-9 text-left'>
 						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
-					            	<p>".$row['text']."</p>
-					     			
+									<p>".$row['text']."</p>
+									 			
 					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
-					     				<div class='share' style='float:left;'>
-											<a class='share_a'>
+
+						     			<div class='share' style='float:left;'>
+											<a class='share_a' style='color: #16a085'>
 												<i class='icon-share' aria-hidden='true'></i> share
 											</a>
-										</div>
+	 									</div>
 
-						     			<div class='commentdis' style='float:left; margin-left: 10px;'>
+						     			<div class='commentdis' style='float:left; margin-left: 10px'>
 											<a class='comment_a'>
 												<i class='icon-comments-alt' aria-hidden='true'></i> comment
 											</a>
 										</div>
-					            		
-
-
+					     
 							         <div class='like'  style='float:left; margin-left: 10px;'> 
 								         <a class='like_a'>
 							               <i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")

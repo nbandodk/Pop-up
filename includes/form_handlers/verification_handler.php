@@ -16,7 +16,7 @@ if (isset($_SESSION['hash'])) {
 			if(mysqli_num_rows($user_closed_query) == 1) {
 				$reopen_account = mysqli_query($con, "UPDATE users SET user_closed='no' WHERE email='$email'");
 			}
-		$_SESSION['id'] = $id;
+			$_SESSION['id'] = $id;
 		header("Location: home.php");
 		exit();
 	}else {

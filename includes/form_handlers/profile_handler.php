@@ -22,6 +22,7 @@
 	$postNum = mysqli_num_rows($check_database_query);
 	//get the friends list of the user 
 	$user_friends = mysqli_query($con, "SELECT friend_id FROM user_friend WHERE user_id='$user_id'");
+	$user2 = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users2 WHERE id='$user_id'"));
 	}else{
 		header("Location: home.php");
 		exit;

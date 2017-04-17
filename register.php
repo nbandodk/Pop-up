@@ -64,7 +64,6 @@ require 'includes/form_handlers/login_handler.php';
 
 	?>
 
-
 	<div class="site-wrapper">
 
       	<div class="site-wrapper-inner">

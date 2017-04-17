@@ -71,7 +71,7 @@ $(document).ready(function() {
 		var username = $('input:hidden:eq(0)').val();
 		var userId = $('input:hidden:eq(1)').val();
 		var profile_pic = $('input:hidden:eq(2)').attr('value');
-		var comment = $this.prev().find('input').val();	
+		var comment = $this.prev().find('p>div').text();	
 		// if <p> exists before <form></form> delete it
 		$this.parent().prevAll('p').remove();
 		$.ajax({
@@ -143,7 +143,7 @@ $(document).ready(function() {
 	
 	//for share ajax
 	$('div.posts_area').on('click','.share>a',function(){
-		var shareContent = $(this).parent().parent().prev().text();
+		var shareContent = $(this).parent().parent().prev().html();
 		var shareUsername = $(this).parent().parent().parent().prev().find('.post_info>p').text();
 		$.ajax({
 				url: "includes/form_handlers/share_handler.php",
@@ -151,7 +151,6 @@ $(document).ready(function() {
 				data: "shareContent="+shareContent+"&shareUsername="+shareUsername,
 				cache: false,
 				success: function(returnedData) {
-						var divID = $(this).parent().parent().parent().parent().val();
 						alert("Shared!");
 						location.reload();
 						return false;
@@ -164,6 +163,26 @@ $(document).ready(function() {
 	$(window).click(function(){
 		$("nav").find('.search_result_ajax').hide('slow','swing');
 	});
+
+	
+	
 });
+update();
+function update() {
+    $.ajax({
+        url: 'includes/form_handlers/check_num_unseen_messages.php',
+        type: 'GET',
+        success: function(data) {
+            	
+            	if(data!= 0) {
+                var add_this = data;
+                $("#new_message").html(add_this);
+                /*var container = document.getElementById("yourDiv");
+                var content = container.innerHTML;
+                container.innerHTML= content;*/
+            	}
+        }
+    });
+}
 
-
+setInterval('update()', 1000); // refresh div after 5 secs
