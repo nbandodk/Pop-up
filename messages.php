@@ -124,6 +124,44 @@
 		</div>
     </div>
 
+    <script type="text/javascript">
+    	//var user_id = '<?php echo $user_to_id; ?>';
+    	/*function load_specific_messages_update() {
+    	 
+        $.ajax({
+            url: "includes/form_handlers/messages_with_person_handler.php",
+            type: "GET",
+            //data: ({user_to_id: user_id}),
+			//cache: false,
+
+			
+           
+        });
+        $("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
+       // window.alert(user_id);
+    }
+	*/
+	function load_specific_messages_update(){
+		var user_id = '<?php echo $user_to_id; ?>';
+		$.ajax({
+			url: "includes/form_handlers/messages_with_person_handler.php",
+            type: "POST",
+            data: {user_id : user_id},
+            dataType: 'text',
+            success : function(data) {
+               // $("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
+              // $("#scroll_messages").append(data);
+               $('#scroll_messages').empty().append(data);
+               //window.alert(data);
+            }
+		});
+		 //$("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
+	}
+
+    setInterval('load_specific_messages_update()', 1000); // refresh div after 5 secs
+
+    </script>
+
 
 
 

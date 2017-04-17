@@ -21,6 +21,7 @@ $(document).ready(function() {
 
 	//for adding likes
 	$('div.posts_area').on('click','.like>button:has(i)',function(){
+		
 		var $this = $(this);
 		var postId = $this.parent().parent().attr('value');
 		var username = $('input:hidden:eq(0)').val();
@@ -140,7 +141,7 @@ $(document).ready(function() {
 
 
 });
-
+update();
  function update() {
         $.ajax({
             url: 'includes/form_handlers/check_num_unseen_messages.php',
@@ -159,3 +160,26 @@ $(document).ready(function() {
     }
 
     setInterval('update()', 1000); // refresh div after 5 secs
+
+/*
+ function load_specific_messages_update() {
+ 		var user_to_id = <?php echo $user_to_id
+        $.ajax({
+            url: 'includes/form_handlers/messages_with_person_handler.php',
+            type: 'GET',
+            data: ({})
+            success: function(data) {
+                	
+                	if(data!= 0) {
+                    var add_this = " ( " + data + ")" ;
+                    $("#new_message").html(add_this);
+                    var container = document.getElementById("yourDiv");
+                    var content = container.innerHTML;
+                    container.innerHTML= content;
+                	}
+            }
+        });
+    }
+
+    setInterval('load_specific_messages_update()', 1000); // refresh div after 5 secs
+*/
