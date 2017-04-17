@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//for adding likes
 	$('div.posts_area').on('click','.like>button:has(i)',function(){
-		
+
 		var $this = $(this);
 		var postId = $this.parent().parent().attr('value');
 		var username = $('input:hidden:eq(0)').val();
@@ -141,6 +141,10 @@ $(document).ready(function() {
 
 
 });
+
+
+
+
 update();
  function update() {
         $.ajax({

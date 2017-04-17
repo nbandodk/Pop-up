@@ -42,7 +42,7 @@
 			    
 		  		<div class=" col-sm-12 box">
 		        	<div class="user_details_column" id="conversations"><h4>Chats</h4>
-	    		      			<div class ="loaded_conversations">
+	    		      			<div class ="loaded_conversations" id="load_all_chats">
 	    		      			<?php echo $message_obj->getChats();?>
 	    		      			</div>
 	    		      			<br>
@@ -125,22 +125,59 @@
     </div>
 
     <script type="text/javascript">
-    	//var user_id = '<?php echo $user_to_id; ?>';
-    	/*function load_specific_messages_update() {
-    	 
-        $.ajax({
-            url: "includes/form_handlers/messages_with_person_handler.php",
-            type: "GET",
-            //data: ({user_to_id: user_id}),
-			//cache: false,
+/*
+    $(document).ready(function() {
 
-			
-           
+
+    	$('#new_message').on('change',function(){
+
+
+
+    	});
+
+
+    });
+
+    */
+     $('#latest_chat').on('click', function() {
+        var data = {
+            mode: "vote",
+            rating: $(this).data('rating'),
+            id: $(this).data('id')
+        };
+        $.ajax({
+            type: 'GET',
+            url: 'rating.php',
+            data: data,
+            success: function(response) {
+                console.log(response);
+            }
         });
-        $("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
-       // window.alert(user_id);
-    }
-	*/
+    });
+
+
+    function load_chats_update(){
+		var user_id = '<?php echo $user_to_id; ?>';
+		$.ajax({
+			url: "includes/form_handlers/chats_update_handler.php",
+            type: "GET",
+            
+            success : function(data) {
+               // $("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
+              // $("#scroll_messages").append(data);
+               $('#load_all_chats').empty().append(data);
+               //window.alert(data);
+            }
+		});
+		 //$("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
+	}
+
+    setInterval('load_chats_update()', 1000); // refresh div after 5 secs
+
+    
+
+
+    	
 	function load_specific_messages_update(){
 		var user_id = '<?php echo $user_to_id; ?>';
 		$.ajax({

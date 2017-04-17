@@ -164,7 +164,7 @@
 				$split = $split[0] . $dots; 
 
 				if($latest_message_details[3] == 'no') {
-				$return_string .= "<a href='messages.php?u=$id'> <div class='box b1' style='background-color: aliceblue;'><div class='user_found_messages'>
+				$return_string .= "<a href='messages.php?u=$id' id='latest_chat'> <div class='box b1' style='background-color: aliceblue;'><div class='user_found_messages'>
 								<img src='" . $user_found_obj->getProfile_pic() . "' style='border-radius: 5px; margin-right: 5px;'>
 								" . $user_found_obj->getUsername() . "
 								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
