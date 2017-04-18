@@ -125,33 +125,6 @@
     </div>
 
     <script type="text/javascript">
-/*
-    $(document).ready(function() {
-
-
-    	$('#new_message').on('change',function(){
-
-
-
-    	});
-
-
-    });
-
-    
-     $('#latest_chat').on('click', function() {
-        var user_id = '<?php echo $user_to_id; ?>';
-        $.ajax({
-            url: "includes/form_handlers/changing_status_messages_handler.php",
-            type: "POST",
-            data: {user_id : user_id},
-            dataType: 'text',
-            success: function(response) {
-                //console.log(response);
-            }
-        });
-    });
-*/
 
     function load_chats_update(){
 		$.ajax({
@@ -180,14 +153,12 @@
             data: {user_id : user_id},
             dataType: 'text',
             success : function(data) {
-               // $("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
-              // $("#scroll_messages").append(data);
+
                $('#scroll_messages').empty().append(data);
-               //window.alert(data);
+               
             }
 		});
-		 //$("#scroll_messages").load("includes/form_handlers/messages_with_person_handler.php").fadeIn("slow");
-	}
+    }
 
     setInterval('load_specific_messages_update()', 1000); // refresh div after 1 secs
 
