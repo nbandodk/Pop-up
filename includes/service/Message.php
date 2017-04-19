@@ -59,6 +59,29 @@
 		}
 
 
+		public function getUnseenMessages($otherUser_id){
+			$userLoggedIn_id = $this->user_obj->getUserId();
+			$data = "";
+
+			//$change_message_status_query = mysqli_query($con, "UPDATE messages SET seen ='yes' WHERE user_to_id='$id' AND user_from_id='$user_to_id' AND seen = 'no'");
+
+
+			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id' AND opened='no'");
+			$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to_id = '$userLoggedIn_id' AND user_from_id = '$otherUser_id') AND seen = 'no' ");
+
+			while($row = mysqli_fetch_array($get_messages_query)) {
+				$user_to_id = $row['user_to_id'];
+				$user_from_id = $row['user_from_id'];
+				$body = $row['message_body'];
+
+				$div_top = ($user_to_id == $userLoggedIn_id) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
+				$data = $data . $div_top . $body . "</div><br><br>"; 
+			}
+			return $data;
+		
+		}
+
+
 		public function getLatestMessage($userLoggedIn_id,$user2_id){
 			$details_array = array();
 
@@ -139,6 +162,7 @@
 			return $details_array;
 			
 	}
+
 
 	
 

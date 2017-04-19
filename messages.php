@@ -154,13 +154,13 @@
             dataType: 'text',
             success : function(data) {
 
-               $('#scroll_messages').empty().append(data);
+               $('#scroll_messages').append(data);
                
             }
 		});
     }
 
-    setInterval('load_specific_messages_update()', 1000); // refresh div after 1 secs
+    setInterval('load_specific_messages_update()', 1500); // refresh div after 1 secs
 
     </script>
 
