@@ -144,8 +144,7 @@
     
 
 
-    	
-	function load_specific_messages_update(){
+ 	function load_specific_messages_update(){
 		var user_id = '<?php echo $user_to_id; ?>';
 		$.ajax({
 			url: "includes/form_handlers/messages_with_person_handler.php",
@@ -155,6 +154,8 @@
             success : function(data) {
 
                $('#scroll_messages').append(data);
+               var div =document.getElementById("scroll_messages");
+	    		      			div.scrollTop = div.scrollHeight;
                
             }
 		});

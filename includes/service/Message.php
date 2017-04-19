@@ -44,7 +44,7 @@
 			$userLoggedIn_id = $this->user_obj->getUserId();
 			$data = "";
 
-			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id'");
+			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' , seen='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id'");
 			$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to_id = '$userLoggedIn_id' AND user_from_id = '$otherUser_id') OR (user_to_id = '$otherUser_id' AND user_from_id = '$userLoggedIn_id') ");
 
 			while($row = mysqli_fetch_array($get_messages_query)) {
@@ -63,12 +63,11 @@
 			$userLoggedIn_id = $this->user_obj->getUserId();
 			$data = "";
 
-			//$change_message_status_query = mysqli_query($con, "UPDATE messages SET seen ='yes' WHERE user_to_id='$id' AND user_from_id='$user_to_id' AND seen = 'no'");
-
-
-			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id' AND opened='no'");
 			$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to_id = '$userLoggedIn_id' AND user_from_id = '$otherUser_id') AND seen = 'no' ");
 
+
+			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes', seen='yes'  WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id' AND opened='no'");
+			
 			while($row = mysqli_fetch_array($get_messages_query)) {
 				$user_to_id = $row['user_to_id'];
 				$user_from_id = $row['user_from_id'];

@@ -152,18 +152,22 @@ update();
             type: 'GET',
             success: function(data) {
                 	
-                	
+                	if(data!=0){
                     var add_this =  " "+data ;
-                    $("#new_message").empty().append(add_this);
+                    $("#new_message").html(add_this);
                     /*var container = document.getElementById("yourDiv");
                     var content = container.innerHTML;
                     container.innerHTML= content;*/
+                    }
+                    else{
+                    	$("#new_message").empty();
+                    }
                 	
             }
         });
     }
 
-    setInterval('update()', 1000); // refresh div after 5 secs
+    setInterval('update()', 2000); // refresh div after 5 secs
 
 /*
  function load_specific_messages_update() {
