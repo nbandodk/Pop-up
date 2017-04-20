@@ -61,16 +61,16 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-reorder"></span>
                 </button>
-                <a href="#" class="navbar-brand">Pop-up</a>
+                <a href="home.php" class="navbar-brand">Pop-up</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.php"><i class="icon-home icon-large"></i> Home</a></li>
+                    <!-- <li class="active"><a href="home.php"><i class="icon-home icon-large"></i> Home</a></li> -->
 
                     <li><a href="messages.php" id="count_unseen_messages"><i class=" icon-envelope icon-large"></i>
                     <?php
-                    echo "Messages <span id='new_message' class='badge'></span>"; 
+                        echo "Messages <span id='new_message' class='badge'></span>"; 
                     ?>
                     </a></li>
                     

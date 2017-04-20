@@ -1,6 +1,6 @@
 <?php 
 require 'header.php';
-require 'includes/form_handlers/profile_handler.php';   
+require 'includes/form_handlers/friend_profile_handler.php';
 require 'includes/service/user.php';
 ?>
   
@@ -10,22 +10,23 @@ require 'includes/service/user.php';
   	<input type="hidden" value="<?php echo $user['username'] ?>">
 	<input type="hidden" value="<?php echo $user['id'] ?>">
 	<input type="hidden" value="<?php echo $user['profile_pic'] ?>">
+	<input type="hidden" value="<?php echo $user_id ?>">
 
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-sm-12">
 				<div id= "theme" class="profile_cover">
 					<div class="col-sm-6 myprofile_box">
-						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
+						<div class="col-xs-12 col-sm-6 col-md-4 left_area">
 							<img class="img-rounded friend_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
 				        </div>
 
-				        <div class="col-xs-7 col-sm-6 col-md-4 right_area">
+				        <div class="col-xs-7 col-sm-6 col-md-8 right_area text-left">
 							<a class="user_name" href="profile.php?<?php echo "username=".$user['username']."&id=".$user['id']?>">	
 					    		<p class="user_name_p"><?php echo $user['username'] ?></p>
 					        </a>
 				        </div>
-				        <div class="col-xs-5 col-sm-6 col-md-4 right_area text-left">
+				        <div class="col-xs-5 col-sm-4 col-md-8 right_area text-left">
 							<a class="follow_user" href="">	
 					    		<p class="follow_p"><i class="icon-heart"></i> Follow</p>
 					        </a>
@@ -38,7 +39,7 @@ require 'includes/service/user.php';
 	  	<div class="row" style="margin-top: 5px;">
 	    	<div class="col-sm-5">
 	      		<div id="pro_box" class="box" style="padding-left: 25px; padding-right: 25px;">
-					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> Profile: </p>
+					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> &nbspProfile: </p>
 					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
 					
 					<form action="" class="form-horizontal text-left friend_pro_form" method="post">
@@ -126,14 +127,17 @@ require 'includes/service/user.php';
 			<?php 
 				if (isset($_SESSION['Loading'])) {
 					unset($_SESSION['Loading']);
+					unset($_SESSION['Loading_myposts']);			
 				}
-				$_SESSION['Loading_myposts'] = 'true'; 
+				$_SESSION['Loading_onefriendposts'] = 'true';
 			?>
-			//ajax request for loading posts 
+
+			//ajax request for loading posts
+			var friend_id = $('input:hidden:eq(3)').val();
 			$.ajax({
 				url: "includes/form_handlers/post_handler.php",
 				type: "POST",
-				data: "page=1",
+				data: { page: 1, onefriend_id: friend_id},
 				cache: false,
 				success: function(returnedData) {
 					$('#loadingIcon').hide();
@@ -147,17 +151,20 @@ require 'includes/service/user.php';
 			$(window).scroll(function() {
 				var pageNum = $('.posts_area').find('.nextPage').val();
 				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+				var friend_id = $('input:hidden:eq(3)').val();
+				
 				//if the height of the browser window + scrolled height == total height that can be scorlled
 				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
 					//start ajax request again
 					$('#loadingIcon').show();
 					$('.posts_area').find('.nextPage').remove(); //Removes current input
 					$('.posts_area').find('.noMorePosts').remove(); //Removes hidden input
+
 					//do ajax request
 					var ajaxReq = $.ajax({
 						url: "includes/form_handlers/post_handler.php",
 						type: "POST",
-						data: "page="+pageNum,
+						data: { page: pageNum, onefriend_id: friend_id},
 						cache: false,
 						success: function(returnedData) {
 							$('#loadingIcon').hide();

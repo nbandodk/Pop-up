@@ -12,7 +12,7 @@
 			<div class="col-xs-12 col-sm-2 sright">
 				<!-- Button trigger modal -->
 				<a data-toggle="modal" data-target="#filter" style="float: left;">
-				  <i class='icon-cog' aria-hidden='true'></i> Advance search
+				  <i class='icon-cog' aria-hidden='true'></i> Advanced search
 				</a>
 			</div>			
 		</div>

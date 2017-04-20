@@ -19,7 +19,7 @@
 
 		public function getMostRecentUser(){
 			$userLoggedIn_id = $this->user_obj->getUserid();
-			$query = mysqli_query($this->con, "SELECT user_to_id, user_from_id FROM messages WHERE user_to_id ='$userLoggedIn_id' OR user_from_id='$userLoggedIn_id' ORDER BY id DESC LIMIT 1" );
+			$query = mysqli_query($this->con, "SELECT user_to_id, user_from_id FROM messages WHERE user_to_id ='$userLoggedIn_id' OR user_from_id = '$userLoggedIn_id' ORDER BY id DESC LIMIT 1" );
 			if(mysqli_num_rows($query) == 0)
 				return false;
 			$row = mysqli_fetch_array($query);
@@ -44,7 +44,7 @@
 			$userLoggedIn_id = $this->user_obj->getUserId();
 			$data = "";
 
-			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id'");
+			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' , seen='yes' WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id'");
 			$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to_id = '$userLoggedIn_id' AND user_from_id = '$otherUser_id') OR (user_to_id = '$otherUser_id' AND user_from_id = '$userLoggedIn_id') ");
 
 			while($row = mysqli_fetch_array($get_messages_query)) {
@@ -56,6 +56,28 @@
 				$data = $data . $div_top . $body . "</div><br><br>"; 
 			}
 			return $data;
+		}
+
+
+		public function getUnseenMessages($otherUser_id){
+			$userLoggedIn_id = $this->user_obj->getUserId();
+			$data = "";
+
+			$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to_id = '$userLoggedIn_id' AND user_from_id = '$otherUser_id') AND seen = 'no' ");
+
+
+			$query = mysqli_query($this->con, "UPDATE messages SET opened='yes', seen='yes'  WHERE user_to_id='$userLoggedIn_id' AND user_from_id='$otherUser_id' AND opened='no'");
+			
+			while($row = mysqli_fetch_array($get_messages_query)) {
+				$user_to_id = $row['user_to_id'];
+				$user_from_id = $row['user_from_id'];
+				$body = $row['message_body'];
+
+				$div_top = ($user_to_id == $userLoggedIn_id) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
+				$data = $data . $div_top . $body . "</div><br><br>"; 
+			}
+			return $data;
+		
 		}
 
 
@@ -137,10 +159,7 @@
 			array_push($details_array, $row['seen']);
 
 			return $details_array;
-			
-	}
-
-	
+		}
 
 		public function getChats() {
 			$userLoggedIn_id = $this->user_obj->getUserid();
@@ -164,30 +183,31 @@
 				$split = $split[0] . $dots; 
 
 				if($latest_message_details[3] == 'no') {
-				$return_string .= "<a href='messages.php?u=$id'> <div class='box b1' style='background-color: aliceblue;'><div class='user_found_messages'>
-								<img src='" . $user_found_obj->getProfile_pic() . "' style='border-radius: 5px; margin-right: 5px;'>
-								" . $user_found_obj->getUsername() . "
-								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
-								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
-								</div></div>
-								</a>";
+				$return_string .= "
+					<a href='messages.php?u=$id' id='latest_chat'> <div class='box b1' style='background-color: aliceblue;'>
+						<div class='user_found_messages'>
+							<img class='img-rounded' src='" . $user_found_obj->getProfile_pic() . "' style='margin-right: 5px; margin-top: 5px'>
+							" . $user_found_obj->getUsername() . "<br>
+							<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span><br>
+							<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
+							</div>
+						</div>
+					</a>";
 				}
 				else {
-				$return_string .= "<a href='messages.php?u=$id'> <div class='box b1' style='background-color:#fff;'><div class='user_found_messages'>
-								<img src='" . $user_found_obj->getProfile_pic() . "' style='border-radius: 5px; margin-right: 5px;'>
-								" . $user_found_obj->getUsername() . "
-								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
+				$return_string .= "
+					<a href='messages.php?u=$id'> <div class='box b1' style='background-color:#fff;'>
+							<div class='user_found_messages'>
+								<img class='img-rounded' src='" . $user_found_obj->getProfile_pic() . "' style='margin-right: 5px; margin-top: 5px'>
+								" . $user_found_obj->getUsername() . "<br>
+								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span><br>
 								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
-								</div></div>
-								</a>";
-					  }
+							</div>
+						</div>
+					</a>";
+				}
 			}
 			return $return_string;
-
-			
-
 		}
-
 	}
-
 ?>

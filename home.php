@@ -175,7 +175,7 @@ require 'includes/service/user.php';
 				    					</div>
 					    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
 					      					<ul class='list-group'>
-					        					<li class='list-group-item text-left'><a href='#'><i class='icon-eye-open icon-large'></i> &nbspVisit</a></li>
+					        					<li class='list-group-item text-left'><a href='friend_profile.php?friend_id=".$friend->getUserid()."'><i class='icon-eye-open icon-large'></i> &nbspVisit</a></li>
 				                            	<li class='list-group-item text-left'><a href='messages.php?u=".$friend->getUserid()."'><i class='icon-comment-alt icon-large'></i> &nbspChat</a></li>
 					      					</ul>
 					    				</div>
@@ -214,6 +214,7 @@ require 'includes/service/user.php';
 			<?php 
 				if (isset($_SESSION['Loading_myposts'])) {
 					unset($_SESSION['Loading_myposts']);
+					unset($_SESSION['Loading_onefriendposts']);
 				}
 				$_SESSION['Loading'] = 'true';
 			?>
@@ -250,16 +251,13 @@ require 'includes/service/user.php';
 						type: "POST",
 						data: "page="+pageNum,
 						cache: false,
-
 						success: function(returnedData) {
 							$('#loadingIcon').hide();
 							$('.posts_area').append(returnedData);
 						}
 					});
 				}
-
 				return false;
-
 			}); //End (window).scroll(function())
 		});
 	</script>

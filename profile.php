@@ -17,7 +17,7 @@ require 'includes/service/user.php';
 				<div id= "theme" class="profile_cover">
 				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? Look for more covers.</a>
 					<div class="col-sm-6 myprofile_box">
-						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
+						<div class="col-xs-12 col-sm-6 col-md-4 left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
 							<div class="middle">
 								<a href="upload.php" class="icon-camera-retro upload_pic"></a>
@@ -517,8 +517,9 @@ require 'includes/service/user.php';
 		$(document).ready(function() {
 			$('#loadingIcon').show();
 			<?php 
-				if (isset($_SESSION['Loading'])) {
+				if (isset($_SESSION['Loading']) || isset($_SESSION['Loading_onefriendposts'])) {
 					unset($_SESSION['Loading']);
+					unset($_SESSION['Loading_onefriendposts']);
 				}
 				$_SESSION['Loading_myposts'] = 'true'; 
 			?>

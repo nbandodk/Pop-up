@@ -72,24 +72,22 @@ require 'includes/form_handlers/login_handler.php';
 
           		<div class="masthead clearfix">
             		<div class="inner">
-              			<h3 class="masthead-brand"><strong>Pop-up</strong></h3>
+              			<h3 class="masthead-brand"><strong><a href="register.php">Pop-up</a></strong></h3>
               			<nav>
                 			<ul class="nav masthead-nav">
                   				<li class="active"><a href="register.php"><i class="fa fa-home"></i> Home</a></li>
-                  				<li><a href="#">Features</a></li>
-                  				<li><a href="#">Contact</a></li>
                 			</ul>
               			</nav>
             		</div>
           		</div>
 
-          		<div id="intro_part" class="inner cover">
+          		<div id="intro_part" class="inner cover" style="background-color: rgba(4, 11, 29, .5); padding: 15px; border-radius: 4px;">
             		<h1 class="cover-heading"><strong>Welcome to Pop-up.</strong></h1>
 
-            		<p class="lead">Pop-up is a free community. You will find anything you need and enjoy a variety of activities here.</p>
+            		<p class="lead"><strong>Pop-up is a free community. You will find anything you need and enjoy a variety of activities here.</strong></p>
             		<p class="lead">
               			<!-- <a href="#" id="join_in" class="btn btn-lg btn-default">Join us now!</a> -->
-              			<a href="#" id="join_in" class="btn btn-link-1">Join us now!</a>
+              			<a href="#" id="join_in" class="btn btn-link-1"><strong>Let's start!</strong></a>
             		</p>
           		</div>
 

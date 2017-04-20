@@ -174,7 +174,7 @@ if (isset($_POST['x'])){
 			   	 		</div>
 			   	 		<div class="col-xs-7 col-sm-8 col-sm-offset-2">
 			   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
-							<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none"><br>
+							<input type="file" id="myImage" name="image" onchange="filename.value=this.value" style="display: none" required><br>
 						</div>
 					</div>
 

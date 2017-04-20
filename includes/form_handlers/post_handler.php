@@ -102,6 +102,12 @@
 
 		echo $post_obj->loadAllMyPosts($_REQUEST,2);
 		
+	}elseif (isset($_SESSION['Loading_onefriendposts'])) {
+		$user_id = $_REQUEST['onefriend_id'];
+		$post_obj = new post($con, $user_id);
+
+		echo $post_obj->loadOneFriendPosts($_REQUEST,2,$user_id);
+		
 	}else {
 		header("Location: ../../register.php");
 	}

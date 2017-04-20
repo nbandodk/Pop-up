@@ -71,7 +71,7 @@
 			$date = date("Y-m-d H:i:s");
 			$added_by_id = $this->id;
 			$added_by_name = $this->user_obj->getUsername();
-			$body = "<strong>Shared from ".$shareUsername.": </strong>".$shareContent;
+			$body = "<strong>Shared from ".$shareUsername.": </strong><br>".$shareContent;
 			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 	
 		}
 
@@ -137,7 +137,7 @@
 									<a class='comment_a'>
 										<i class='icon-comments-alt' aria-hidden='true'></i> comment
 									</a>
-									</div>
+								</div>
 					            
 					            <div class='like'  style='float:left; margin-left: 10px;'> 
 						            <a class='like_a'>
