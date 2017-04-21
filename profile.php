@@ -15,7 +15,7 @@ require 'includes/service/user.php';
 		<div class="row">
 			<div class="col-sm-12">
 				<div id= "theme" class="profile_cover" style="background-image: url(<?php if(empty($user2['background_pic'])) echo "assets/images/themes/default_th.jpg"; else echo $user2['background_pic'] ?>);">
-				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? Look for more covers.</a>
+				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? See what we have.</a>
 					<div class="col-sm-6 myprofile_box">
 						<div class="col-xs-12 col-sm-6 col-md-4 left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
@@ -220,7 +220,7 @@ require 'includes/service/user.php';
 					                                <div class="thumbnail" id="th1" onclick="select_theme(1)" style="width: 100%; height: 220px;">
 					                                    <img class="img-responsive" src="assets/images/themes/th1.jpg" alt="..." data-dismiss="modal">
 					                                    <div class="caption">
-					                                        <h4>Colorful Stripes</h4>
+					                                        <h4>Technology Cube</h4>
 					                                        <p></p>
 	                                					</div>
 					                                </div>
@@ -230,7 +230,7 @@ require 'includes/service/user.php';
 					                                <div class="thumbnail" id="th2" onclick="select_theme(2)" style="width: 100%; height: 220px;">
 					                                    <img class="img-responsive" src="assets/images/themes/th2.jpg" alt="...">
 					                                    <div class="caption">
-					                                        <h4>Dark blue</h4>
+					                                        <h4>Mountains</h4>
 					                                        <p></p>
 	                                					</div>
 					                                </div>
@@ -239,7 +239,7 @@ require 'includes/service/user.php';
 					                                <div class="thumbnail" id="th3" onclick="select_theme(3)" style="width: 100%; height: 220px;">
 					                                    <img class="img-responsive" src="assets/images/themes/th3.jpg" alt="...">
 					                                    <div class="caption">
-					                                        <h4>Little bit of stars</h4>
+					                                        <h4>Lavender Garden</h4>
 					                                        <p></p>
 	                                					</div>
 					                                </div>
@@ -250,7 +250,7 @@ require 'includes/service/user.php';
 						                            <div class="thumbnail" id="th4" onclick="select_theme(4)" style="width: 100%; height: 220px;">
 					                                    <img class="img-responsive" src="assets/images/themes/th4.jpg" alt="...">
 					                                    <div class="caption">
-					                                        <h4>Blue Ribbon</h4>
+					                                        <h4>The corner of the world</h4>
 					                                        <p></p>
 	                                					</div>
 						                            </div>
@@ -259,7 +259,7 @@ require 'includes/service/user.php';
 						                            <div class="thumbnail" id="th5" onclick="select_theme(5)" style="width: 100%; height: 220px;">
 					                                    <img class="img-responsive" src="assets/images/themes/th5.jpg" alt="...">
 					                                    <div class="caption">
-					                                        <h4>Technology Cube</h4>
+					                                        <h4>Forest Spring</h4>
 					                                        <p></p>
 	                                					</div>
 						                            </div>
