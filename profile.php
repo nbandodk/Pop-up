@@ -190,7 +190,7 @@ require 'includes/service/user.php';
 									<h4 class="modal-title" id="myModalLabel">Change your password</h4>
 								</div>
 								<div class="modal-body">
-									<form class="pwdReset" method="POST">
+									<form class="pwdReset"method="POST">
 
 										<input type="password" name="reset_password" class="form-control" placeholder="New password...">
 
@@ -598,7 +598,7 @@ require 'includes/service/user.php';
 				});
 			});
 
-
+			//for change theme
 			$(".thumbnail").click(function(){
 				var theme_src = $(this).find('img').attr('src');
 				//alert(theme_src);
@@ -619,6 +619,5 @@ require 'includes/service/user.php';
 
 		});
 	</script>
-
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php 
 	require 'header.php';
+	require 'includes/service/user.php';
 ?>
  <!--body-->
 

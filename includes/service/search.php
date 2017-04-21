@@ -14,16 +14,49 @@
 		}
 
 		function searchUserAjax($username){
-			$resultSet = mysqli_query($this->con,"SELECT * FROM users WHERE username LIKE '$username%' AND user_closed = 'no' LIMIT 3");
+			$resultSet = mysqli_query($this->con,"SELECT * FROM users WHERE username LIKE '$username%' AND user_closed = 'no' LIMIT 5");
+			//get all the friends' ids
+			$friend_list = $this->searchFriend();
 			$output = "";
 			while ($row = mysqli_fetch_array($resultSet))
 			{
+				if (in_array($row['id'], $friend_list)) {
+				$output .="
+					<a href='friend_profile.php?friend_id=".$row['id']."'>
+						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'> ".$row['username']."
+					</a>
+					<input type='hidden' value='".$row['username']."'/>
+					<input type='hidden' value='".$row['id']."'/>
+					<a class='Delete' style='float: right'>
+            			<i class='icon-remove'></i> Delete
+          			</a>
+					<hr>
+				";
+				}elseif ($row['id'] == $this->myId) {
 				$output .="
 					<a href='profile.php?username=".$row['username']."&id=".$row['id']."'>
 						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'> ".$row['username']."
 					</a>
+					<input type='hidden' value='".$row['username']."'/>
+					<input type='hidden' value='".$row['id']."'/>
+					<a href='home.php' style='float: right'>
+            			<i class='icon-home'></i> Home
+          			</a>
 					<hr>
 				";
+				}else{
+				$output .="
+					<a href='#'>
+						<img src='".$row['profile_pic']."' class='img-circle' height='25' width='25'> ".$row['username']."
+					</a>
+					<input type='hidden' value='".$row['username']."'/>
+					<input type='hidden' value='".$row['id']."'/>
+					<a class='Add' style='float: right'>
+            			<i class='icon-ok'></i> Add
+          			</a>
+					<hr>
+				";
+				}
 			}
 			if ($output == '') {
 				$output .= "<p>No result</p>";
@@ -50,27 +83,37 @@
 				}
 				$output .="
 				<div class='col-sm-4'>
- 					<div class='result_box'>
-						<a href='#'>
-							<img src='".$row['profile_pic']."' class='img-circle' height='65' width='65'>
-							<p style='margin-top: 10px'>".$row['username']."</p>
-						</a>
-						<input type='hidden' value='".$row['id']."'/>";
+ 					<div class='result_box'>";
 				//friend
 				if (in_array($row['id'], $friend_list)) {
 					$output .="
+						<a href='friend_profile.php?friend_id=".$row['id']."'>
+							<img src='".$row['profile_pic']."' class='img-circle' height='65' width='65'>
+							<p style='margin-top: 10px'>".$row['username']."</p>
+						</a>
+						<input type='hidden' value='".$row['id']."'/>
 						<a class='Delete' style='float: left'>
                 			<i class='icon-remove'></i> Delete
               			</a>
 					";
 				}elseif ($row['id'] == $this->myId) {
 					$output .="
+						<a href='home.php'>
+							<img src='".$row['profile_pic']."' class='img-circle' height='65' width='65'>
+							<p style='margin-top: 10px'>".$row['username']."</p>
+						</a>
+						<input type='hidden' value='".$row['id']."'/>
 						<a href='home.php' style='float: left'>
                 			<i class='icon-home'></i> Home
               			</a>
 					";
 				}else{
 					$output .="
+						<a href='#'>
+							<img src='".$row['profile_pic']."' class='img-circle' height='65' width='65'>
+							<p style='margin-top: 10px'>".$row['username']."</p>
+						</a>
+						<input type='hidden' value='".$row['id']."'/>
 						<a class='Add' style='float: left'>
                 			<i class='icon-ok'></i> Add
               			</a>

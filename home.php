@@ -2,6 +2,7 @@
 require 'header.php';
 require 'includes/form_handlers/home_handler.php';
 require 'includes/service/user.php';
+
 ?>
   
 <!--body-->

@@ -216,11 +216,12 @@
 
 			$data = mysqli_query($this->con,"select * from posts where added_by_id='$friend_id' and deleted = 'no' order by date DESC limit $start, $pageSize");
 			if (mysqli_num_rows($data) >= 1) {
+
 				$outputStr = "";
 				$friend = new user($this->con, $friend_id);
-				//output the data from result set
-				while ($row = mysqli_fetch_array($data)) {
-					$outputStr .= "
+					//output the data from result set (load post)
+					while ($row = mysqli_fetch_array($data)){
+						$outputStr .= "
 					        <div class='col-sm-12 well post_box' value='".$row['id']."'>
 					        	<div class='col-sm-12 post_box_header'>
 					        ";

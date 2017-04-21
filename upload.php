@@ -1,6 +1,5 @@
 <?php 
 require 'header.php';
-require 'includes/service/user.php';
 require 'includes/form_handlers/home_handler.php';
 $profile_id = $user['username'];
 $imgSrc = "";

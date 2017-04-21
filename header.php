@@ -74,11 +74,41 @@
                     ?>
                     </a></li>
                     
-                    <li role="presentation"><a href="#"><i class=" icon-bell-alt icon-large"></i> Notice <span class="badge"><?php
-                    $id = $_SESSION['id'];
-                    $query = "SELECT friend_id FROM user_friend WHERE user_id='$id' AND block='yes' ";
-                    echo mysqli_num_rows(mysqli_query($con,$query));
-                      ?></span></a></li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bell-alt icon-large"></i> Notice <?php
+                        $id = $_SESSION['id'];
+                        $query = "SELECT friend_id FROM user_friend WHERE user_id='$id' AND block='yes' ";
+                        $friendRequest =  mysqli_query($con,$query);
+                        $numRows = mysqli_num_rows($friendRequest);
+                        if ($numRows != 0) {
+                            $output = "<span class='badge'>".$numRows."</span>";
+                            $output .="<ul class='dropdown-menu'>";
+                            while ($row = mysqli_fetch_array($friendRequest)) {
+                               $fid = $row['friend_id'];
+                               $user_details_query = mysqli_query($con,"select * from users where id='$fid'");
+                               $friend_request = mysqli_fetch_array($user_details_query);
+                               $output .= "
+                                <li>
+                                    <a>
+                                        <img src='".$friend_request['profile_pic']."' class='img-circle' height='25' width='25'> ".$friend_request['username']."
+                                    </a>
+                                    <input type='hidden' value='".$friend_request['id']."'/>
+                                    <input type='hidden' value='".$friend_request['username']."'/>
+                                    <a class='Add'>
+                                        <i class='icon-ok icon-large'></i> Add
+                                    </a>
+                                </li>
+                                <li class='divider'></li>
+                               ";
+                            }
+                            $output .=" </ul>";
+                            echo $output;
+                        } 
+                        
+                        ?>
+                        </a>
+                        
+                    </li>
                 </ul>
                 <form action="includes/form_handlers/search_handler.php" class="navbar-form navbar-right" method="post" role="search">
                     <div class="form-group input-group">

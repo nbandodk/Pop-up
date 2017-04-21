@@ -185,3 +185,74 @@ function update() {
 }
 
 setInterval('update()', 2000); // refresh div after 2 secs
+
+//--------------------Search Ajax Add & Delete Friend------------------
+$(document).ready(function() {
+	$('nav .search_result_ajax').on("click", ".Add", function(){
+		var $thisObj = $(this);
+		var addFriendByName = $(this).prev().prev().val();
+		if (confirm("Add "+addFriendByName+" as your friend?")) {
+			var addFriendById = $(this).prev().val();
+			$.ajax({
+			url: "includes/form_handlers/friend_handler.php",
+			type: "POST",
+			data: "addFriendById="+addFriendById,
+			cache: false,
+
+			success: function(returnedData) {
+				var result = $.parseJSON(returnedData);
+				$thisObj.replaceWith(result[0]);
+				if(result[1] == 1){
+					alert(addFriendByName+" is your friend now");
+				}else{
+					alert("Wait for "+addFriendByName+"'s respond");
+				}
+				
+				return false;
+			}
+		});
+		}
+	});
+
+	$('nav .search_result_ajax').on("click", ".Delete", function(){
+		var $thisObj = $(this);
+		var deleteFriendByName = $(this).prev().prev().val();
+		if (confirm("Delete "+deleteFriendByName+" ?")) {
+
+			var deleteFriendById = $(this).prev().val();
+			$.ajax({
+			url: "includes/form_handlers/friend_handler.php",
+			type: "POST",
+			data: "deleteFriendById="+deleteFriendById,
+			cache: false,
+
+			success: function(returnedData) {
+				$thisObj.replaceWith(returnedData);
+
+				alert("Delete friend successfully");
+				return false;
+			}
+		});
+		}
+		
+	});
+
+	$('ul.navbar-nav').on("click", ".Add", function(){
+		var addFriendByName = $(this).prev().val();
+		if (confirm("Add "+addFriendByName+" as your friend?")) {
+			var addFriendById = $(this).prev().prev().val();
+			$.ajax({
+			url: "includes/form_handlers/friend_handler.php",
+			type: "POST",
+			data: "addFriendById="+addFriendById,
+			cache: false,
+
+			success: function(returnedData) {
+				alert(addFriendByName+" is your friend now");
+				location.reload();
+				return false;
+			}
+		});
+		}
+	});
+});
