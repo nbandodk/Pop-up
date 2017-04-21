@@ -71,7 +71,7 @@
 			$date = date("Y-m-d H:i:s");
 			$added_by_id = $this->id;
 			$added_by_name = $this->user_obj->getUsername();
-			$body = "Shared from ".$shareUsername.": ".$shareContent;
+			$body = "<strong>Shared from ".$shareUsername.": </strong><br>".$shareContent;
 			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 	
 		}
 
@@ -137,7 +137,7 @@
 									<a class='comment_a'>
 										<i class='icon-comments-alt' aria-hidden='true'></i> comment
 									</a>
-									</div>
+								</div>
 					            
 					            <div class='like'  style='float:left; margin-left: 10px;'> 
 						            <a class='like_a'>
@@ -216,64 +216,108 @@
 
 			$data = mysqli_query($this->con,"select * from posts where added_by_id='$friend_id' and deleted = 'no' order by date DESC limit $start, $pageSize");
 			if (mysqli_num_rows($data) >= 1) {
+
 				$outputStr = "";
 				$friend = new user($this->con, $friend_id);
-				//output the data from result set
-				while ($row = mysqli_fetch_array($data)) {
-					$outputStr .= "
-				        <div class='well' value='".$row['id']."'>
-				        	<a href='#' class='close'
-				        	 	data-dismiss='alert'
-				        	 	aria-label='close'><i class='fa fa-window-close'aria-hidden='true'></i></a>
-				            <img src='".$this->user_obj->getProfile_pic()."' class='img-circle' height='55' width='55'>
-				            <br>
-		        	        ".$this->user_obj->getUsername()."
-				          	<p>".$this->getTime($row['date'])."</p>
-				          	<br>
-				            <p>".$row['text']."</p>
-				            <br>
-				            <div>
-					            <button class='btn btn-default btn-sm'>
-					                <i class='fa fa-thumbs-up' aria-hidden='true'></i>
-					                Likes (".$row['likes'].")
-					            </button>
-		        	";
+					//output the data from result set (load post)
+					while ($row = mysqli_fetch_array($data)){
+						$outputStr .= "
+					        <div class='col-sm-12 well post_box' value='".$row['id']."'>
+					        	<div class='col-sm-12 post_box_header'>
+					        ";
+					        //add cross
+					        if ($this->id == $row['added_by_id']) {
+					        	$outputStr .= "
+					        	<a href='#' class='close'
+					        	 	data-dismiss='alert'
+					        	 	aria-label='close'>
+					        	 	<i>×</i>
+					        	</a>";
+					        }
+					        $outputStr .= "</div>";
+					        
+					        $outputStr .= "
+					        	<div class='col-sm-3'>
+					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
+					            		<img src='".$this->user_obj->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
+					            		<br>
+			        	        			<p>".$this->user_obj->getUsername()."</p>
+				          			</a>
+						        </div>
+
+						        <div class='col-sm-9 text-left'>
+						          	<p class='post_area_p post_p'>sent by ".$this->getTime($row['date'])."</p>
+									<p>".$row['text']."</p>
+									
+					     			<div class='col-sm-12 post_option_box text-left' style='clear:both' value='".$row['id']."'>
+
+					     			<div class='share' style='float:left;'>
+										<a class='share_a' style='color: #16a085'>
+											<i class='icon-share' aria-hidden='true'></i> share
+										</a>
+ 									</div>
+
+					     			<div class='commentdis' style='float:left; margin-left: 10px'>
+									
+									<a class='comment_a'>
+										<i class='icon-comments-alt' aria-hidden='true'></i> comment
+									</a>
+								</div>
+					            
+					            <div class='like'  style='float:left; margin-left: 10px;'> 
+						            <a class='like_a'>
+					                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
+					            	</a>
+				            	
+				            ";
 				    //--------------add likes-----------------
 				    $like_obj = new like($this->con);
 				    $likeResultSet= $like_obj->selectLikes($row['id']);
 				    while ($like = mysqli_fetch_array($likeResultSet))
 				    {
 				    	$outputStr .="
-				    		<a href='#'>
-				            	<img src='".$like['profile_pic']."' class='img-circle' height='25' width='25'>
-				            	<input type='hidden' value='".$like['username']."'>
+				    		<a href='profile.php?username=".$like['username']."&id=".$like['user_id']."'>
+				            	<img src='".$like['profile_pic']."' class='img-circle' height='20' width='20' data-toggle='tooltip' data-placement='top' title='".$like['username']."'>
 				            </a>
 				        ";
 				    }
 				    //---------------------------------------
 				    	$outputStr .="
+				    			  </div>
+				    			 </div>
 				    			</div>
-				    			<div class='comment'>
-				    			<form>
-				    				<input type='text' class='verify_input' placeholder='comment here...' required>
- 
- 									<button type='submit' class='btn btn-danger verify_btn' style='display:inline-block'>Reply</button>
- 								</form>";
+
+				    			<div class='col-sm-12 comment' style='display:none;'>
+					    			<form class='form-horizontal'>
+					    				<div class='form-group'>
+				    						<div class='col-xs-7 col-sm-8 col-md-10 text-left comment_input_panel'>
+				    							<p class='lead emoji-picker-container emoji-container-p'>
+	              									<input type='text' class='form-control comment_input' placeholder='comment here...' data-emojiable='true' data-emoji-input='unicode' required>
+	            								</p>
+	                                        </div>
+				    					
+				    						<button type='submit' class='btn btn-success'>Reply</button>
+										</div>
+	 								</form>
+ 							<div class='col-sm-12 text-left'>
+ 								";
+
  					//--------------add comments--------------
  					$comment_obj = new comment($this->con,$this->id);
  					$outputStr .= $comment_obj->selectComments($row['id']);
 
  					//----------------------------------------
-				    $outputStr .="
-			    			</div>
-				        </div>
-					";
-				}
-				$outputStr .= "
-					<input type='hidden' class='nextPage' value='".($pageNum + 1)."'>
-					<input type='hidden' class='noMorePosts' value='false'>
-					";
-				return $outputStr;
+				    	$outputStr .="
+				    				</div>
+				    			</div>
+					        </div>
+						";  
+					}
+					$outputStr .= "
+						<input type='hidden' class='nextPage' value='".($pageNum + 1)."'>
+						<input type='hidden' class='noMorePosts' value='false'>
+						";
+					return $outputStr;
 			}else{
 				//no more posts
 				$outputStr = "";

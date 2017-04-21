@@ -2,6 +2,7 @@
 require 'header.php';
 require 'includes/form_handlers/home_handler.php';
 require 'includes/service/user.php';
+
 ?>
   
 <!--body-->
@@ -70,13 +71,13 @@ require 'includes/service/user.php';
 		      	<div class="row">
 		        	<div class="col-sm-12">
 		        		<ul class="nav nav-pills">
-						    <li class="active"><a data-toggle="pill" href="#home">Posts</a></li>
+						    <li class="active"><a data-toggle="pill" href="#post_menu">Posts</a></li>
 						    <li><a data-toggle="pill" href="#photo_menu">Photos</a></li>
 						    <li><a data-toggle="pill" href="#video_menu">Videos</a></li>
 						</ul>
 
 						<div class="tab-content">
-							<div id="home" class="tab-pane fade in active">
+							<div id="post_menu" class="tab-pane fade in active">
 				          		<div class="panel panel-default text-left" style="margin-top: 10px;">
 				            		<div class="panel-body">
 						            	<form action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
@@ -156,7 +157,6 @@ require 'includes/service/user.php';
 	    
 		      	<div class="posts_area"></div>
 		      	<p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
-			  	<!-- <img id="loadingIcon" src="assets/images/icons/loading.gif"> -->
 		    </div>
 
 		    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
@@ -176,7 +176,7 @@ require 'includes/service/user.php';
 				    					</div>
 					    				<div id='collapse".$friend->getUserid()."' class='panel-collapse collapse'>
 					      					<ul class='list-group'>
-					        					<li class='list-group-item text-left'><a href='#'><i class='icon-eye-open icon-large'></i> &nbspVisit</a></li>
+					        					<li class='list-group-item text-left'><a href='friend_profile.php?friend_id=".$friend->getUserid()."'><i class='icon-eye-open icon-large'></i> &nbspVisit</a></li>
 				                            	<li class='list-group-item text-left'><a href='messages.php?u=".$friend->getUserid()."'><i class='icon-comment-alt icon-large'></i> &nbspChat</a></li>
 					      					</ul>
 					    				</div>
@@ -215,6 +215,7 @@ require 'includes/service/user.php';
 			<?php 
 				if (isset($_SESSION['Loading_myposts'])) {
 					unset($_SESSION['Loading_myposts']);
+					unset($_SESSION['Loading_onefriendposts']);
 				}
 				$_SESSION['Loading'] = 'true';
 			?>
@@ -251,16 +252,13 @@ require 'includes/service/user.php';
 						type: "POST",
 						data: "page="+pageNum,
 						cache: false,
-
 						success: function(returnedData) {
 							$('#loadingIcon').hide();
 							$('.posts_area').append(returnedData);
 						}
 					});
 				}
-
 				return false;
-
 			}); //End (window).scroll(function())
 		});
 	</script>

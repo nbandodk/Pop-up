@@ -11,6 +11,4 @@
 		$post_obj = new post($con, $user_id);
 		$post_obj->submitSharedPost($shareUsername,$shareContent);
 	}
-
-
 ?>

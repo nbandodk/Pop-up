@@ -17,7 +17,7 @@ require 'includes/service/user.php';
 				<div id= "theme" class="profile_cover">
 				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? Look for more covers.</a>
 					<div class="col-sm-6 myprofile_box">
-						<div class="col-xs-12 col-sm-6 col-md-4 img-rounded left_area">
+						<div class="col-xs-12 col-sm-6 col-md-4 left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
 							<div class="middle">
 								<a href="upload.php" class="icon-camera-retro upload_pic"></a>
@@ -37,128 +37,150 @@ require 'includes/service/user.php';
 		   
 	  	<div class="row" style="margin-top: 5px;">
 	    	<div class="col-sm-5">
-	      		<div id="pro_box" class="box" style="padding-left: 25px; padding-right: 25px;">
-					<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> My Profile: </p>
-					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
-					
-					<form action="includes/form_handlers/profile_savepro_handler.php" class="form-horizontal text-left pro_form" method="post">
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_fname" class="col-sm-4 control-label" style="text-align: left">First name:</label>
-                            <div class="col-sm-8">
-                            	<input type="text" class="form-control pro_input" name='profname' id="pro_fname" value="<?php echo $user['first_name'] ?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_lname" class="col-sm-4 control-label" style="text-align: left">Last name:</label>
-                            <div class="col-sm-8" style="margin-bottom: 5px;">
-                                <input type="text" class="form-control pro_input" 
-                                name='prolname'id="pro_lname" value="<?php echo $user['last_name'] ?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_email" class="col-sm-4 control-label" style="text-align: left">Email:</label>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control pro_input" name='proemail'id="pro_email" value="<?php echo $user['email'] ?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_age" class="col-sm-4 control-label" style="text-align: left">Age:</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control pro_input" name='proage' id="pro_age" value="<?php echo $user2['age']?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_gender" class="col-sm-4 control-label" style="text-align: left">Gender:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control pro_input" name='progender'id="pro_gender" value="<?php echo $user2['gender']?>" disabled="true">
-                            </div>
-                        </div>
+	    		<ul class="nav nav-pills">
+				    <li class="active"><a data-toggle="pill" href="#about_menu">About</a></li>
+				    <li><a data-toggle="pill" href="#setting_menu">Settings</a></li>
+				</ul>
 
-                        <div id="pro_op1" class="form-group options1" style="display: block;">
-                            <div class="col-sm-offset-9 col-sm-3 text-right">
-                            	<a id="edit_pro" class="edit_profile" onclick="edit_pro();">
-					                <i class='icon-edit icon-large' aria-hidden='true'></i> Edit
-					            </a>
-                            </div>
-                        </div>
+				<div class="tab-content">
+					<div id="about_menu" class="tab-pane fade in active">
+			      		<div id="pro_box" class="box" style="padding-left: 25px; padding-right: 25px; margin-top: 10px;">
+							<p class="text-left profile_title"><i class="icon-list-alt icon-large"></i> &nbspMy Profile</p>
+							<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
+							
+							<form action="includes/form_handlers/profile_savepro_handler.php" class="form-horizontal text-left pro_form" method="post">
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_fname" class="col-sm-4 control-label" style="text-align: left">First name:</label>
+		                            <div class="col-sm-8">
+		                            	<input type="text" class="form-control pro_input" name='profname' id="pro_fname" value="<?php echo $user['first_name'] ?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_lname" class="col-sm-4 control-label" style="text-align: left">Last name:</label>
+		                            <div class="col-sm-8">
+		                                <input type="text" class="form-control pro_input" 
+		                                name='prolname'id="pro_lname" value="<?php echo $user['last_name'] ?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_email" class="col-sm-4 control-label" style="text-align: left">Email:</label>
+		                            <div class="col-sm-8">
+		                                <input type="email" class="form-control pro_input" name='proemail'id="pro_email" value="<?php echo $user['email'] ?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_age" class="col-sm-4 control-label" style="text-align: left">Age:</label>
+		                            <div class="col-sm-8">
+		                                <input type="number" class="form-control pro_input" name='proage' id="pro_age" value="<?php echo $user2['age']?>" min=0 max=200 disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_gender" class="col-sm-4 control-label" style="text-align: left">Gender:</label>
+		                            <div class="col-sm-8" style="padding-left: 0; margin-top: 5px;">
+		                            	<label class="checkbox-inline">
+											<input type="radio" name="progender" id="pro_gender1" value="male" <?php if($user2['gender']=='male'){ echo 'checked'; }  ?> disabled="true"> Male
+										</label>
+										<label class="checkbox-inline">
+											<input type="radio" name="progender" id="pro_gender2"  value="female" <?php if($user2['gender']=='female'){ echo 'checked'; }  ?> disabled="true"> Female
+										</label>
+		                            </div>
+		                        </div>
 
-                        <div id="pro_op2" class="form-group options2" style="display: none;">
-                        	<div class="col-xs-3 col-sm-3 text-left">
-                            	<a id="cancel_pro" class="edit_profile" onclick="cancel_pro();">
-					                <i class='icon-undo icon-large' aria-hidden='true'></i> Cancel
-					            </a>
-                            </div>
-                            <div class="col-xs-3 col-xs-offset-6 col-sm-offset-6 col-sm-3 text-right">
-                            	<a id="save_pro" class="edit_profile">
-					                <i class='icon-save icon-large' aria-hidden='true'></i><input class="pro_save" type="submit" value="Save">
-					            </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+		                        <div id="pro_op1" class="form-group options1" style="display: block;">
+		                            <div class="col-sm-offset-9 col-sm-3 text-right">
+		                            	<a id="edit_pro" class="edit_profile" onclick="edit_pro();">
+							                <i class='icon-edit icon-large' aria-hidden='true'></i> Edit
+							            </a>
+		                            </div>
+		                        </div>
 
-                <div id="show_loc">
-                	<a onclick="show_all();" style="font-size: 16px"><i class="icon-angle-down icon-large"></i> See More</a>
-				</div>
+		                        <div id="pro_op2" class="form-group options2" style="display: none;">
+		                        	<div class="col-xs-3 col-sm-3 text-left">
+		                            	<a id="cancel_pro" class="edit_profile" onclick="cancel_pro();">
+							                <i class='icon-undo icon-large' aria-hidden='true'></i> Cancel
+							            </a>
+		                            </div>
+		                            <div class="col-xs-3 col-xs-offset-6 col-sm-offset-6 col-sm-3 text-right">
+		                            	<a id="save_pro" class="edit_profile">
+							                <i class='icon-save icon-large' aria-hidden='true'></i><input class="pro_save" type="submit" value="Save">
+							            </a>
+		                            </div>
+		                        </div>
+		                    </form>
+		                </div>
 
-                <div id="loc_box" class="box" style="margin-top: 10px; padding-left: 25px; padding-right: 25px; display: none;">
-					<p class="text-left location_title"><i class="icon-globe icon-large"></i> Location: </p>
-					<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
-					
-					<form action="includes/form_handlers/profile_saveloc_handler.php" class="form-horizontal text-left loc_form" method="post">
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_street" class="col-sm-3 control-label" style="text-align: left">Street:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control pro_input" name='locstreet' id="loc_street" value="<?php echo $user2['street']?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_city" class="col-sm-3 control-label" style="text-align: left">City:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control pro_input" name='loccity' id="loc_city" value="<?php echo $user2['city']?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_state" class="col-sm-3 control-label" style="text-align: left">State:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control pro_input" 
-                                name='locstate'id="loc_state" value="<?php echo $user2['province']?>" disabled="true">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 5px;">
-                            <label for="my_country" class="col-sm-3 control-label" style="text-align: left">Country:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control pro_input" name='loccountry' id="loc_country" value="<?php echo $user2['country']?>" disabled="true">
-                            </div>
-                        </div>
-                        <div id="loc_op1" class="form-group options1" style="display: block;">
-                            <div class="col-sm-offset-9 col-sm-3 text-right">
-                            	<a id="edit_loc" class="edit_profile" onclick="edit_loc();">
-					                <i class='icon-edit icon-large' aria-hidden='true'></i> Edit
-					            </a>
-                            </div>
-                        </div>
+		                <div id="show_loc">
+		                	<a onclick="show_all();" style="font-size: 16px"><i class="icon-angle-down icon-large"></i> See More</a>
+						</div>
 
-                        <div id="loc_op2" class="form-group options2" style="display: none;">
-                        	<div class="col-xs-3 col-sm-3 text-left">
-                            	<a id="cancel_loc" class="edit_profile" onclick="cancel_loc();">
-					                <i class='icon-undo icon-large' aria-hidden='true'></i> Cancel
-					            </a>
-                            </div>
-                            <div class="col-xs-3 col-xs-offset-6 col-sm-offset-6 col-sm-3 text-right">
-                            	<a id="save_loc" class="edit_profile">
-					                <i class='icon-save icon-large' aria-hidden='true'></i><input class="pro_save" type="submit" value="Save">
-					            </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+		                <div id="loc_box" class="box" style="margin-top: 10px; padding-left: 25px; padding-right: 25px; display: none;">
+							<p class="text-left location_title"><i class="icon-globe icon-large"></i> &nbspLocation</p>
+							<hr style="height: 1px; border: none; background-color: #7f8c8d; margin-top: 5px;">
+							
+							<form action="includes/form_handlers/profile_saveloc_handler.php" class="form-horizontal text-left loc_form" method="post">
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_street" class="col-sm-3 control-label" style="text-align: left">Street:</label>
+		                            <div class="col-sm-9">
+		                                <input type="text" class="form-control pro_input" name='locstreet' id="loc_street" value="<?php echo $user2['street']?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_city" class="col-sm-3 control-label" style="text-align: left">City:</label>
+		                            <div class="col-sm-9">
+		                                <input type="text" class="form-control pro_input" name='loccity' id="loc_city" value="<?php echo $user2['city']?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_state" class="col-sm-3 control-label" style="text-align: left">State:</label>
+		                            <div class="col-sm-9">
+		                                <input type="text" class="form-control pro_input" 
+		                                name='locstate'id="loc_state" value="<?php echo $user2['province']?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div class="form-group" style="margin-bottom: 5px;">
+		                            <label for="my_country" class="col-sm-3 control-label" style="text-align: left">Country:</label>
+		                            <div class="col-sm-9">
+		                                <input type="text" class="form-control pro_input" name='loccountry' id="loc_country" value="<?php echo $user2['country']?>" disabled="true">
+		                            </div>
+		                        </div>
+		                        <div id="loc_op1" class="form-group options1" style="display: block;">
+		                            <div class="col-sm-offset-9 col-sm-3 text-right">
+		                            	<a id="edit_loc" class="edit_profile" onclick="edit_loc();">
+							                <i class='icon-edit icon-large' aria-hidden='true'></i> Edit
+							            </a>
+		                            </div>
+		                        </div>
 
-                <div id="hide_loc" style="display: none;">
-                	<a onclick="hide_all();" style="font-size: 16px"><i class="icon-angle-up icon-large"></i> Hide</a>
+		                        <div id="loc_op2" class="form-group options2" style="display: none;">
+		                        	<div class="col-xs-3 col-sm-3 text-left">
+		                            	<a id="cancel_loc" class="edit_profile" onclick="cancel_loc();">
+							                <i class='icon-undo icon-large' aria-hidden='true'></i> Cancel
+							            </a>
+		                            </div>
+		                            <div class="col-xs-3 col-xs-offset-6 col-sm-offset-6 col-sm-3 text-right">
+		                            	<a id="save_loc" class="edit_profile">
+							                <i class='icon-save icon-large' aria-hidden='true'></i><input class="pro_save" type="submit" value="Save">
+							            </a>
+		                            </div>
+		                        </div>
+		                    </form>
+		                </div>
+
+		                <div id="hide_loc" style="display: none;">
+		                	<a onclick="hide_all();" style="font-size: 16px"><i class="icon-angle-up icon-large"></i> Hide</a>
+						</div>
+					</div>
+
+					<div id="setting_menu" class="tab-pane fade">
+						<div class="col-sm-12 text-left" style="margin-top: 10px;">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pwdModal">
+								<i class="icon-refresh"></i> Password Reset
+							</button>
+						</div>
+					</div>
 				</div>
                     
-		   		<div class="row">			   			
+		   		<div class="row">
 		   			<!-- pwdModal -->
 		   			<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -248,51 +270,94 @@ require 'includes/service/user.php';
 
 	    	<!-- for posting something -->
 	    	<div class="col-sm-7">
-		    	<ul class="nav nav-pills">
-				    <li class="active"><a data-toggle="pill" href="#home">Post</a></li>
-				    <li><a data-toggle="pill" href="#mess_menu">Message</a></li>
-				    <li><a data-toggle="pill" href="#set_menu">Setting</a></li>
-				</ul>
-  
-				<div class="tab-content">
-					<div id="home" class="tab-pane fade in active">
-		  				<div class="row" style="margin-top: 10px;">
-							<div class="col-sm-12">
-							  <div class="panel panel-default text-left">
-							    <div class="panel-body">
-							    	<form action="includes/form_handlers/post_handler.php" method="POST">
-							    		<p class="lead emoji-picker-container">
-							    			<textarea class="form-control post_input" rows="3" name="profile_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
-							    		</p>
-							  			<button type="submit" class="btn btn-success btn-f" style="float:right;">
-							    			<i class="icon-ok icon-large"></i> Send
-							  			</button>
-							    	</form>
-							    </div>
-							  </div>
+		  		<div class="row">
+					<div class="col-sm-12">
+						<ul class="nav nav-pills">
+						    <li class="active"><a data-toggle="pill" href="#pro_post_menu">Posts</a></li>
+						    <li><a data-toggle="pill" href="#pro_photo_menu">Photos</a></li>
+						    <li><a data-toggle="pill" href="#pro_video_menu">Videos</a></li>
+						</ul>
+
+						<div class="tab-content">
+							<div id="pro_post_menu" class="tab-pane fade in active" style="margin-top: 10px;">
+								<div class="panel panel-default text-left">
+								    <div class="panel-body">
+								    	<form action="includes/form_handlers/post_handler.php" method="POST">
+								    		<p class="lead emoji-picker-container">
+								    			<textarea class="form-control post_input" rows="3" name="profile_post" placeholder="Share your life here..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" data-emojiable="true" data-emoji-input="unicode" style="resize: none" required></textarea>
+								    		</p>
+								  			<button type="submit" class="btn btn-success btn-f" style="float:right;">
+								    			<i class="icon-ok icon-large"></i> Send
+								  			</button>
+								    	</form>
+								    </div>
+								</div>
+							</div>
+
+							<div id="pro_photo_menu" class="tab-pane fade">
+								<div class="panel panel-default text-left" style="margin-top: 10px;">
+				            		<div class="panel-body">
+						            	<form action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
+											<div class="row">
+												<div class="col-xs-3 col-sm-3 col-md-2">
+									   	 			<input class="btn btn-primary" type="button" id="image" name="find_image" onclick="myImage.click();" value="Browse" style="font-size: 14px; width: 85px">
+									   	 		</div>
+									   	 		<div class="col-sm-5 col-md-5">
+									   	 			<input type="text" class='form-control imgname' id="imgname" style="" disabled="true">
+													<input type="file" id="myImage" name="img" onchange="imgname.value=this.value" style="display: none" required>
+													<br>
+												</div>
+											</div>
+
+											<input type="submit" name="pro_post_img" class="btn btn-success" value="Submit" style="font-size: 14px; width: 85px">
+						            	</form>
+				            		</div>
+				          		</div>
+							</div>
+
+							<div id="pro_video_menu" class="tab-pane fade">
+								<div class="panel panel-default text-left" style="margin-top: 10px;">
+				            		<div class="panel-body">
+						            	<form id="form1" action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data">
+						            		<input class="form-control" name="profile_post" placeholder="Video url..." value="<?php if(isset($_SESSION['home_post']))echo $_SESSION['home_post']; ?>" style="resize: none" required></textarea>
+						            		<br>
+
+					                		<a id="loc_vid" class="local_video" onclick="switch_localVideo();" style="float: left; padding-left: 5px; padding-top: 13px;">
+					                			<i class='icon-folder-close-alt icon-large' aria-hidden='true'></i> Local
+					            			</a>
+
+					              			<button type="submit" class="btn btn-success btn-f" style="float: right;">
+					                 			<i class="icon-ok icon-large"></i> Send
+					                		</button>
+						            	</form>
+						            	<form id="form2" action="includes/form_handlers/post_handler.php" method="POST" enctype="multipart/form-data"; style="display: none;">
+											<div class="row">
+												<div class="col-xs-3 col-sm-3 col-md-2">
+									   	 			<input class="btn btn-primary" type="button" id="file" name="find_file" onclick="myVideo.click();" value="Browse" style="font-size: 14px; width: 85px">
+									   	 		</div>
+									   	 		<div class="col-sm-5 col-md-5">
+									   	 			<input type="text" class='form-control filename' id="filename" style="" disabled="true">
+													<input type="file" id="myVideo" name="file" onchange="filename.value=this.value" style="display: none" required>
+													<br>
+												</div>
+											</div>
+
+											<input type="submit" name="pro_post_video" class="btn btn-success" value="Submit" style="font-size: 14px; width: 85px">
+
+											<a id="web_vid" class="web_video" onclick="switch_webVideo();" style="float: right; padding-top: 10px; padding-right: 5px;">
+					                			<i class='icon-external-link icon-large' aria-hidden='true'></i> URL
+					            			</a>
+						            	</form>
+				            		</div>
+				          		</div>
 							</div>
 						</div>
 
-			    		<div class="posts_area"></div>
-				  		<p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
-					</div>
-
-					<div id="mess_menu" class="tab-pane fade">
-						<h3>Message Menu</h3>
-						<p>Put the message box and history here.</p>
-					</div>
-
-					<div id="set_menu" class="tab-pane fade">
-						<h3>Setting Menu</h3>
-						<p>Put any setting options here.</p>	
-					    	
-          				<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pwdModal">
-						<span class="glyphicon glyphicon-refresh"> Password Reset</span> 
-						</button>
 					</div>
 				</div>
 
+		    	<div class="posts_area"></div>
+			  	<p id="loadingIcon"><i class="icon-spinner icon-spin icon-large"></i> Loading content...</p>
 	    	</div>
 
 	    	<!-- <div class="col-sm-2">
@@ -330,12 +395,26 @@ require 'includes/service/user.php';
 	</div>
 
 	<script>
+		function switch_localVideo () {
+			$('#form1').slideUp('slow', function() {
+				$('#form2').slideDown('slow');
+			});
+		}
+		function switch_webVideo () {
+			$('#form2').slideUp('slow', function() {
+				$('#form1').slideDown('slow');
+			});
+		}
+	</script>
+
+	<script>
 		function edit_pro () {
 			var fname = document.getElementById("pro_fname");
 			var lname = document.getElementById("pro_lname");
 			var email = document.getElementById("pro_email");
 			var age = document.getElementById("pro_age");
-			var gender = document.getElementById("pro_gender");
+			var gender1 = document.getElementById("pro_gender1");
+			var gender2 = document.getElementById("pro_gender2");
 
 			var edit = document.getElementById("op1");
 			var save = document.getElementById("op2");
@@ -344,7 +423,8 @@ require 'includes/service/user.php';
 			lname.disabled = false;
 			email.disabled = false;
 			age.disabled = false;
-			gender.disabled = false;
+			gender1.disabled = false;
+			gender2.disabled = false;
 
 			$('#pro_op1').slideUp('slow', function() {
 				$('#pro_op2').slideDown('slow');
@@ -355,7 +435,8 @@ require 'includes/service/user.php';
 			var lname = document.getElementById("pro_lname");
 			var email = document.getElementById("pro_email");
 			var age = document.getElementById("pro_age");
-			var gender = document.getElementById("pro_gender");
+			var gender1 = document.getElementById("pro_gender1");
+			var gender2 = document.getElementById("pro_gender2");
 
 			var edit = document.getElementById("op1");
 			var save = document.getElementById("op2");
@@ -364,7 +445,8 @@ require 'includes/service/user.php';
 			lname.disabled = true;
 			email.disabled = true;
 			age.disabled = true;
-			gender.disabled = true;
+			gender1.disabled = true;
+			gender2.disabled = true;
 
 			$('#pro_op2').slideUp('slow', function() {
 				$('#pro_op1').slideDown('slow');
@@ -435,8 +517,9 @@ require 'includes/service/user.php';
 		$(document).ready(function() {
 			$('#loadingIcon').show();
 			<?php 
-				if (isset($_SESSION['Loading'])) {
+				if (isset($_SESSION['Loading']) || isset($_SESSION['Loading_onefriendposts'])) {
 					unset($_SESSION['Loading']);
+					unset($_SESSION['Loading_onefriendposts']);
 				}
 				$_SESSION['Loading_myposts'] = 'true'; 
 			?>

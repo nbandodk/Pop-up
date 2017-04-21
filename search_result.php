@@ -1,5 +1,6 @@
 <?php 
 	require 'header.php';
+	require 'includes/service/user.php';
 ?>
  <!--body-->
 
@@ -12,7 +13,7 @@
 			<div class="col-xs-12 col-sm-2 sright">
 				<!-- Button trigger modal -->
 				<a data-toggle="modal" data-target="#filter" style="float: left;">
-				  <i class='icon-cog' aria-hidden='true'></i> Advance search
+				  <i class='icon-cog' aria-hidden='true'></i> Advanced search
 				</a>
 			</div>			
 		</div>
@@ -30,7 +31,7 @@
 	    <div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Filter Search Result</h4>
+				<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Filter Search Result</h4>
 			</div>
 									
 			<div class="modal-body">
@@ -57,7 +58,7 @@
                     <div class="form-group" style="margin-bottom: 5px;">
                         <label for="sear_age" class="col-sm-4 control-label" style="text-align: left">Search user age</label>
                         <div class="col-sm-8" style="margin-bottom: 5px;">
-                        	<input type="number" name="age" class="form-control" placeholder="age">
+                        	<input type="number" name="age" class="form-control" placeholder="age" min=0 max=200>
                         </div>
                     </div>
 
@@ -65,10 +66,10 @@
                     	<label for="sear_gender" class="col-sm-4 control-label" style="text-align: left; padding-top: 5px; padding-bottom: 5px;">Search user gender</label>
                         <div class="col-sm-5">
 							<label class="checkbox-inline">
-								<input type="radio" name="gender" id="optionsRadios1" value="male" checked>Male
+								<input type="radio" name="gender" id="optionsRadios1" value="male" checked> Male
 							</label>
 							<label class="checkbox-inline">
-								<input type="radio" name="gender" id="optionsRadios2"  value="female">Female
+								<input type="radio" name="gender" id="optionsRadios2"  value="female"> Female
 							</label>
 						</div>
                     </div>
@@ -100,8 +101,10 @@
                         	<input type="text" name="country" class="form-control" placeholder="country">
                         </div>
                     </div>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" id="fSRSumbit">Confirm</button>
+                    <div class="form-group text-right" style="margin-bottom: 0; padding: 15px 15px 5px 15px; ">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary" id="fSRSumbit">Confirm</button>
+                    </div>
 				</form>
 			</div>
 		</div>

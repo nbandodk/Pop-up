@@ -8,7 +8,7 @@
 	$gender = $_POST['progender'];
 	mysqli_query($con,"UPDATE users SET first_name='$fname', last_name='$lname', email='$email' WHERE id='$id'");
 
-	$is = mysqli_query($con,"SELECT count(id) FROM users2 WHERE id='$id'");
+	$is = mysqli_num_rows(mysqli_query($con,"SELECT * FROM users2 WHERE id='$id'"));
 	if ($is >= 1) {
 		mysqli_query($con,"UPDATE users2 SET age='$age', gender='$gender' WHERE id='$id'");
 	} else {
