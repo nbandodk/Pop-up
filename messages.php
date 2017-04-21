@@ -133,14 +133,50 @@
 	            dataType: 'text',
 	            success : function(data) {
 
+	               if(data && data !=""){
 	               $('#scroll_messages').append(data);
 	               var div =document.getElementById("scroll_messages");
 		    		      			div.scrollTop = div.scrollHeight;
+		    		}
+		    		
 	            }
 			});
 	    }
 
-	    setInterval('load_specific_messages_update()', 1500); // refresh div after 1 secs
+	    setInterval('load_specific_messages_update()', 1500); // refresh div after 1.5 secs
+
+
+	    	// to send messages on hitting enter
+	        $('#message_textarea').bind("enterKey",function(e){
+
+		   		var user_id = '<?php echo $user_to_id; ?>';
+		   		var message = $('#message_textarea').val();
+				$.ajax({
+					url: "includes/form_handlers/message_submit_on_hitting_enter_hadler.php",
+		            type: "POST",
+		            data: {user_id : user_id, message : message },
+		            dataType: 'text',
+		            success : function(data) {
+
+		               $('#scroll_messages').append(data);
+		               var div =document.getElementById("scroll_messages");
+			    		      			div.scrollTop = div.scrollHeight;
+
+			    		 document.getElementById('message_textarea').value = "";
+
+			    		
+		            }
+				});
+			});
+
+			$('#message_textarea').keyup(function(e){
+			    if(e.keyCode == 13)
+			    {
+			        $(this).trigger("enterKey");
+			    }
+			    return false;
+			});
+
     </script>
 
 </body>

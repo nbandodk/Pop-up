@@ -40,6 +40,19 @@
 			}
 		}
 
+
+		public function sendAndShowSentMessage($user_to_id, $body, $date)  {
+			if($body != "") {
+				$userLoggedIn_id = $this->user_obj->getUserId();
+				$query = mysqli_query($this->con,"INSERT INTO messages VALUES('', '$user_to_id', '$userLoggedIn_id', '$body', '$date', 'no', 'no', 'no')");
+				$data = "";
+				$div_top = "<div class='message' id='blue'>";
+				$data = $data . $div_top . $body . "</div><br><br>";
+				return $data;
+			}
+		}
+
+		
 		public function getMessages($otherUser_id) {
 			$userLoggedIn_id = $this->user_obj->getUserId();
 			$data = "";

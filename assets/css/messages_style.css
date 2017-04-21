@@ -16,6 +16,7 @@
 	display: table;
 	background-image: url("../images/chat_backgrounds/chat_background_1.png");
 
+
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: top center;
@@ -33,6 +34,7 @@
 	padding: 5px 10px;
 	display: inline-block;
 	color: #fff;
+	font-size: 1.1em;
 }
 
 .message#blue {
