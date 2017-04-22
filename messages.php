@@ -74,7 +74,7 @@
 							</div>';
     		      		}
     		      		else {
-    		      			echo "<h2>Add Friends or Search for People to start talking</h2>";
+    		      			echo "<h2>Add Friends and start chatting</h2>";
     		      		}  		      	
     		      	?>
 
