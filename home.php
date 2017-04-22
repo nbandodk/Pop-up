@@ -189,6 +189,19 @@ require 'includes/service/user.php';
 		    		</div>
 		    	</div>
 		    </div>
+
+		    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
+		    	<div class='box friends_list_area suggest_friends_area'>
+		    		<p class="friendlist_title"><i class="icon-group icon-large"></i> &nbspSuggestions</p>
+		    		<div class="panel-group friends_list_group">
+		    			<div class="panel panel-default friends_list_panel text-left" id="friend_suggestions">
+				    		
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+
+		   
 	  	</div>
 	</div>
 
@@ -306,6 +319,40 @@ require 'includes/service/user.php';
 		    document.body.scrollTop = 0;
 		    document.documentElement.scrollTop = 0;
 		}
+	</script>
+
+	<script type="text/javascript">
+		// to get friend suggestions
+
+	    suggest_friends();
+
+	    /*function suggest_friends(){
+			$.ajax({
+				url: "includes/form_handlers/suggesting_friends_handler.php",
+	            type: "GET",
+	            
+	            success : function(data) {
+	               $('#friend_suggestions').empty().append(data);
+	            }
+			});
+		}*/
+
+		function suggest_friends(){
+			var num_friends = '<?php echo $friendNum; ?>';
+			$.ajax({
+				url: "includes/form_handlers/suggesting_friends_handler.php",
+	            type: "POST",
+	            data: {num_friends : num_friends},
+	            dataType: 'text',
+
+	             success : function(data) {
+	               $('#friend_suggestions').empty().append(data);
+	            }
+
+			});
+	    }
+
+		
 	</script>
 
 </body>
