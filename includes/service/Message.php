@@ -21,7 +21,7 @@
 			$userLoggedIn_id = $this->user_obj->getUserid();
 			$query = mysqli_query($this->con, "SELECT user_to_id, user_from_id FROM messages WHERE user_to_id ='$userLoggedIn_id' OR user_from_id = '$userLoggedIn_id' ORDER BY id DESC LIMIT 1" );
 			if(mysqli_num_rows($query) == 0)
-				return false;
+				return 0;
 			$row = mysqli_fetch_array($query);
 			$user_to_id = $row['user_to_id'];
 			$user_from_id = $row['user_from_id'];

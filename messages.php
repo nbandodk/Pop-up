@@ -10,13 +10,14 @@
 		$user_to_id = $_GET['u'];
 	else {
 		$user_to_id = $message_obj->getMostRecentUser();
-		if($user_to_id == false)
-			$user_to_id = 'new';
+		//if($user_to_id == false)
+		//	$user_to_id = 'new';
 	}
+	if($user_to_id!=0){
 
 	$user_to_obj = new user($con, $user_to_id);
-
-	if(isset($_POST['post_message'])) {
+	}
+	if(isset($_POST['post_message']) && $user_to_id!= 0) {
 
 		if(isset($_POST['message_body'])) {
 			$body = mysqli_real_escape_string($con, $_POST['message_body']);
@@ -52,26 +53,32 @@
 		    <div class="col-sm-7">
 		      	<div class="box messages_area">
     		      	<?php
+    		      		if($user_to_id != 0) {
     		      		$user_to_id_profile_pic = $user_to_obj->getProfile_pic();
     		      		echo "<div class='box chat_head'><img class='img-circle' src='$user_to_id_profile_pic' height='50'><h3 style='margin-top: 5px;'>" . $user_to_obj->getUsername() . "</h3></div>" ;
     		      		echo "<div class='loaded_messages' id='scroll_messages'>";
     		      			echo $message_obj->getMessages($user_to_id);
-    		      		echo "</div>";   		      	
+    		      		echo "</div>"; 
+    		      		echo '<div class="message_post">
+								<form class="form-horizontal" action="" method="POST">
+									<div class="form-group">
+										<div class="col-xs-8 col-sm-8 col-md-10">
+											<textarea class="form-control post_input" name="message_body" id="message_textarea" placeholder="Write your message ..." style="resize: none;"></textarea>
+										</div>
+
+										<div class="col-xs-3 col-sm-4 col-md-2" >
+											<button type="submit" name="post_message" class="btn btn-success btn-f" id="message_submit" style="float: right;">Send</button>
+										</div>
+									</div>									
+								</form>
+							</div>';
+    		      		}
+    		      		else {
+    		      			echo "<h2>Add Friends or Search for People to start talking</h2>";
+    		      		}  		      	
     		      	?>
 
-		      		<div class="message_post">
-						<form class="form-horizontal" action="" method="POST">
-							<div class="form-group">
-								<div class="col-xs-8 col-sm-8 col-md-10">
-									<textarea class="form-control post_input" name='message_body' id='message_textarea' placeholder='Write your message ...' style="resize: none;"></textarea>
-								</div>
-
-								<div class="col-xs-3 col-sm-4 col-md-2" >
-									<button type='submit' name='post_message' class='btn btn-success btn-f' id='message_submit' style="float: right;">Send</button>
-								</div>
-							</div>									
-						</form>
-					</div>
+		      		
 
 		      		<script>
 		      			var div =document.getElementById("scroll_messages");
