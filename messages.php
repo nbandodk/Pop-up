@@ -41,7 +41,7 @@
 		  		<div class="box">
 		        	<div class="user_details_column" id="conversations" style="padding-top: 0; margin-top: -10px; margin-bottom: 0">
 		        		<h4 style="margin-bottom: 15px">Chats</h4>
-		      			<div class ="loaded_conversations">
+		      			<div class ="loaded_conversations" id="load_all_chats">
 		      				<?php echo $message_obj->getChats();?>
 		      			</div>
 		      			<br>
@@ -118,6 +118,7 @@
     </div>
 
 	<script type="text/javascript">
+
 	    function load_chats_update(){
 			$.ajax({
 				url: "includes/form_handlers/chats_update_handler.php",
