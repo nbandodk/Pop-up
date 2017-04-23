@@ -40,7 +40,9 @@
 				$added_by_id = $this->id;
 				$added_by_name = $this->user_obj->getUsername();
 				//add a post record to table named posts 
-				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')"); 
+				mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+				mysqli_query($this->con,"update users SET num_posts = num_posts+1 where id = '$added_by_id'"); 
+
 			}
 		}
 
@@ -53,6 +55,8 @@
 			$added_by_name = $this->user_obj->getUsername();
 			
 			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+			mysqli_query($this->con,"update users SET num_posts = num_posts+1 where id = '$added_by_id'"); 
+
 		}
 
 		//submit my videoposts
@@ -64,6 +68,8 @@
 			$added_by_name = $this->user_obj->getUsername();
 			
 			mysqli_query($this->con,"insert into posts values('','$body','$added_by_id','$added_by_name','$date','no','no','0')");
+			mysqli_query($this->con,"update users SET num_posts = num_posts+1 where id = '$added_by_id'"); 
+
 		}
 		
 		//shared friends' posts

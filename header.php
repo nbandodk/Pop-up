@@ -102,8 +102,9 @@
                                ";
                             }
                             $output .=" </ul>";
+                            echo $output;
                         } 
-                        echo $output;
+                        
                         ?>
                         </a>
                         

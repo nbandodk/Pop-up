@@ -21,7 +21,7 @@
 			$userLoggedIn_id = $this->user_obj->getUserid();
 			$query = mysqli_query($this->con, "SELECT user_to_id, user_from_id FROM messages WHERE user_to_id ='$userLoggedIn_id' OR user_from_id = '$userLoggedIn_id' ORDER BY id DESC LIMIT 1" );
 			if(mysqli_num_rows($query) == 0)
-				return false;
+				return 0;
 			$row = mysqli_fetch_array($query);
 			$user_to_id = $row['user_to_id'];
 			$user_from_id = $row['user_from_id'];
@@ -40,6 +40,19 @@
 			}
 		}
 
+
+		public function sendAndShowSentMessage($user_to_id, $body, $date)  {
+			if($body != "") {
+				$userLoggedIn_id = $this->user_obj->getUserId();
+				$query = mysqli_query($this->con,"INSERT INTO messages VALUES('', '$user_to_id', '$userLoggedIn_id', '$body', '$date', 'no', 'no', 'no')");
+				$data = "";
+				$div_top = "<div class='message' id='blue'>";
+				$data = $data . $div_top . $body . "</div><br><br>";
+				return $data;
+			}
+		}
+
+		
 		public function getMessages($otherUser_id) {
 			$userLoggedIn_id = $this->user_obj->getUserId();
 			$data = "";

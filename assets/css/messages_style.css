@@ -10,11 +10,14 @@
 #message_submit {
 	height: 45px;
 	width: 76px;
+	background-color: #5e5d8b;
+	margin-left: -50px;
 }
 
 .messages_area {
 	display: table;
 	background-image: url("../images/chat_backgrounds/chat_background_1.png");
+
 
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -33,6 +36,7 @@
 	padding: 5px 10px;
 	display: inline-block;
 	color: #fff;
+	font-size: 1.1em;
 }
 
 .message#blue {
@@ -104,7 +108,7 @@
 }
 
 .loaded_conversations {
-	max-height: 500px;
+	max-height: 336px;
 	overflow-y: scroll;
 }
 
@@ -152,3 +156,17 @@
 	float: left;
 	margin: 0 15px 0 5px;
 }
+
+/*
+to remove space between divs in bootstrap
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+    padding-right:0;
+    padding-left:0;
+}
+
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+*/

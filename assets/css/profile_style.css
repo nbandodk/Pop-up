@@ -2,7 +2,7 @@
 	position: relative;
 	display: table;
 
-	background-image: url("../images/backgrounds/bg3.jpg");
+	/* background-image: url("../images/backgrounds/bg3.jpg"); */
 	/* background picture adaptive screen size */
 	/*background-image:url('');*/
 	background-size: cover;

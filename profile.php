@@ -14,8 +14,8 @@ require 'includes/service/user.php';
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-sm-12">
-				<div id= "theme" class="profile_cover">
-				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? Look for more covers.</a>
+				<div id= "theme" class="profile_cover" style="background-image: url(<?php if(empty($user2['background_pic'])) echo "assets/images/themes/default_th.jpg"; else echo $user2['background_pic'] ?>);">
+				<a href="#" style="float: right; margin-right: 5px;" data-toggle="modal" data-target="#themeModal">Feel boring? See what we have.</a>
 					<div class="col-sm-6 myprofile_box">
 						<div class="col-xs-12 col-sm-6 col-md-4 left_area">
 							<img class="img-rounded user_photo" src="<?php echo $user['profile_pic'] ?>" height="150" width="150">
@@ -214,53 +214,72 @@ require 'includes/service/user.php';
 								</div>
 								<div class="modal-body">
 									<div class="box">
-				                        <div class="row">
-				                            <div class="col-md-4 col-xs-6">
-				                                <div class="thumbnail" id="th1" onclick="select_theme(1)" style="width: 100%; height: 220px;">
-				                                    <img class="img-responsive" src="assets/images/themes/th1.jpg" alt="..." data-dismiss="modal">
-				                                    <div class="caption">
-				                                        <h4>Website theme 1</h4>
-				                                        <p></p>
-                                					</div>
-				                                </div>
+										<form class="themeChange" method="POST">
+					                        <div class="row">
+					                            <div class="col-md-4 col-xs-6">
+					                                <div class="thumbnail" id="th1" onclick="select_theme(1)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th1.jpg" alt="..." data-dismiss="modal">
+					                                    <div class="caption">
+					                                        <h4>Technology Cube</h4>
+					                                        <p></p>
+	                                					</div>
+					                                </div>
 
-				                            </div>
-				                            <div class="col-md-4 col-xs-6">
-				                                <div class="thumbnail" id="th2" onclick="select_theme(2)" style="width: 100%; height: 220px;">
-				                                    <img class="img-responsive" src="assets/images/themes/th2.jpg" alt="...">
-				                                    <div class="caption">
-				                                        <h4>Website theme 2</h4>
-				                                        <p></p>
-                                					</div>
-				                                </div>
-				                            </div>
-				                            <div class="col-md-4 col-xs-6">
-				                                <div class="thumbnail" id="th3" onclick="select_theme(3)" style="width: 100%; height: 220px;">
-				                                    <img class="img-responsive" src="assets/images/themes/th3.jpg" alt="...">
-				                                    <div class="caption">
-				                                        <h4>Website theme 3</h4>
-				                                        <p></p>
-                                					</div>
-				                                </div>
-				                            </div>
-				                        </div>
-				                        <div class="row">
-				                        	<div class="col-md-4 col-xs-6">
-					                            <div class="thumbnail" id="th4" onclick="select_theme(4)" style="width: 100%; height: 220px;">
-				                                    <img class="img-responsive" src="assets/images/themes/th4.jpg" alt="...">
-				                                    <div class="caption">
-				                                        <h4>Website theme 4</h4>
-				                                        <p></p>
-                                					</div>
+					                            </div>
+					                            <div class="col-md-4 col-xs-6">
+					                                <div class="thumbnail" id="th2" onclick="select_theme(2)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th2.jpg" alt="...">
+					                                    <div class="caption">
+					                                        <h4>Mountains</h4>
+					                                        <p></p>
+	                                					</div>
+					                                </div>
+					                            </div>
+					                            <div class="col-md-4 col-xs-6">
+					                                <div class="thumbnail" id="th3" onclick="select_theme(3)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th3.jpg" alt="...">
+					                                    <div class="caption">
+					                                        <h4>Lavender Garden</h4>
+					                                        <p></p>
+	                                					</div>
+					                                </div>
 					                            </div>
 					                        </div>
-				                        </div>
+					                        <div class="row">
+					                        	<div class="col-md-4 col-xs-6">
+						                            <div class="thumbnail" id="th4" onclick="select_theme(4)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th4.jpg" alt="...">
+					                                    <div class="caption">
+					                                        <h4>The corner of the world</h4>
+					                                        <p></p>
+	                                					</div>
+						                            </div>
+						                        </div>
+						                        <div class="col-md-4 col-xs-6">
+						                            <div class="thumbnail" id="th5" onclick="select_theme(5)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th5.jpg" alt="...">
+					                                    <div class="caption">
+					                                        <h4>Forest Spring</h4>
+					                                        <p></p>
+	                                					</div>
+						                            </div>
+						                        </div>
+						                        <div class="col-md-4 col-xs-6">
+						                            <div class="thumbnail" id="th6" onclick="select_theme(6)" style="width: 100%; height: 220px;">
+					                                    <img class="img-responsive" src="assets/images/themes/th6.jpg" alt="...">
+					                                    <div class="caption">
+					                                        <h4>Distant Neighborhood</h4>
+					                                        <p></p>
+	                                					</div>
+						                            </div>
+						                        </div>
+					                        </div>
+
+				                        </form>
+
 				                    </div>
 								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-									<button type="button" class="btn btn-primary" id="pwdResetSumbit">Confirm</button>
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -506,7 +525,7 @@ require 'includes/service/user.php';
 
 	<script>
 		function select_theme (idclick) {
-			for(var i = 1; i <= 4; i++) {
+			for(var i = 1; i <= 6; i++) {
             	$("#th" + i).css({"background-color": "#fff"});
         	}
         	$("#th" + idclick).css({"background-color": "#bdc3c7"});
@@ -577,7 +596,27 @@ require 'includes/service/user.php';
 						return false;
 					}
 				});
-			});		
+			});
+
+			//for change theme
+			$(".thumbnail").click(function(){
+				var theme_src = $(this).find('img').attr('src');
+				//alert(theme_src);
+				$.ajax({
+					url: "includes/form_handlers/theme_handler.php",
+					type: "POST",
+					data: "theme_src="+theme_src,
+					cache: false,
+					success: function(returnedData) {
+						$('#themeModal').modal('hide');
+						//reload the profile page
+						alert("Theme changed successfully");
+						location.reload();
+						return false;
+					}
+				});
+			});
+
 		});
 	</script>
 </body>
