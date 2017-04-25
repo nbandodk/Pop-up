@@ -26,11 +26,6 @@ require 'includes/service/user.php';
 					    		<p class="user_name_p"><?php echo $user['username'] ?></p>
 					        </a>
 				        </div>
-				        <div class="col-xs-5 col-sm-4 col-md-8 right_area text-left">
-							<a class="follow_user" href="">	
-					    		<p class="follow_p"><i class="icon-heart"></i> Follow</p>
-					        </a>
-				        </div>
 			        </div>
 			    </div>
 			</div>
@@ -149,12 +144,15 @@ require 'includes/service/user.php';
 
 			//do it if scroll up or down
 			$(window).scroll(function() {
+				var height = $('.posts_area').height();
+ 				var scroll_top = $(this).scrollTop();
+ 				
 				var pageNum = $('.posts_area').find('.nextPage').val();
 				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 				var friend_id = $('input:hidden:eq(3)').val();
 				
 				//if the height of the browser window + scrolled height == total height that can be scorlled
-				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+				if((document.body.scrollHeight == (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight) && noMorePosts == 'false') {
 					//start ajax request again
 					$('#loadingIcon').show();
 					$('.posts_area').find('.nextPage').remove(); //Removes current input

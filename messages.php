@@ -41,7 +41,7 @@
 		  		<div class="box">
 		        	<div class="user_details_column" id="conversations" style="padding-top: 0; margin-top: -10px; margin-bottom: 0">
 		        		<h4 style="margin-bottom: 15px">Chats</h4>
-		      			<div class ="loaded_conversations">
+		      			<div class ="loaded_conversations" id="load_all_chats">
 		      				<?php echo $message_obj->getChats();?>
 		      			</div>
 		      			<br>
@@ -55,7 +55,7 @@
     		      	<?php
     		      		if($user_to_id != 0) {
     		      		$user_to_id_profile_pic = $user_to_obj->getProfile_pic();
-    		      		echo "<div class='box chat_head'><img class='img-circle' src='$user_to_id_profile_pic' height='50'><h3 style='margin-top: 5px;'>" . $user_to_obj->getUsername() . "</h3></div>" ;
+    		      		echo "<div class='box chat_head'><img class='img-circle' src='$user_to_id_profile_pic' height='50'><h3 style='margin-top: 5px;'>" . $user_to_obj->getUsername() . "</h3><p id='online_status' style = 'float:left; color:#fff;'></p><br></div>" ;
     		      		echo "<div class='loaded_messages' id='scroll_messages'>";
     		      			echo $message_obj->getMessages($user_to_id);
     		      		echo "</div>"; 
@@ -118,6 +118,7 @@
     </div>
 
 	<script type="text/javascript">
+
 	    function load_chats_update(){
 			$.ajax({
 				url: "includes/form_handlers/chats_update_handler.php",
@@ -151,6 +152,31 @@
 	    }
 
 	    setInterval('load_specific_messages_update()', 1500); // refresh div after 1.5 secs
+
+	    last_seen_status_update();
+	    function last_seen_status_update(){
+			var user_id = '<?php echo $user_to_id; ?>';
+			$.ajax({
+				url: "includes/form_handlers/last_seen_status_handler.php",
+	            type: "POST",
+	            data: {user_id : user_id},
+	            dataType: 'text',
+	            success : function(data) {
+
+	               if(data == 'yes'){
+	               //	data = '<span class="glyphicon glyphicon-star"></span> ' + " " + data;
+	               $('#online_status').empty().append(data);
+
+		    		}
+		    		else {
+		    		$('#online_status').empty().append(data);	
+		    		}
+		    		
+	            }
+			});
+	    }
+
+	     setInterval('last_seen_status_update()', 5000); // refresh div after 1.5 secs
 
 
 	    	// to send messages on hitting enter

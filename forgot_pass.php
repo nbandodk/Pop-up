@@ -49,6 +49,7 @@ require 'includes/form_handlers/forgot_handler.php';
 						<form action="forgot_pass.php" method="POST">
 							<?php if(in_array("<span style='color:#14C800;'>Check your email for the new password</span><br>", $error_array)) echo "<span style='color:#14C800;'>Check your email for the new password</span><br>"; ?>
 							<?php if(in_array("<span style='color:#14C800;'>Password could not be changed :(</span><br>", $error_array)) echo "<span style='color:#14C800;'>Password could not be changed :(</span><br>"; ?>
+							<?php if(in_array("<span style='color:red;'>No such email found</span><br>", $error_array)) echo "<span style='color:red;'>No such email found</span><br>"; ?>
 							<input type="text" class="forgetpass_input" name="f_email" placeholder="Email" required>
 							<!-- <input type="submit" name="verification_button" value="Verify">-->
 							<button type="submit" class="btn btn-danger forgetpass_btn" name="forgot_button">Send</button>

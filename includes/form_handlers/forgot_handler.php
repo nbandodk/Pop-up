@@ -14,7 +14,7 @@ $error_array = array(); //errors
 			$row = mysqli_fetch_array($check_query);
 			$id = $row['id'];
 
-			$temp_pass = rand(999,99999999);
+			$temp_pass = md5(rand(0, 1000));
 			$password = md5($temp_pass);
 			$update_query = mysqli_query($con, "UPDATE users SET password='$password' WHERE id='$id'");
 
@@ -47,7 +47,7 @@ $error_array = array(); //errors
 			mail($to, $subject, $message, $headers); // Send our email
 	}
 	else {
-		array_push($error_array, "<br>No such email found<br>");
+		array_push($error_array, "<span style='color:red;'>No such email found</span><br>");
 	}
 	// if ($hash == $ver_code) {
 	// 	$user_closed_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND user_closed='yes'");

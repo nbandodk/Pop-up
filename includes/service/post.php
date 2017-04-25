@@ -149,7 +149,6 @@
 						            <a class='like_a'>
 					                	<i class='icon-heart-empty' aria-hidden='true'></i> (".$row['likes'].")
 					            	</a>
-				            	
 				            ";
 				    //--------------add likes-----------------
 				    $like_obj = new like($this->con);
@@ -214,7 +213,7 @@
 		}
 
 		//load one of my friends' posts
-		public function loadOneFriendPosts($request, $pageSize,$friend_id){
+		public function loadOneFriendPosts($request, $pageSize, $friend_id){
 			//get the current page number
 			$pageNum = $request['page']; 
 			$start = ($pageNum-1)*$pageSize;
@@ -231,20 +230,12 @@
 					        <div class='col-sm-12 well post_box' value='".$row['id']."'>
 					        	<div class='col-sm-12 post_box_header'>
 					        ";
-					        //add cross
-					        if ($this->id == $row['added_by_id']) {
-					        	$outputStr .= "
-					        	<a href='#' class='close'
-					        	 	data-dismiss='alert'
-					        	 	aria-label='close'>
-					        	 	<i>×</i>
-					        	</a>";
-					        }
+
 					        $outputStr .= "</div>";
 					        
 					        $outputStr .= "
 					        	<div class='col-sm-3'>
-					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
+					        		<a href='friend_profile.php?friend_id=".$this->user_obj->getUserid()."' class='post_info'>
 					            		<img src='".$this->user_obj->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
 			        	        			<p>".$this->user_obj->getUsername()."</p>
@@ -309,7 +300,7 @@
  								";
 
  					//--------------add comments--------------
- 					$comment_obj = new comment($this->con,$this->id);
+ 					$comment_obj = new comment($this->con,$_SESSION['id']);
  					$outputStr .= $comment_obj->selectComments($row['id']);
 
  					//----------------------------------------
@@ -381,18 +372,21 @@
 					        ";
 					        //add cross
 					        if ($this->id == $row['added_by_id']) {
+					        	$url = "profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid();
 					        	$outputStr .= "
 					        	<a href='#' class='close'
 					        	 	data-dismiss='alert'
 					        	 	aria-label='close'>
 					        	 	<i>×</i>
 					        	</a>";
+					        }else{
+					        	$url = "friend_profile.php?friend_id=".$row['added_by_id'];
 					        }
 					        $outputStr .= "</div>";
 					        
 					        $outputStr .= "
 					        	<div class='col-sm-3'>
-					        		<a href='profile.php?username=".$this->user_obj->getUsername()."&id=".$this->user_obj->getUserid()."' class='post_info'>
+					        		<a href='".$url."' class='post_info'>
 					            		<img src='".$person->getProfile_pic()."' class='img-rounded' height='55' width='55' style='margin-bottom:10px;'>
 					            		<br>
 					            		<p>".$person->getUsername()."</p>

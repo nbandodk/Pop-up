@@ -2,6 +2,11 @@
 	//coding here
 	if (isset($_SESSION['id'])) {
 		$id = $_SESSION['id'];
+
+		// last_seen_status query
+		$last_seen_status_query  = mysqli_query($con, "UPDATE user_last_seen_status SET logged_in = 'yes' WHERE id = '$id'");
+
+
 		$check_database_query = mysqli_query($con, "SELECT user_id FROM user_friend WHERE user_id='$id' AND block='no' ");
 		$friendNum = mysqli_num_rows($check_database_query);
 		

@@ -558,10 +558,13 @@ require 'includes/service/user.php';
 
 			//do it if scroll up or down
 			$(window).scroll(function() {
+				var height = $('.posts_area').height();
+ 				var scroll_top = $(this).scrollTop();
+ 				
 				var pageNum = $('.posts_area').find('.nextPage').val();
 				var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 				//if the height of the browser window + scrolled height == total height that can be scorlled
-				if((document.documentElement.scrollHeight == document.documentElement.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+				if((document.body.scrollHeight == (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight) && noMorePosts == 'false') {
 					//start ajax request again
 					$('#loadingIcon').show();
 					$('.posts_area').find('.nextPage').remove(); //Removes current input

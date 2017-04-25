@@ -192,7 +192,7 @@ require 'includes/service/user.php';
 
 		    <div class="col-sm-3 col-md-2" style="padding-left: 0; padding-right: 0">
 		    	<div class='box friends_list_area suggest_friends_area'>
-		    		<p class="friendlist_title"><i class="icon-group icon-large"></i> &nbspSuggestions</p>
+		    		<p class="friendlist_title"><i class="icon-gift icon-large"></i> &nbspRecommend</p>
 		    		<div class="panel-group friends_list_group">
 		    			<div class="panel panel-default friends_list_panel text-left" id="friend_suggestions" >
 				    		

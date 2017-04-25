@@ -10,7 +10,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="assets/images/myicon/pop-up.ico">
 
     <!-- css including boostrap -->
     <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -81,7 +81,7 @@
                         $friendRequest =  mysqli_query($con,$query);
                         $numRows = mysqli_num_rows($friendRequest);
                         if ($numRows != 0) {
-                            $output = "<span class='badge'>".$numRows."</span>";
+                            $output = "<span class='badge'>".$numRows."</span></a>";
                             $output .="<ul class='dropdown-menu'>";
                             while ($row = mysqli_fetch_array($friendRequest)) {
                                $fid = $row['friend_id'];
@@ -89,16 +89,19 @@
                                $friend_request = mysqli_fetch_array($user_details_query);
                                $output .= "
                                 <li>
-                                    <a>
-                                        <img src='".$friend_request['profile_pic']."' class='img-circle' height='25' width='25'> ".$friend_request['username']."
-                                    </a>
-                                    <input type='hidden' value='".$friend_request['id']."'/>
-                                    <input type='hidden' value='".$friend_request['username']."'/>
-                                    <a class='Add'>
-                                        <i class='icon-ok icon-large'></i> Add
-                                    </a>
+                                    <div class='row' style='margin-bottom: 5px; margin-top: 6px;'>
+                                        <div class='col-xs-7 col-sm-7'>
+                                            <img src='".$friend_request['profile_pic']."' class='img-circle' height='25' width='25' style='margin-left:3px;'><span style='color: #fff'> &nbsp".$friend_request['username']."</span>
+                                        </div>
+                                        <div class='col-xs-4 col-sm-4'>
+                                            <input type='hidden' value='".$friend_request['id']."'/>
+                                            <input type='hidden' value='".$friend_request['username']."'/>
+                                            <a class='Add' style='color: #fff'>
+                                                <i class='icon-ok'></i> Pass
+                                            </a>
+                                        </div>
+                                    </div>
                                 </li>
-                                <li class='divider'></li>
                                ";
                             }
                             $output .=" </ul>";

@@ -31,9 +31,8 @@
 				$data = $data . "
 					<div class=' panel-heading' style='padding-left: 15px; padding-top: 12px; padding-bottom: 12px;'>
   						<h4 class='panel-title'>
-  							<input type='submit' name='add_friend' class='add_friend_class' value='Add ' style='float:right; border-radius:5px; background-color:#2ecc71; border:1px solid #2ecc00; padding:2px 5px; opacity:0.98;'>
-
-    						<a href='friend_profile.php?friend_id=".$friend->getUserid()."'><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><br> &nbsp".$friend->getUsername()."</a>
+  							
+    						<a><img src='".$friend->getProfile_pic()."' class='img-circle' height='25' width='25'><br> ".$friend->getUsername()."</a>
 
   						</h4>
 					</div>
