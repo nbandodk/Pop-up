@@ -1,0 +1,22 @@
+.stitle {
+	color: #2c3e50;
+	float: left;
+}
+
+.sright {
+	padding-top: 23px;
+	padding-bottom: 12px;
+}
+
+.result_box {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	padding: 30px 15px;
+	margin-bottom: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	
+	-webkit-box-shadow: none;
+			box-shadow: none;
+}

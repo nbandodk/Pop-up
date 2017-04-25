@@ -1,0 +1,29 @@
+#formExample {
+	background-color: #eff3f5;
+	border: 1px solid #ddd;
+	top: 7%;
+	border-radius: 4px;
+	padding: 15px;
+	margin-top: 50px;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form_header {
+	width: 100%;
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+/* #CroppingContainer {
+	background-color: #eff3f5;
+	border: 1px solid #ddd;
+	width: 70%;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	z-index: 2001;
+	padding-bottom: 0px;
+	border-radius: 4px;
+} */

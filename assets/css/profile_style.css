@@ -1,0 +1,181 @@
+#theme {
+	position: relative;
+	display: table;
+
+	/* background-image: url("../images/backgrounds/bg3.jpg"); */
+	/* background picture adaptive screen size */
+	/*background-image:url('');*/
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+
+	width: 100%;
+	height: 350px;
+	min-height: 350px; /* For at least Firefox */
+
+	margin-bottom: 70px;
+
+	-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+			box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+
+.myprofile_box {
+	top: 230px;
+	padding: 0;
+}
+
+.left_area {
+	position: relative;
+	opacity: 1;
+	display: block;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+
+.middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+
+.left_area:hover .user_photo {
+	opacity: 0.7;
+}
+
+.left_area:hover .middle {
+	opacity: 1;
+}
+
+.upload_pic {
+	color: #fff;
+	font-size: 70px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.upload_pic:focus, .upload_pic:hover {
+	color: #95a5a6;
+	opacity: 0.8;
+}
+
+.user_name {
+	color: #fff;
+	font-size: 23px;
+	margin-top: 0;
+}
+
+.user_name:focus, .user_name:hover {
+	color: #95a5a6;
+}
+
+.user_state_p {
+	color: #ecf0f1;
+}
+
+.user_name_p, .user_state_p {
+	margin: -4px 0 10px;
+}
+
+.location_title, .profile_title {
+	color: #7f8c8d;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.loc_form, .pro_form {
+	background-color: #f8f8f8;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 25px;
+	color: #2c3e50;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+}
+
+.pro_input {
+	padding-bottom: 4px;
+	padding-left: 10px;
+	background-color: transparent;
+	color: #2c3e50;
+	
+	BORDER-TOP-STYLE: none;
+	BORDER-RIGHT-STYLE: none;
+	BORDER-LEFT-STYLE: none;
+	BORDER-BOTTOM-STYLE: solid;
+
+    FILTER: alpha(opacity=0);
+    appearance: none;
+    -moz-appearance: none;  
+    -webkit-appearance: none;
+}
+
+.pro_input:disabled {
+	background-color: transparent;
+	
+	BORDER-TOP-STYLE: none;
+	BORDER-RIGHT-STYLE: none;
+	BORDER-LEFT-STYLE: none;
+	BORDER-BOTTOM-STYLE: solid;
+    
+    FILTER: alpha(opacity=0);
+    appearance: none;
+    -moz-appearance: none;  
+    -webkit-appearance: none;
+}
+
+.options1, .options2 {
+	padding-left: 0;
+	padding-top: 15px;
+	margin-bottom: 10px;
+}
+
+.pro_save {
+	background-color: transparent;
+	BORDER-TOP-STYLE: none;
+	BORDER-LEFT-STYLE: none;
+	BORDER-RIGHT-STYLE: none;
+	BORDER-BOTTOM-STYLE: none;
+	FILTER: alpha(opacity=0);
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.modal-content {
+	background: rgba(255, 255, 255, 0.75);
+}
+
+
+/* for friend profile */
+.follow_p {
+	color: #e74c3c;
+	font-size: 16px;
+	margin-top: 0;
+}
+
+.follow_p:focus, .follow_p:hover {
+	color: #c0392b;
+}
+
+.follow_p {
+	margin: 2px 0 10px;
+}
+
+.friend_loc_form, .friend_pro_form {
+	background-color: #f8f8f8;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 14px;
+	margin-bottom: 25px;
+	color: #2c3e50;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+}
