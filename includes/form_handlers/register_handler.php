@@ -118,6 +118,13 @@ if(isset($_POST['register_button'])) {
 		
 		$query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'yes')");
 
+		$query = mysqli_query($con, "SELECT id FROM users ORDER BY id DESC LIMIT 1");
+		$row = mysqli_fetch_array($query);
+		$id = $row['id'];
+		$date_time_now = date("Y-m-d H:i:s");
+				//$last_seen_status_query  = mysqli_query($con, "UPDATE user_last_seen_status SET logged_in = 'no',last_online_time = '$date_time_now' WHERE id = '$id'");
+				$upadte_in_last_seen_table_query = mysqli_query($con, "INSERT into  user_last_seen_status values ('$id','no','$date_time_now' ) ");
+
 		array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and log in!</span><br>");
 
 		//clear session variables
